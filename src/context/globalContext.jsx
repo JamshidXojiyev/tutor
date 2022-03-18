@@ -8,6 +8,7 @@ function GlobalState({ children }) {
   const [globalState, setGlobalState] = useState({
     sidebarOpen: true,
     mobileDevice: false,
+    sidebarSize: -125,
   });
   return (
     <GlobalContext.Provider value={[globalState, setGlobalState]}>

@@ -14,7 +14,7 @@ export const SidebarStyle = styled.div`
   padding: 16px 8px;
   z-index: 9;
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 700px) { 
     width: ${({ openMenu }) => (openMenu ? "255px" : "0")};
     padding: ${({ openMenu }) => (openMenu ? "16px 8px" : "0")};
   }
