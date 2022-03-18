@@ -43,6 +43,9 @@ const en = {
       },
     ],
   },
+  profileSettings: {
+    full_name: "Full Name",
+  },
 };
 
 export default en;
