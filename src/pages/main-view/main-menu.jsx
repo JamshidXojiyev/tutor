@@ -1,89 +1,27 @@
-import React, { useState } from "react";
-import MyButton from "../../components/my-button/my-button";
+import React, { useContext, useEffect } from "react";
+import { GlobalContext } from "../../context/globalContext";
 import { MyDiv } from "../../global-styles/my-div.s";
-import {
-  Body,
-  BottomBtn,
-  Header,
-  Item,
-  ItemBlock,
-  MenuName,
-  Sidebar,
-  SubItem,
-  SubItemBlock,
-  User,
-  UserEmail,
-  UserImg,
-  UserName,
-} from "./main-menu.s";
-import { useLocation } from "react-router-dom";
-import { NavigationData } from "./navigation-data";
-
-import { ReactComponent as MenuIcon } from "../../assets/icon/menu.svg";
-import AvatarImage from "../../assets/image/avatar.png";
+import Header from "./header/header";
+import Sidebar from "./sidebar/sidebar";
+import { Body } from "./main-menu.s";
 
 function MainMenu(props) {
-  const location = useLocation();
-  const [positionMenu, setPositionMenu] = useState(true);
-  const [subItemType, setSubItemType] = useState(true);
+  // globalState
+  const [globalState, setGlobalState] = useContext(GlobalContext);
+  // select device - window innerWidth
+  useEffect(() => {
+    setGlobalState({
+      ...globalState,
+      sidebarOpen: !(window.innerWidth < 1100),
+      mobileDevice: window.innerWidth < 700,
+    });
+  }, [window.innerWidth]);
   return (
     <MyDiv height="100vh" position="relative">
-      <Header position={positionMenu}>
-        <MyButton
-          onClick={() => {
-            setSubItemType(!positionMenu && subItemType ? true : false);
-            setPositionMenu(!positionMenu);
-          }}
-          icon={<MenuIcon />}
-          shadowAnime
-        />
-        <MenuName>Dashboard</MenuName>
-      </Header>
-
-      <Sidebar position={positionMenu}>
-        <User position={positionMenu}>
-          <UserImg src={AvatarImage} />
-          <MyDiv padding="5px 0 0 0">
-            <UserName>Sierra Ferguson</UserName>
-            <UserEmail>s.ferguson@gmail.com</UserEmail>
-          </MyDiv>
-        </User>
-        {NavigationData.map((item, index) => (
-          <ItemBlock key={index}>
-            <Item
-              position={positionMenu}
-              onClick={() => {
-                if (item.parent) {
-                  setSubItemType(!subItemType);
-                  setPositionMenu(true);
-                }
-              }}
-              to={item.url}
-              activ={location.pathname === item.url ? true : false}
-            >
-              {item.icon && item.icon}
-
-              {item.name}
-              {item.parent && <BottomBtn position={subItemType} />}
-            </Item>
-            {item.parent && (
-              <SubItemBlock position={subItemType} positionMenu={positionMenu}>
-                {item.parent?.map((subItem, subIndex) => (
-                  <SubItem
-                    to={subItem.url}
-                    key={subIndex}
-                    activ={location.pathname === subItem.url ? true : false}
-                  >
-                    {subItem.name}
-                  </SubItem>
-                ))}
-              </SubItemBlock>
-            )}
-          </ItemBlock>
-        ))}
-      </Sidebar>
-      <Body position={positionMenu}>
-        <h1>I`ts mee</h1>
+      <Sidebar />
+      <Header />
+      <Body openMenu={globalState.sidebarOpen}>
+        <h1>lorem100</h1>
       </Body>
     </MyDiv>
   );

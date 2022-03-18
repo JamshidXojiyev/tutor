@@ -12,7 +12,7 @@ import { ReactComponent as HideIcon } from "./icons/hide.svg";
 import { ReactComponent as SearchIcon } from "./icons/search.svg";
 function MyInput(props) {
   const [typeBtn, setTypeBtn] = useState(
-    props.label === "Parol" ? true : false
+    props.name === "password" ? true : false
   );
 
   return (

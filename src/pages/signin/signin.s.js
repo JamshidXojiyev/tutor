@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { css } from "styled-components";
 
 export const Container = styled.div`
-  background: #ffffff;
-  box-shadow: 0px 16px 24px rgba(52, 60, 68, 0.12);
+  background: #fff9;
+  backdrop-filter: blur(8px);
+  box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.06);
   border-radius: 15px;
 
   display: flex;

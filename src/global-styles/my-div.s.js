@@ -22,12 +22,13 @@ const heightCenterStyled = css`
 `;
 
 export const MyDiv = styled.div`
-  width: ${({ width }) => (width ? width : "100%")};
-  height: ${({ height }) => (height ? height : "100%")};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
   position: ${({ position }) => position};
   gap: ${({ gap }) => gap};
+  display: ${({ display }) => display};
   z-index: ${({ z_ndex }) => z_ndex};
   ${({ center, widthCenter, heightCenter }) =>
     center

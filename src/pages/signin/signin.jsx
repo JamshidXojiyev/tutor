@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MyDiv } from "../../global-styles/my-div.s";
 import { BgIcon, Brand, Container, H1 } from "./signin.s";
 import BrandImage from "../../assets/image/brand.png";
@@ -11,9 +11,11 @@ import MyButton from "../../components/my-button/my-button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
-import axios from "axios";
 import client from "../../client/index";
+import { LanguagesContext } from "../../locale/languagesContext";
 function SignIn(props) {
+  const [languages, setLanguages] = useContext(LanguagesContext);
+  const lanSignIn = languages.value.signin;
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -21,12 +23,12 @@ function SignIn(props) {
     },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(3, "Minimal uzunlik - 3 ta belgi")
-        .required("Elektron pochtangizni kiritishingiz majbutiy")
-        .email("Elektron pochtangizni noto'g'ri kiritilgan"),
+        .min(3, lanSignIn.min_err)
+        .required(lanSignIn.email_required_err)
+        .email(lanSignIn.email_email_err),
       password: Yup.string()
-        .min(3, "Minimal uzunlik - 3 ta belgi")
-        .required("Parolingizni kiritishingiz kiritishingiz majbutiy"),
+        .min(3, lanSignIn.min_err)
+        .required(lanSignIn.password_required_err),
     }),
     onSubmit: (val) => {
       console.log(val);
@@ -34,13 +36,6 @@ function SignIn(props) {
         .post(`${process.env.REACT_APP_BASE_URL}/api/auth/signin`, val)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));
-
-      // axios
-      //   .post("https://academy-back.herokuapp.com/api/auth/signin", {
-      //     username: "jamshid@g.com",
-      //     password: "jamshid",
-      //   })
-      //   .then((res) => console.log(res));
     },
   });
 
@@ -56,7 +51,7 @@ function SignIn(props) {
               <BgIcon src={BottomRightBg} bottomRight />
               <Brand src={BrandImage} />
             </>
-            <H1>Tizimga kirish</H1>
+            <H1>{lanSignIn.signin}</H1>
             <MyDiv
               z_ndex="1"
               gap="12px"
@@ -67,9 +62,9 @@ function SignIn(props) {
             >
               <MyInput
                 width="100%"
-                label="Elektron pochta"
+                label={lanSignIn.email}
                 sign
-                placeholder="Elektron pochtangizni kiriting"
+                placeholder={lanSignIn.email_placeholder}
                 name="username"
                 value={formik.values.username}
                 onChange={formik.handleChange}
@@ -83,10 +78,10 @@ function SignIn(props) {
               />
               <MyInput
                 width="100%"
-                label="Parol"
+                label={lanSignIn.password}
                 sign
                 icon
-                placeholder="Parolingizni kiriting"
+                placeholder={lanSignIn.password_placeholder}
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}

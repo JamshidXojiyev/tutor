@@ -7,9 +7,12 @@
   /* user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none; */
+  transition: all 100ms ease-in-out;
 }
 body {
-  background-color: #f5f9ff;
+  background-color: #eff3fd;
+  background-size: cover;
+  background-image: url("./assets//image/bg.png");
 }
 a {
   text-decoration: none;
