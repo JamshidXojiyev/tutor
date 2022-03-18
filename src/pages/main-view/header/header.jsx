@@ -6,21 +6,7 @@ function Header(props) {
   // globalState
   const [globalState, setGlobalState] = useContext(GlobalContext);
 
-  return (
-    <HeaderStyle openMenu={globalState.sidebarOpen}>
-      <button
-        onClick={() => {
-          setGlobalState({
-            ...globalState,
-            sidebarOpen: !globalState.sidebarOpen,
-          });
-        }}
-        // icon={<MenuIcon />}
-      >
-        asd
-      </button>
-    </HeaderStyle>
-  );
+  return <HeaderStyle openMenu={globalState.sidebarOpen}></HeaderStyle>;
 }
 
 export default Header;

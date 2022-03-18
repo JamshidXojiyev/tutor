@@ -13,9 +13,13 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import client from "../../client/index";
 import { LanguagesContext } from "../../locale/languagesContext";
+
 function SignIn(props) {
+  // language
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanSignIn = languages.value.signin;
+  
+  // validation formik
   const formik = useFormik({
     initialValues: {
       username: "",

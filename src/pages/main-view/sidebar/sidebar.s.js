@@ -61,6 +61,7 @@ export const Title = styled.h1`
   color: #707eae;
   margin-bottom: 12px;
   height: 16px;
+  overflow-x: hidden;
 `;
 // menu lists
 export const UlStyle = styled.ul`
@@ -123,4 +124,38 @@ export const Circle = styled.div`
   height: 8px;
   background: #00dea3;
   border-radius: 50%;
+`;
+
+export const MenuButton = styled.button`
+  && {
+    position: absolute;
+    bottom: 0;
+    right: -26px;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 0;
+    background-color: #5a55d2;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    svg {
+      transform: ${({ sidebarType }) =>
+        sidebarType ? "rotate(90deg)" : "rotate(-90deg)"};
+    }
+    path {
+      stroke: #fff;
+    }
+
+    @media only screen and (max-width: 700px) {
+      display: none;
+    }
+  }
 `;
