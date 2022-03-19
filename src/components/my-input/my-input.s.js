@@ -1,10 +1,12 @@
 import styled, { css } from "styled-components";
 
-const signStyle = css`
-  border: 1px solid #e7e7e7;
-  font-weight: normal;
+const searchStyle = css`
+  border: 0;
+  border-radius: 50px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
   font-size: 14px;
-  line-height: 17px;
 `;
 const errorStyle = css`
   border: 1px solid #ff333f;
@@ -47,17 +49,49 @@ const errorStyle = css`
   }
 `;
 
+export const Container = styled.div`
+  width: ${({ width }) => (width ? width : "100%")};
+`;
+export const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;
+export const LabelStyle = styled.label`
+  display: block;
+  width: 100%;
+  margin-bottom: 2px;
+
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
+  color: #343c44;
+`;
 export const InputStyle = styled.input`
   && {
-    width: ${({ width }) => (width ? width : "100%")};
-    height: 42px;
-    border-radius: 8px;
-    padding: 12px 16px;
-    background-color: #fff;
-    color: #101010;
-    font-family: Montserrat;
+    width: 100%;
+    height: ${({ height }) => (height ? height : "36px")};
+    padding: ${({ padding }) => (padding ? padding : "0 18px")};
+    border: 1px solid #d6e4ec;
+    border-radius: 4px;
+
+    font-family: "Poppins";
     font-style: normal;
-    ${({ sign }) => (sign ? signStyle : "")}
+    font-weight: 400;
+    font-size: 12px;
+    color: #343c44;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+
+    ${({ search }) => (search ? searchStyle : "")}
     :focus {
       outline: none !important;
       box-shadow: 2px 2px 10px 0px #e5e5e5;
@@ -68,38 +102,29 @@ export const InputStyle = styled.input`
     ${({ error }) => (error ? errorStyle : "")}
   }
 `;
-export const InputContainer = styled.div`
-  position: relative;
-  width: ${({ width }) => (width ? width : "100%")};
-`;
-
 export const IconStyle = styled.button`
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   position: absolute;
   top: 50%;
-  right: 8px;
-  transform: translateY(-10px);
-
+  right: 18px;
+  transform: translateY(-12px);
   border: 0;
-  background-color: #ffffff00;
-`;
-export const LabelStyle = styled.label`
-  display: block;
-  width: 100%;
-  margin-bottom: 2px;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 15px;
-  color: #101010;
+  background-color: #fff0;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 export const ErrorStyle = styled.label`
-  font-family: Montserrat;
+  font-family: "Poppins";
   font-style: normal;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 15px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.5px;
   color: #ff333f;
 `;

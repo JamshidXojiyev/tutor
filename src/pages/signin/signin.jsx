@@ -18,7 +18,7 @@ function SignIn(props) {
   // language
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanSignIn = languages.value.signin;
-  
+
   // validation formik
   const formik = useFormik({
     initialValues: {
@@ -67,7 +67,6 @@ function SignIn(props) {
               <MyInput
                 width="100%"
                 label={lanSignIn.email}
-                sign
                 placeholder={lanSignIn.email_placeholder}
                 name="username"
                 value={formik.values.username}
@@ -81,10 +80,9 @@ function SignIn(props) {
                 errorMessage={formik.touched.username && formik.errors.username}
               />
               <MyInput
+                password
                 width="100%"
                 label={lanSignIn.password}
-                sign
-                icon
                 placeholder={lanSignIn.password_placeholder}
                 name="password"
                 value={formik.values.password}
