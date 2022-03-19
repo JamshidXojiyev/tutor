@@ -16,7 +16,7 @@ function MyInput(props) {
   );
   const [value, setValue] = useState(null);
   return (
-    <Container>
+    <Container width={props.width ? props.width : "100%"}>
       <LabelStyle>{props.label}</LabelStyle>
       <InputContainer>
         <InputStyle

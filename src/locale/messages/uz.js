@@ -14,6 +14,9 @@ const uz = {
     region: "Viloyat",
     district: "Tuman",
     description: "Ma'lumotlari",
+    firstname: "Ismi",
+    lastname: "Familiyasi",
+    edit: "Tahrirlash",
   },
   signin: {
     signin: "Sign In",

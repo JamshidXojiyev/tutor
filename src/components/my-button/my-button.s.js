@@ -50,5 +50,6 @@ export const ButtonStyle = styled.button`
           opacity: 1;
           cursor: pointer;
         `};
-  ${({ icon, blue }) => (icon ? iconStyle : blueStyle)}
+  ${({ icon, blue }) => (icon ? iconStyle : blueStyle)};
+  margin: ${({ margin }) => margin};
 `;

@@ -51,6 +51,7 @@ const errorStyle = css`
 
 export const Container = styled.div`
   width: ${({ width }) => (width ? width : "100%")};
+  display: inline-block;
 `;
 export const InputContainer = styled.div`
   position: relative;
@@ -73,7 +74,7 @@ export const LabelStyle = styled.label`
 `;
 export const InputStyle = styled.input`
   && {
-    width: 100%;
+    width: ${({ width }) => (width ? width : "100%")};
     height: ${({ height }) => (height ? height : "36px")};
     padding: ${({ padding }) => (padding ? padding : "0 18px")};
     border: 1px solid #d6e4ec;
@@ -85,11 +86,12 @@ export const InputStyle = styled.input`
     font-size: 12px;
     color: #343c44;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: center;
-    align-content: center;
+    dis
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: nowrap;
+    // align-items: center;
+    // align-content: center;
 
     ${({ search }) => (search ? searchStyle : "")}
     :focus {

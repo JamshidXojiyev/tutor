@@ -15,6 +15,9 @@ const en = {
     region: "Region",
     district: "District",
     description: "Description",
+    firstname: "Firstname",
+    lastname: "Lastnames",
+    edit: "Edit",
   },
   signin: {
     signin: "Sign In",

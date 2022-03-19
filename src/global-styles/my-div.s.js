@@ -24,7 +24,7 @@ const spaceBetweenStyled = css`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 `;
 const blockStyled = css`
   background: #ffffff;
