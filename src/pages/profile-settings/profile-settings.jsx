@@ -1,12 +1,15 @@
 import React, { useContext, useEffect } from "react";
 import { LanguagesContext } from "../../locale/languagesContext";
-import { Info, Line, MainDiv, P, Row, Td, UserDiv } from "./profile-settings.s";
-import userSvg from "../../components/my-input/icons/user.svg";
+import { Info, Line, P, Row, Td, UserImgStyle } from "./profile-settings.s";
+import MyButton from "../../components/my-button/my-button";
+import { ReactComponent as AddSvg } from "../../assets/icon/add.svg";
+import { MyDiv } from "../../global-styles/my-div.s";
+import UserIcon from "../../assets/image/user.png";
 
 function ProfileSettings(props) {
   // language data
   const [languages, setLanguages] = useContext(LanguagesContext);
-  const lanSidebar = languages.value.profileSettings;
+  const lanTutor = languages.value.profileSettings;
   const lanForm = languages.value.form;
   // Profile funtions
   const firstData = [
@@ -59,33 +62,37 @@ function ProfileSettings(props) {
 
   return (
     <>
-      <P>Tutor info</P>
-      <MainDiv>
-        <UserDiv>
-          <img src={userSvg} alt="error img" />
-        </UserDiv>
-        <Info>
-          {firstData.map((item) => {
-            return (
-              <Row key={item.th}>
-                <Td bold={true}>{item.th}:</Td>
-                <Td>{item.td}</Td>
-              </Row>
-            );
-          })}
-        </Info>
-        <Line />
-        <Info>
-          {secondData.map((item) => {
-            return (
-              <Row key={item.th}>
-                <Td bold={true}>{item.th}:</Td>
-                <Td>{item.td}</Td>
-              </Row>
-            );
-          })}
-        </Info>
-      </MainDiv>
+      {/* Header section */}
+      <MyDiv widthCenter spaceBetween margin="0 0 18px">
+        <P>{lanTutor.tutor_info}</P>
+        <MyButton blue svg={<AddSvg />} text={lanTutor.edit_tutor} />
+      </MyDiv>
+      {/* Info section */}
+      <MyDiv display="inline-block">
+        <MyDiv widthCenter block gap="17px">
+          <UserImgStyle src={UserIcon} />
+          <Info border>
+            {firstData.map((item) => {
+              return (
+                <Row key={item.th}>
+                  <Td bold>{item.th}:</Td>
+                  <Td>{item.td}</Td>
+                </Row>
+              );
+            })}
+          </Info>
+          <Info>
+            {secondData.map((item) => {
+              return (
+                <Row key={item.th}>
+                  <Td bold>{item.th}:</Td>
+                  <Td>{item.td}</Td>
+                </Row>
+              );
+            })}
+          </Info>
+        </MyDiv>
+      </MyDiv>
     </>
   );
 }

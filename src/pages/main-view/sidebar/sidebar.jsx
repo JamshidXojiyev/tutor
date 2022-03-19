@@ -30,7 +30,7 @@ function Sidebar(props) {
   // mobile open sidebar
   const [size, setSize] = useState("0");
   const findSize = () => {
-    if (window.innerWidth > 700) {
+    if (window.innerWidth > 500) {
       setSize("0");
     } else setSize(-255);
   };
@@ -42,14 +42,14 @@ function Sidebar(props) {
   window.addEventListener("touchend", (ev) => {
     moveX = ev.changedTouches[0].pageX;
     let size = +(moveX - startX).toString().split(".")[0];
-    if (size > 50 && window.innerWidth < 700) {
+    if (size > 50 && window.innerWidth < 500) {
       openSidebar();
-    } else if (size < -50 && window.innerWidth < 700) {
+    } else if (size < -50 && window.innerWidth < 500) {
       closeSidebar();
     }
   });
   window.addEventListener("resize", () => {
-    if (700 < window.innerWidth < 705) {
+    if (500 < window.innerWidth < 505) {
       setSize(0);
     }
   });
@@ -57,7 +57,7 @@ function Sidebar(props) {
     setSize("0");
   };
   const closeSidebar = () => {
-    if (window.innerWidth < 700) setSize("-255");
+    if (window.innerWidth < 500) setSize("-255");
   };
   useEffect(() => {
     findSize();

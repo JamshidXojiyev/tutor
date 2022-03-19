@@ -56,7 +56,8 @@ const en = {
     ],
   },
   profileSettings: {
-    full_name: "Full Name",
+    tutor_info: "Tutor info",
+    edit_tutor: "Edit Tutor",
   },
 };
 

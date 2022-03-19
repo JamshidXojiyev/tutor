@@ -55,7 +55,8 @@ const uz = {
     ],
   },
   profileSettings: {
-    full_name: "Full Name",
+    tutor_info: "Tutor ma'lumotlari",
+    edit_tutor: "Ma'lumotlarni tahrirlash",
   },
 };
 

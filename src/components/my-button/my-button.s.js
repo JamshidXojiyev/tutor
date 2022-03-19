@@ -1,15 +1,28 @@
 import styled, { css } from "styled-components";
 
 const blueStyle = css`
-  background: #1628c5;
-  border-radius: 4px;
-  width: ${({ width }) => (width ? width : "100%")};
-  padding: 12px 10px;
-  font-family: Poppins;
+  background: #5a55d2;
+  border-radius: 6px;
+  padding: 12px 14px;
+
+  font-family: "Inter";
   font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 15px;
   color: #ffffff;
-  font-weight: 500;
-  font-size: 12px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+
+  :hover {
+    box-shadow: 0px 4px 16px rgba(90, 85, 210, 0.4);
+  }
 `;
 const iconStyle = css`
   && {
@@ -37,5 +50,5 @@ export const ButtonStyle = styled.button`
           opacity: 1;
           cursor: pointer;
         `};
-  ${({ icon }) => (icon ? iconStyle : blueStyle)}
+  ${({ icon, blue }) => (icon ? iconStyle : blueStyle)}
 `;

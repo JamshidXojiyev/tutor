@@ -14,7 +14,7 @@ export const SidebarStyle = styled.div`
   padding: 16px 8px;
   z-index: 9;
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 500px) {
     width: 255px;
     padding: "16px 8px";
   }

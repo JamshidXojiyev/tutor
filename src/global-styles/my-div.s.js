@@ -11,7 +11,7 @@ const centerStyled = css`
 const widthCenterStyled = css`
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
 `;
 const heightCenterStyled = css`
@@ -19,6 +19,17 @@ const heightCenterStyled = css`
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
+`;
+const spaceBetweenStyled = css`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+`;
+const blockStyled = css`
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
 `;
 
 export const MyDiv = styled.div`
@@ -38,4 +49,6 @@ export const MyDiv = styled.div`
       : heightCenter
       ? heightCenterStyled
       : ""};
+  ${({ spaceBetween }) => (spaceBetween ? spaceBetweenStyled : "")};
+  ${({ block }) => (block ? blockStyled : "")};
 `;
