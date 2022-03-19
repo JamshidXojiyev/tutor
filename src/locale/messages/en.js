@@ -4,6 +4,18 @@ import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/
 import { ReactComponent as SignOut } from "../../assets/icon/menu-icons/Sign-Out.svg";
 
 const en = {
+  form: {
+    full_name: "Full Name",
+    father_name: "Father Name",
+    birth_date: "Birth Date",
+    phone_number: "Phone Number",
+    gender: "Gender",
+    passportData: "Passport Data",
+    country: "Country",
+    region: "Region",
+    district: "District",
+    description: "Description",
+  },
   signin: {
     signin: "Sign In",
 

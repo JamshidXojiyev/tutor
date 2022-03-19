@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../../context/globalContext";
 import { LanguagesContext } from "../../../locale/languagesContext";
 import {
@@ -28,6 +28,12 @@ function Sidebar(props) {
   const [globalState, setGlobalState] = useContext(GlobalContext);
 
   // mobile open sidebar
+  const [size, setSize] = useState("0");
+  const findSize = () => {
+    if (window.innerWidth > 700) {
+      setSize("0");
+    } else setSize(-255);
+  };
   let startX = "";
   let moveX = "";
   window.addEventListener("touchstart", (ev) => {
@@ -36,23 +42,33 @@ function Sidebar(props) {
   window.addEventListener("touchend", (ev) => {
     moveX = ev.changedTouches[0].pageX;
     let size = +(moveX - startX).toString().split(".")[0];
-    if (size > 50) {
-      setGlobalState({
-        ...globalState,
-        sidebarOpen: true,
-      });
-    }
-    if (size < -50) {
-      setGlobalState({
-        ...globalState,
-        sidebarOpen: false,
-      });
+    if (size > 50 && window.innerWidth < 700) {
+      openSidebar();
+    } else if (size < -50 && window.innerWidth < 700) {
+      closeSidebar();
     }
   });
+  window.addEventListener("resize", () => {
+    if (700 < window.innerWidth < 705) {
+      setSize(0);
+    }
+  });
+  const openSidebar = () => {
+    setSize("0");
+  };
+  const closeSidebar = () => {
+    if (window.innerWidth < 700) setSize("-255");
+  };
+  useEffect(() => {
+    findSize();
+  }, []);
 
   return (
     <>
-      <SidebarStyle openMenu={globalState.sidebarOpen}>
+      <SidebarStyle
+        style={{ position: "fixed", left: `${size}px`, top: 0 }}
+        openMenu={globalState.sidebarOpen}
+      >
         <MyDiv position="relative" height="100%">
           <User>
             <AvatarImageStyle src={AvatarImage} />
@@ -72,7 +88,7 @@ function Sidebar(props) {
           )}
           <UlStyle>
             {lanSidebar.menus.map((item, index) => (
-              <Link to={item.url} key={index}>
+              <Link to={item.url} key={index} onClick={closeSidebar}>
                 <LiStyle
                   openMenu={globalState.sidebarOpen}
                   activ={!location.pathname.search(item.url)}
