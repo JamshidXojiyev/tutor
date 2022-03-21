@@ -1,14 +1,6 @@
 import styled, { css } from "styled-components";
 import BottomIcon from "../../assets/image/bottom-icon.png";
 
-const searchStyle = css`
-  border: 0;
-  border-radius: 50px;
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-`;
 const errorStyle = css`
   border: 1px solid #ff333f;
   animation: animate 0.7s linear forwards;
@@ -54,13 +46,11 @@ export const SelectStyle = styled.select`
     width: ${({ width }) => width};
     border: 1px solid #d6e4ec;
     border-radius: 4px;
-    padding: 8px 16px;
-    padding-right: 36px;
+    padding: ${({ table }) => (table ? "4px 12px" : "8px 16px")};
+    padding-right: ${({ table }) => (table ? "30px" : "36px")};
     appearance: none;
+    cursor: pointer;
     background: url(${BottomIcon}) white no-repeat calc(100% - 4px) !important;
-    :focus-visible {
-      border: 0 !important;
-    }
   }
 `;
 
@@ -99,7 +89,6 @@ export const InputStyle = styled.input`
     align-items: center;
     align-content: center;
 
-    ${({ search }) => (search ? searchStyle : "")}
     :focus {
       outline: none !important;
       box-shadow: 2px 2px 10px 0px #e5e5e5;

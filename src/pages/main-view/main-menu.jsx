@@ -9,6 +9,7 @@ import { Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Dashboard from "../dashboard/dashboard";
+import Students from "../students/students";
 
 function MainMenu(props) {
   // globalState
@@ -22,7 +23,7 @@ function MainMenu(props) {
         <Switch>
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/profile-settings" component={ProfileSettings} />
-
+          <Route exact path="/students" component={Students} />
           <Route path="*">
             <Redirect to={"/dashboard"} />
           </Route>

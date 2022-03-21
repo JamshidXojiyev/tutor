@@ -5,7 +5,7 @@ import { ErrorStyle, LabelStyle, SelectStyle } from "./my-select.s";
 function MySelect(props) {
   return (
     <>
-      <MyDiv>
+      <MyDiv center>
         <LabelStyle>{props.label}</LabelStyle>
         <SelectStyle {...props}>
           {props.option?.map((item) => (
