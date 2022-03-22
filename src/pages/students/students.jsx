@@ -5,6 +5,8 @@ import { MyDiv } from "../../global-styles/my-div.s";
 import { PageTitle, TotalUsers } from "../../global-styles/page.s";
 
 import { ReactComponent as SearchIcon } from "../../assets/icon/search.svg";
+import { GroupName } from "./students.s";
+import MySelect from "../../components/my-select/my-select";
 
 function Students() {
   const data = {
@@ -51,6 +53,10 @@ function Students() {
             rightIcon={<SearchIcon />}
             setValue={(e) => console.log(e)}
           />
+        </MyDiv>
+        <MyDiv>
+          <GroupName>group name:</GroupName>
+          <MySelect options={["101-group", "102-group"]} />
         </MyDiv>
       </MyDiv>
       <MyDiv block display="inline-block">
