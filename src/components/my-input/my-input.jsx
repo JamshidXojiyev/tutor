@@ -21,8 +21,8 @@ function MyInput(props) {
       <InputContainer>
         <InputStyle
           type={inputType}
-          {...props}
           onChange={(e) => setValue(e.target.value)}
+          {...props}
         />
         {/* right button */}
         {props.rightIcon && (
