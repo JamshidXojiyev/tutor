@@ -18,12 +18,36 @@ const blueStyle = css`
   align-content: center;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
 
   :hover {
-    box-shadow: 0px 4px 16px rgba(90, 85, 210, 0.4);
+    box-shadow: 0px 4px 16px #b1b1c342;
   }
 `;
+const whiteStyle = css`
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 12px 14px;
+  height: ${({ height }) => (height ? height : "34px")};
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  color: #575c76;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
+
+  :hover {
+    box-shadow: 0px 4px 16px #d8d8e566;
+  }
+`;
+
 const iconStyle = css`
   && {
     width: 38px;
@@ -39,7 +63,8 @@ const iconStyle = css`
 
 export const ButtonStyle = styled.button`
   border: 0;
-
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   ${({ disabled }) =>
     disabled
       ? css`
@@ -50,6 +75,6 @@ export const ButtonStyle = styled.button`
           opacity: 1;
           cursor: pointer;
         `};
-  ${({ icon, blue }) => (icon ? iconStyle : blueStyle)};
+  ${({ icon, white }) => (icon ? iconStyle : white ? whiteStyle : blueStyle)};
   margin: ${({ margin }) => margin};
 `;

@@ -7,6 +7,9 @@ import { PageTitle, TotalUsers } from "../../global-styles/page.s";
 import { ReactComponent as SearchIcon } from "../../assets/icon/search.svg";
 import { GroupName } from "./students.s";
 import MySelect from "../../components/my-select/my-select";
+import MyButton from "../../components/my-button/my-button";
+import { ReactComponent as ImportIcon } from "../../assets/icon/import.svg";
+import { ReactComponent as AddIcon } from "../../assets/icon/add.svg";
 
 function Students() {
   const data = {
@@ -42,7 +45,7 @@ function Students() {
   };
   return (
     <>
-      <MyDiv margin="0 0 16px 0">
+      <MyDiv margin="0 0 16px 0" spaceBetween>
         <MyDiv widthCenter>
           <PageTitle>Students list</PageTitle>
           <TotalUsers>274 Users</TotalUsers>
@@ -54,9 +57,11 @@ function Students() {
             setValue={(e) => console.log(e)}
           />
         </MyDiv>
-        <MyDiv>
+        <MyDiv widthCenter gap="12px">
           <GroupName>group name:</GroupName>
-          <MySelect options={["101-group", "102-group"]} />
+          <MySelect option={["All", "101-group", "102-group"]} />
+          <MyButton white svg={<ImportIcon />} text="Import" />
+          <MyButton svg={<AddIcon />} text="Add New Student" />
         </MyDiv>
       </MyDiv>
       <MyDiv block display="inline-block">
