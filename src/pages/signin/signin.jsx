@@ -35,7 +35,9 @@ function SignIn(props) {
         .required(lanSignIn.password_required_err),
     }),
     onSubmit: (val) => {
-      LoginConfig(val).then((res) => {});
+      LoginConfig(val).then((res) => {
+        console.log(res);
+      });
     },
   });
 

@@ -43,7 +43,7 @@ const errorStyle = css`
 `;
 export const SelectStyle = styled.select`
   && {
-    width: ${({ width }) => width};
+    width: 100%;
     border: 1px solid #d6e4ec;
     border-radius: 4px;
     padding: ${({ table }) => (table ? "4px 12px" : "8px 16px")};

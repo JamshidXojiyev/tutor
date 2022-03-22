@@ -6,6 +6,7 @@ import { LanguagesContext } from "../../locale/languagesContext";
 import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
+import MySelect from "../../components/my-select/my-select";
 
 function ProfileDiaolog() {
   const [languages, setLanguages] = useContext(LanguagesContext);
@@ -77,6 +78,7 @@ function ProfileDiaolog() {
       label: lanForm.gender,
       width: true,
       select: true,
+      option: ["Erkak", "Ayol"],
     },
     {
       name: "country",
@@ -87,12 +89,14 @@ function ProfileDiaolog() {
       label: lanForm.region,
       width: true,
       select: true,
+      option: ["Toshlent", "Farg'ona", "Andijon", "Namangan"],
     },
     {
       name: "district",
       label: lanForm.district,
       width: true,
       select: true,
+      option: ["Yunusobod", "Olmazor", "Shayxontohur"],
     },
     {
       name: "description",
@@ -106,9 +110,9 @@ function ProfileDiaolog() {
   return (
     <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
       <MyDiv spaceBetween gap="8px">
-        {data.map(({ name, label, width, type, select }) => {
+        {data.map(({ name, label, width, type, select, option }) => {
           return select ? (
-            <select key={name}></select>
+            <MySelect option={option} width="200px" label={label} />
           ) : (
             <MyInput
               key={name}
