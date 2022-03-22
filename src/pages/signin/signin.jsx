@@ -10,9 +10,9 @@ import MyInput from "../../components/my-input/my-input";
 import MyButton from "../../components/my-button/my-button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { MyForm } from "../../global-styles/form.s";
-import client from "../../client/index";
-import { LanguagesContext } from "../../locale/languagesContext";
+import { MyForm } from "../../global-styles/form.s"; 
+import { LanguagesContext } from "../../locale/languagesContext"; 
+import { LoginConfig } from "../../server/config/CrudUrls";
 
 function SignIn(props) {
   // language
@@ -35,11 +35,9 @@ function SignIn(props) {
         .required(lanSignIn.password_required_err),
     }),
     onSubmit: (val) => {
-      console.log(val);
-      client
-        .post(`${process.env.REACT_APP_BASE_URL}/api/auth/signin`, val)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+      LoginConfig(val).then(res => {
+
+      });
     },
   });
 

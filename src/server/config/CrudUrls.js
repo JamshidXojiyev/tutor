@@ -1,4 +1,4 @@
-import { CreateFunc, DeleteFunc, GetFunc, EditFunc, GetFuncByData } from ".";
+import { CreateFunc, DeleteFunc, GetFunc, EditFunc } from ".";
 
 //Login section
 export const LoginConfig = (data) => {

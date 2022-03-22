@@ -1,18 +1,15 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { API_URL, SITE_LANG, TOKEN } from "../constants";
 import { deleteCookie, getCookie } from "../functions/useCookies";
 
-export const token = getCookie(TOKEN);
-export const userData = JSON.parse(localStorage.getItem("user"));
+export const token = getCookie("token");
 
-export let host = API_URL;
+export let host = process.env.REACT_APP_BASE_URL;
 
 export let headers = {
   "X-Requested-With": "XMLHttpRequest",
   "Content-Type": "application/json; charset=utf-8",
   Authorization: token ? `Bearer ${token}` : "",
-  Language: localStorage.getItem(SITE_LANG),
 };
 
 export let axiosInstance = axios.create({
@@ -27,9 +24,10 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     if (error.response) {
       if (error.response.status === 401) {
-        deleteCookie(TOKEN);
-        toast.error("Iltimos avval tizimga kiring");
-        window.location.href = "/signin";
+        // deleteCookie(TOKEN);
+        // toast.error("Iltimos avval tizimga kiring");
+        // window.location.href = "/signin";
+        console.log(error);
       } else {
         error.response.data && toast.error(error.response.data.message);
       }
