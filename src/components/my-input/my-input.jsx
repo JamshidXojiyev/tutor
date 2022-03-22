@@ -16,7 +16,7 @@ function MyInput(props) {
   );
   const [value, setValue] = useState(null);
   return (
-    <Container width={props.width ? props.width : "100%"}>
+    <Container width={props.width ? props.width : "auto"}>
       <LabelStyle>{props.label}</LabelStyle>
       <InputContainer>
         <InputStyle
@@ -26,7 +26,11 @@ function MyInput(props) {
         />
         {/* right button */}
         {props.rightIcon && (
-          <IconStyle onClick={props.setValue && props.setValue(value)}>
+          <IconStyle
+            onClick={() => {
+              props.setValue(value);
+            }}
+          >
             {props.rightIcon}
           </IconStyle>
         )}
