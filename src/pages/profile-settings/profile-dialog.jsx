@@ -112,7 +112,7 @@ function ProfileDiaolog() {
       <MyDiv spaceBetween gap="8px">
         {data.map(({ name, label, width, type, select, option }) => {
           return select ? (
-            <MySelect option={option} width="200px" label={label} />
+            <MySelect name={name} option={option} width="200px" label={label} />
           ) : (
             <MyInput
               key={name}
@@ -121,7 +121,7 @@ function ProfileDiaolog() {
               label={label}
               name={name}
               value={formik.values[name]}
-              onChange={(e) => console.log(e)}
+              onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
           );

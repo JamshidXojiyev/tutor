@@ -13,6 +13,8 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { LoginConfig } from "../../server/config/CrudUrls";
+import { setCookie } from "../../functions/useCookies";
+import { setLocalStorage } from "../../functions/useLocalStorage";
 
 function SignIn(props) {
   // language
@@ -37,6 +39,9 @@ function SignIn(props) {
     onSubmit: (val) => {
       LoginConfig(val).then((res) => {
         console.log(res);
+        setCookie("token", res.data.token);
+        setLocalStorage("refresh_token", res.data.refreshToken);
+        window.location.href = "/dashboard";
       });
     },
   });

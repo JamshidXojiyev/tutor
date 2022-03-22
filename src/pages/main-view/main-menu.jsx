@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { GlobalContext } from "../../context/globalContext";
 import { MyDiv } from "../../global-styles/my-div.s";
 import Header from "./header/header";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MyInput from "../../components/my-input/my-input";
 import MyTable from "../../components/my-table/my-table";
 import { MyDiv } from "../../global-styles/my-div.s";
@@ -10,8 +10,26 @@ import MySelect from "../../components/my-select/my-select";
 import MyButton from "../../components/my-button/my-button";
 import { ReactComponent as ImportIcon } from "../../assets/icon/import.svg";
 import { ReactComponent as AddIcon } from "../../assets/icon/add.svg";
+import {
+  GetStudentConfig,
+  GetTutorGroupsConfig,
+} from "../../server/config/CrudUrls";
 
 function Students() {
+  const getStudents = () => {
+    GetStudentConfig().then((res) => {
+      console.log(res);
+    });
+  };
+  const getGroups = () => {
+    GetTutorGroupsConfig().then((res) => {
+      console.log(res);
+    });
+  };
+  useEffect(() => {
+    getStudents();
+    getGroups();
+  }, []);
   const data = {
     header: [
       "first name",
@@ -43,6 +61,7 @@ function Students() {
       "special",
     ],
   };
+
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>

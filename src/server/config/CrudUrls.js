@@ -4,6 +4,9 @@ import { CreateFunc, DeleteFunc, GetFunc, EditFunc } from ".";
 export const LoginConfig = (data) => {
   return CreateFunc("api/auth/signin", data);
 };
+export const RefreshTokenConfig = (data) => {
+  return CreateFunc("api/auth/refresh-token", data);
+};
 //Admin Tutor section
 export const GetTutorStudentConfig = () => {
   return GetFunc(`admin/api/tutor/students`);
