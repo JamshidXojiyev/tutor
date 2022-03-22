@@ -10,8 +10,8 @@ import MyInput from "../../components/my-input/my-input";
 import MyButton from "../../components/my-button/my-button";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { MyForm } from "../../global-styles/form.s"; 
-import { LanguagesContext } from "../../locale/languagesContext"; 
+import { MyForm } from "../../global-styles/form.s";
+import { LanguagesContext } from "../../locale/languagesContext";
 import { LoginConfig } from "../../server/config/CrudUrls";
 
 function SignIn(props) {
@@ -35,9 +35,7 @@ function SignIn(props) {
         .required(lanSignIn.password_required_err),
     }),
     onSubmit: (val) => {
-      LoginConfig(val).then(res => {
-
-      });
+      LoginConfig(val).then((res) => {});
     },
   });
 
@@ -93,7 +91,7 @@ function SignIn(props) {
                 }
                 errorMessage={formik.touched.password && formik.errors.password}
               />
-              <MyButton disabled={false} text="SignIn" />
+              <MyButton width="100%" disabled={false} text="SignIn" />
             </MyDiv>
           </Container>
         </MyDiv>
