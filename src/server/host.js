@@ -5,6 +5,7 @@ import { deleteCookie, getCookie } from "../functions/useCookies";
 export const token = getCookie("token");
 
 export let host = process.env.REACT_APP_BASE_URL;
+console.log(host);
 
 export let headers = {
   "X-Requested-With": "XMLHttpRequest",

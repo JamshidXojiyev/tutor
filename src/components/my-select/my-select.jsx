@@ -5,11 +5,11 @@ import { ErrorStyle, LabelStyle, SelectStyle } from "./my-select.s";
 function MySelect(props) {
   return (
     <>
-      <MyDiv center>
+      <MyDiv heightCenter width={props.width ? props.width : "auto"}>
         <LabelStyle>{props.label}</LabelStyle>
         <SelectStyle {...props}>
-          {props.option?.map((item) => (
-            <option>{item}</option>
+          {props.option?.map((item, index) => (
+            <option key={index.toString()}>{item}</option>
           ))}
         </SelectStyle>
         {props.errorMessage && <ErrorStyle>{props.errorMessage}</ErrorStyle>}
