@@ -9,7 +9,7 @@ function MySelect(props) {
         <LabelStyle>{props.label}</LabelStyle>
         <SelectStyle {...props}>
           {props.option?.map((item, index) => (
-            <option key={index.toString()}>{item}</option>
+            <option key={index}>{item}</option>
           ))}
         </SelectStyle>
         {props.errorMessage && <ErrorStyle>{props.errorMessage}</ErrorStyle>}

@@ -30,6 +30,7 @@ const blockStyled = css`
   background: #ffffff;
   border-radius: 12px;
   padding: 18px;
+  overflow: auto;
 `;
 
 export const MyDiv = styled.div`

@@ -1,12 +1,10 @@
 import React from "react";
-import ProfileDiaolog from "../profile-settings/profile-dialog";
+import MyDialog from "../../components/my-dialog/my-dialog";
 
 function Dashboard(props) {
-  console.log(process.env.REACT_APP_BASE_URL);
   return (
     <>
       <h1>Dashboard page</h1>
-      <ProfileDiaolog />
     </>
   );
 }

@@ -65,7 +65,7 @@ function ProfileSettings(props) {
       {/* Header section */}
       <MyDiv widthCenter spaceBetween margin="0 0 18px">
         <P>{lanTutor.tutor_info}</P>
-        <MyButton blue svg={<EditSvg />} text={lanTutor.edit_tutor} />
+        <MyButton svg={<EditSvg />} text={lanTutor.edit_tutor} />
       </MyDiv>
       {/* Info section */}
       <MyDiv display="inline-block">
