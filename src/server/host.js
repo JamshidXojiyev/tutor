@@ -4,7 +4,7 @@ import { deleteCookie, getCookie, setCookie } from "../functions/useCookies";
 import { getLocalStorage, setLocalStorage } from "../functions/useLocalStorage";
 import { RefreshTokenConfig } from "./config/CrudUrls";
 
-export const token = getCookie("token");
+export const token = getLocalStorage("token");
 
 export let host = process.env.REACT_APP_BASE_URL;
 console.log(host);
@@ -27,10 +27,11 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     if (error.response) {
       if (error.response.status === 401) {
-        RefreshTokenConfig(getLocalStorage("refresh_token")).then((res) => {
-          setCookie("token", res.data.token);
-          setLocalStorage("refresh_token", res.data.refreshToken);
-        });
+        // RefreshTokenConfig(getLocalStorage("refresh_token")).then((res) => {
+        //   setLocalStorage("token", res.data.token);
+        //   setLocalStorage("refresh_token", res.data.refreshToken);
+        // });
+        console.log(error);
       } else {
         error.response.data && toast.error(error.response.data.message);
       }

@@ -10,8 +10,19 @@ import { Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Dashboard from "../dashboard/dashboard";
 import Students from "../students/students";
+import { useHistory } from "react-router-dom";
+import {
+  deleteLocalStorage,
+  getLocalStorage,
+} from "../../functions/useLocalStorage";
 
 function MainMenu(props) {
+  const history = useHistory();
+  if (!getLocalStorage("token")) {
+    history.push("/signin");
+    deleteLocalStorage("token");
+    deleteLocalStorage("refresh_token");
+  }
   // globalState
   const [globalState, setGlobalState] = useContext(GlobalContext);
 

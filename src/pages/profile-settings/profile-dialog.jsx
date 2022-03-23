@@ -112,7 +112,16 @@ function ProfileDiaolog() {
       <MyDiv spaceBetween gap="8px">
         {data.map(({ name, label, width, type, select, option }) => {
           return select ? (
-            <MySelect name={name} option={option} width="200px" label={label} />
+            <MySelect
+              key={name}
+              option={option}
+              width="200px"
+              label={label}
+              name={name}
+              value={formik.values[name]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
           ) : (
             <MyInput
               key={name}

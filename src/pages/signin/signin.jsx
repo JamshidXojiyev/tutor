@@ -13,13 +13,18 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { LoginConfig } from "../../server/config/CrudUrls";
-import { setCookie } from "../../functions/useCookies";
-import { setLocalStorage } from "../../functions/useLocalStorage";
+import { deleteCookie, setCookie } from "../../functions/useCookies";
+import {
+  deleteLocalStorage,
+  setLocalStorage,
+} from "../../functions/useLocalStorage";
+import { useHistory } from "react-router-dom";
 
 function SignIn(props) {
   // language
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanSignIn = languages.value.signin;
+  const history = useHistory();
 
   // validation formik
   const formik = useFormik({
@@ -38,13 +43,15 @@ function SignIn(props) {
     }),
     onSubmit: (val) => {
       LoginConfig(val).then((res) => {
-        console.log(res);
-        setCookie("token", res.data.token);
+        setLocalStorage("token", res.data.token);
         setLocalStorage("refresh_token", res.data.refreshToken);
-        window.location.href = "/dashboard";
+        setLocalStorage("role", res.data.roles[0]);
+        history.push("/");
       });
     },
   });
+  // res.data.roles[0] = "ROLE_TUTOR"
+  // res.data.roles[0] = "ROLE_ADMIN"
 
   return (
     <>
