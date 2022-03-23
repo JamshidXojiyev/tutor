@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { LanguagesContext } from "../../locale/languagesContext";
@@ -7,14 +7,49 @@ import MyInput from "../../components/my-input/my-input";
 import MySelect from "../../components/my-select/my-select";
 import { MyForm } from "../../global-styles/form.s";
 import { MyDiv } from "../../global-styles/my-div.s";
+import {
+  CreateStudentConfig,
+  GetTutorGroupsConfig,
+} from "../../server/config/CrudUrls";
 
 function StudentDialog() {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
+  const groups = [];
+  const getGroups = () => {
+    GetTutorGroupsConfig().then((res) => {
+      console.log(res);
+      groups = res.data;
+    });
+  };
 
+  //   address: "Xonqiz"
+  // birthDate: "2022-03-23"
+  // country: "Uzbekistan"
+  // course: "2 - kurs"
+  // description: "sdfsdfdsf"
+  // district: "Olmazor"
+  // educationType: "Bakalvr"
+  // familyStatus: "Turmush qurmagan"
+  // fatherName: "Ulugbek ogli"
+  // firstname: "Avazbek"
+  // gender: "Erkak"
+  // invalidParents: "Nogironligi yo'q"
+  // invalidStudent: "Nogironligi yo'q"
+  // lastname: "Sotvoldiyev"
+  // nationality: "O'zbek"
+  // needy: "Kam taminlanmagan"
+  // orphanStudent: "Ota-onasi bor"
+  // parentsName: "Akbarov Ulug'bek"
+  // parentsRetiree: "Nafaqador emas"
+  // passportData: "Ab7567153"
+  // paymentType: "To'lov shartnoma asosida"
+  // phoneNumber: 973360176
+  // region: "Farg'ona"
+  // speciality: "Moliya va moliyaviy texnologiyalar"
   const formik = useFormik({
     initialValues: {
-      firstname: "asd",
+      firstname: "Avazbek",
       fatherName: "",
       lastname: "",
       birthDate: "",
@@ -35,12 +70,52 @@ function StudentDialog() {
       //   .min(3, lanSignIn.min_err)
       //   .required(lanSignIn.password_required_err),
     }),
-    onSubmit: (val) => {
-      console.log(val);
-      // client
-      //   .post(`${process.env.REACT_APP_BASE_URL}/api/auth/signin`, val)
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err));
+    onSubmit: (value) => {
+      let obj = {
+        firstname: value.firstname,
+        lastname: value.lastname,
+        fatherName: value.fatherName,
+        nationality: value.nationality,
+        passportData: value.passportData,
+        group: {
+          groupName: value.groupName,
+        },
+        gender: value.gender,
+        addressRequest: {
+          country: value.country,
+          region: value.region,
+          district: value.district,
+          description: value.description,
+        },
+        birthDate: value.birthDate,
+        familyInformation: {
+          parentsName: value.parentsName,
+          address: value.address,
+          phoneNumber: value.phoneNumber,
+          needy: true,
+          orphanStudent: value.orphanStudent,
+          parentsRetiree: value.parentsRetiree,
+          invalidParents: value.invalidParents,
+          invalidStudent: value.invalidStudent,
+        },
+        studyInfo: {
+          course: value.course,
+          speciality: value.speciality,
+          university: value.university,
+          educationType: value.educationType,
+          paymentType: value.paymentType,
+        },
+        familyStatus: true,
+        creativePotential: [
+          {
+            type: "Sport",
+            category: ["Voleybo'l", "Futbo'l"],
+          },
+        ],
+      };
+      console.log(value);
+      console.log(obj);
+      // CreateStudentConfig();
     },
   });
   const data = [
@@ -224,6 +299,9 @@ function StudentDialog() {
       ],
     },
   ];
+  useEffect(() => {
+    getGroups();
+  }, []);
 
   return (
     <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
@@ -231,9 +309,14 @@ function StudentDialog() {
         {data.map(({ name, label, width, type, select, option }) => {
           return select ? (
             <MySelect
+              key={name}
               option={option}
               width={width ? "200px" : "100%"}
               label={label}
+              name={name}
+              value={formik.values[name]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           ) : (
             <MyInput
