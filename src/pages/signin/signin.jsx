@@ -13,25 +13,16 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { LoginConfig } from "../../server/config/CrudUrls";
-import { deleteCookie, setCookie } from "../../functions/useCookies";
-import {
-  deleteLocalStorage,
-  setLocalStorage,
-} from "../../functions/useLocalStorage";
-import { useHistory } from "react-router-dom";
+import { setLocalStorage } from "../../functions/useLocalStorage";
 
 function SignIn(props) {
   // language
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanSignIn = languages.value.signin;
-  const history = useHistory();
 
   // validation formik
   const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
+    initialValues: {},
     validationSchema: Yup.object({
       username: Yup.string()
         .min(3, lanSignIn.min_err)
@@ -46,12 +37,10 @@ function SignIn(props) {
         setLocalStorage("token", res.data.token);
         setLocalStorage("refresh_token", res.data.refreshToken);
         setLocalStorage("role", res.data.roles[0]);
-        history.push("/");
+        window.location.href = "/";
       });
     },
   });
-  // res.data.roles[0] = "ROLE_TUTOR"
-  // res.data.roles[0] = "ROLE_ADMIN"
 
   return (
     <>

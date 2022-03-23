@@ -215,7 +215,7 @@ function StudentDialog() {
       label: lanForm.gender,
       width: true,
       select: true,
-      option: ["Erkak", "Ayol"],
+      option: [lanForm["gender" + 0], lanForm["gender" + 1]],
     },
     {
       name: "passportData",
