@@ -1,13 +1,10 @@
 import React from "react";
-import ProfileDiaolog from "../profile-settings/profile-dialog";
-import StudentDialog from "../students/student-diaolog";
+import MyDialog from "../../components/my-dialog/my-dialog";
 
 function Dashboard(props) {
   return (
     <>
       <h1>Dashboard page</h1>
-      <ProfileDiaolog />
-      <StudentDialog />
     </>
   );
 }

@@ -1,15 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState  } from "react"; 
 import MyInput from "../../components/my-input/my-input";
 import MyTable from "../../components/my-table/my-table";
 import { MyDiv } from "../../global-styles/my-div.s";
 import { PageTitle, TotalUsers } from "../../global-styles/page.s";
-
 import { ReactComponent as SearchIcon } from "../../assets/icon/search.svg";
 import { GroupName } from "./students.s";
 import MySelect from "../../components/my-select/my-select";
 import MyButton from "../../components/my-button/my-button";
 import { ReactComponent as ImportIcon } from "../../assets/icon/import.svg";
 import { ReactComponent as AddIcon } from "../../assets/icon/add.svg";
+import { studentsData } from "./filter-data";
+import MyDialog from "../../components/my-dialog/my-dialog";
+import StudentDialog from "./student-diaolog";
 import {
   GetStudentConfig,
   GetTutorGroupsConfig,
@@ -30,6 +32,8 @@ function Students() {
     getStudents();
     getGroups();
   }, []);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
   const data = {
     header: [
       "first name",
@@ -80,14 +84,23 @@ function Students() {
           <GroupName>group name:</GroupName>
           <MySelect option={["All", "101-group", "102-group"]} />
           <MyButton white svg={<ImportIcon />} text="Import" />
-          <MyButton svg={<AddIcon />} text="Add New Student" />
+          <MyButton
+            svg={<AddIcon />}
+            text="Add New Student"
+            onClick={() => setDialogOpen(true)}
+          />
         </MyDiv>
       </MyDiv>
-      <MyDiv block display="inline-block">
-        <MyTable data={data} total="123" loading={false} />
+      <MyDiv width="100%" block display="inline-block">
+        <MyTable data={studentsData()} total="123" loading={false} />
       </MyDiv>
+      <MyDialog
+        title="Student info"
+        body={<StudentDialog />}
+        open={dialogOpen}
+        close={(e) => setDialogOpen(e)}
+      />
     </>
-  );
-}
+  )};
 
 export default Students;

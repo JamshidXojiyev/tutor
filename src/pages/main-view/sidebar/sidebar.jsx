@@ -42,9 +42,9 @@ function Sidebar(props) {
   window.addEventListener("touchend", (ev) => {
     moveX = ev.changedTouches[0].pageX;
     let size = +(moveX - startX).toString().split(".")[0];
-    if (size > 50 && window.innerWidth < 500) {
+    if (size > 100 && window.innerWidth < 500) {
       openSidebar();
-    } else if (size < -50 && window.innerWidth < 500) {
+    } else if (size < -100 && window.innerWidth < 500) {
       closeSidebar();
     }
   });

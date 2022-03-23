@@ -27,6 +27,7 @@ function MyInput(props) {
         {/* right button */}
         {props.rightIcon && (
           <IconStyle
+            type="button"
             onClick={() => {
               props.setValue(value);
             }}
@@ -37,6 +38,7 @@ function MyInput(props) {
         {/* input type password */}
         {props.password && (
           <IconStyle
+            type="button"
             onClick={() =>
               setInputType(inputType === "password" ? "text" : "password")
             }

@@ -7,7 +7,6 @@ import { RefreshTokenConfig } from "./config/CrudUrls";
 export const token = getLocalStorage("token");
 
 export let host = process.env.REACT_APP_BASE_URL;
-console.log(host);
 
 export let headers = {
   "X-Requested-With": "XMLHttpRequest",

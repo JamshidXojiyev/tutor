@@ -5,8 +5,8 @@ function MySelect(props) {
   return (
     <>
       <SelectStyle {...props}>
-        {props.option?.map((item) => (
-          <option>{item}</option>
+        {props.option?.map((item, index) => (
+          <option key={index}>{item}</option>
         ))}
       </SelectStyle>
     </>

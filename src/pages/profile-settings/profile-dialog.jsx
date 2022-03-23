@@ -10,11 +10,10 @@ import MySelect from "../../components/my-select/my-select";
 
 function ProfileDiaolog() {
   const [languages, setLanguages] = useContext(LanguagesContext);
-  const lanTutor = languages.value.profileSettings;
   const lanForm = languages.value.form;
   const formik = useFormik({
     initialValues: {
-      firstname: "asd",
+      firstname: "",
       fatherName: "",
       lastname: "",
       birthDate: "",
@@ -37,12 +36,9 @@ function ProfileDiaolog() {
     }),
     onSubmit: (val) => {
       console.log(val);
-      // client
-      //   .post(`${process.env.REACT_APP_BASE_URL}/api/auth/signin`, val)
-      //   .then((res) => console.log(res))
-      //   .catch((err) => console.log(err));
     },
   });
+
   const data = [
     {
       name: "firstname",
