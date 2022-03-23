@@ -51,6 +51,12 @@ export const SelectStyle = styled.select`
     appearance: none;
     cursor: pointer;
     background: url(${BottomIcon}) white no-repeat calc(100% - 4px) !important;
+
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #343c44;
   }
 `;
 
@@ -62,7 +68,7 @@ export const LabelStyle = styled.label`
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 15px;
   display: flex;
   align-items: center;
@@ -76,12 +82,6 @@ export const InputStyle = styled.input`
     padding: ${({ padding }) => (padding ? padding : "0 18px")};
     border: 1px solid #d6e4ec;
     border-radius: 4px;
-
-    font-family: "Poppins";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    color: #343c44;
 
     display: flex;
     flex-direction: row;

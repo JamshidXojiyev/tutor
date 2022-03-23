@@ -12,6 +12,8 @@ const uz = {
     birth_date: "Tug'ulgan sanasi",
     phone_number: "Telefon raqami",
     gender: "Jinsi",
+    gender0: "Erkak",
+    gender1: "Ayol",
     passportData: "Pasport ma'lumotlari",
     country: "Mamlakat",
     region: "Viloyat",

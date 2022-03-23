@@ -65,7 +65,7 @@ export const LabelStyle = styled.label`
   font-family: "Poppins";
   font-style: normal;
   font-weight: 600;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 15px;
   display: flex;
   align-items: center;
@@ -85,13 +85,6 @@ export const InputStyle = styled.input`
     font-weight: 400;
     font-size: 12px;
     color: #343c44;
-
-    dis
-    // display: flex;
-    // flex-direction: row;
-    // flex-wrap: nowrap;
-    // align-items: center;
-    // align-content: center;
 
     ${({ search }) => (search ? searchStyle : "")}
     :focus {

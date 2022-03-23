@@ -10,7 +10,7 @@ import SignIn from "./pages/signin/signin";
 
 function App() {
   const history = useHistory();
-  !getLocalStorage("token") ? history.push("/signin") : history.push("/");
+  !getLocalStorage("token") && history.push("/signin");
   console.log(getLocalStorage("token"));
   return (
     <LanguagesProvider>

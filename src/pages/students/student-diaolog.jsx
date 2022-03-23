@@ -140,7 +140,7 @@ function StudentDialog() {
       label: lanForm.gender,
       width: true,
       select: true,
-      option: ["Erkak", "Ayol"],
+      option: [lanForm["gender" + 0], lanForm["gender" + 1]],
     },
     {
       name: "passportData",
@@ -234,6 +234,10 @@ function StudentDialog() {
               option={option}
               width={width ? "200px" : "100%"}
               label={label}
+              name={name}
+              value={formik.values[name]}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           ) : (
             <MyInput
