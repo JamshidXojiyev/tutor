@@ -62,7 +62,7 @@ function Sidebar(props) {
   useEffect(() => {
     findSize();
   }, []);
-
+  const role = "ROLE_ADMIN";
   return (
     <>
       <SidebarStyle
@@ -87,18 +87,33 @@ function Sidebar(props) {
             <Title>MENU</Title>
           )}
           <UlStyle>
-            {lanSidebar.menus.map((item, index) => (
-              <Link to={item.url} key={index} onClick={closeSidebar}>
-                <LiStyle
-                  openMenu={globalState.sidebarOpen}
-                  activ={!location.pathname.search(item.url)}
-                >
-                  <item.icon />
-                  {item.name}
-                  {!location.pathname.search(item.url) && <Circle />}
-                </LiStyle>
-              </Link>
-            ))}
+            {role === "ROLE_TUTOR"
+              ? lanSidebar.menus.map((item, index) => (
+                  <Link to={item.url} key={index} onClick={closeSidebar}>
+                    <LiStyle
+                      openMenu={globalState.sidebarOpen}
+                      activ={!location.pathname.search(item.url)}
+                    >
+                      <item.icon />
+                      {item.name}
+                      {!location.pathname.search(item.url) && <Circle />}
+                    </LiStyle>
+                  </Link>
+                ))
+              : role === "ROLE_ADMIN"
+              ? lanSidebar.menusAdmin.map((item, index) => (
+                  <Link to={item.url} key={index} onClick={closeSidebar}>
+                    <LiStyle
+                      openMenu={globalState.sidebarOpen}
+                      activ={!location.pathname.search(item.url)}
+                    >
+                      <item.icon />
+                      {item.name}
+                      {!location.pathname.search(item.url) && <Circle />}
+                    </LiStyle>
+                  </Link>
+                ))
+              : ""}
           </UlStyle>
           <MenuButton
             sidebarType={globalState.sidebarOpen}

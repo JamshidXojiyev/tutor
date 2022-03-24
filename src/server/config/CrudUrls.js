@@ -24,7 +24,7 @@ export const DeleteTutorConfig = (id) => {
   return DeleteFunc(`admin/api/tutor/${id}`);
 };
 export const CreateTutorConfig = (data) => {
-  return GetFunc("admin/api/tutor", data);
+  return CreateFunc("admin/api/tutor", data);
 };
 //Tutor Student section
 export const GetTutorGroupsConfig = () => {
@@ -43,5 +43,5 @@ export const DeleteStudentConfig = (id) => {
   return DeleteFunc(`tutor/api/student/${id}`);
 };
 export const CreateStudentConfig = (data) => {
-  return GetFunc("tutor/api/tutor", data);
+  return CreateFunc("tutor/api/student", data);
 };

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { LanguagesContext } from "../../locale/languagesContext";
@@ -15,51 +15,32 @@ import {
 function StudentDialog() {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
-  const groups = [];
+  const [groups, setGroups] = useState([]);
   const getGroups = () => {
     GetTutorGroupsConfig().then((res) => {
-      console.log(res);
-      groups = res.data;
+      let arr = [];
+      for (let item of res.data) {
+        arr.push(item.groupName);
+      }
+      setGroups(arr);
     });
   };
-
-  //   address: "Xonqiz"
-  // birthDate: "2022-03-23"
-  // country: "Uzbekistan"
-  // course: "2 - kurs"
-  // description: "sdfsdfdsf"
-  // district: "Olmazor"
-  // educationType: "Bakalvr"
-  // familyStatus: "Turmush qurmagan"
-  // fatherName: "Ulugbek ogli"
-  // firstname: "Avazbek"
-  // gender: "Erkak"
-  // invalidParents: "Nogironligi yo'q"
-  // invalidStudent: "Nogironligi yo'q"
-  // lastname: "Sotvoldiyev"
-  // nationality: "O'zbek"
-  // needy: "Kam taminlanmagan"
-  // orphanStudent: "Ota-onasi bor"
-  // parentsName: "Akbarov Ulug'bek"
-  // parentsRetiree: "Nafaqador emas"
-  // passportData: "Ab7567153"
-  // paymentType: "To'lov shartnoma asosida"
-  // phoneNumber: 973360176
-  // region: "Farg'ona"
-  // speciality: "Moliya va moliyaviy texnologiyalar"
   const formik = useFormik({
     initialValues: {
-      firstname: "Avazbek",
-      fatherName: "",
-      lastname: "",
-      birthDate: "",
-      phoneNumber: "",
-      gender: "",
-      passportData: "",
-      country: "",
-      region: "",
-      district: "",
-      description: "",
+      course: "0",
+      speciality: "0",
+      paymentType: "0",
+      nationality: "0",
+      nationality: "0",
+      familyStatus: "0",
+      invalidStudent: "0",
+      gender: "0",
+      region: "0",
+      district: "0",
+      needy: "0",
+      orphanStudent: "0",
+      parentsRetiree: "0",
+      invalidParents: "0",
     },
     validationSchema: Yup.object({
       // username: Yup.string()
@@ -78,7 +59,7 @@ function StudentDialog() {
         nationality: value.nationality,
         passportData: value.passportData,
         group: {
-          groupName: value.groupName,
+          groupName: "string",
         },
         gender: value.gender,
         addressRequest: {
@@ -113,9 +94,9 @@ function StudentDialog() {
           },
         ],
       };
-      console.log(value);
-      console.log(obj);
-      // CreateStudentConfig();
+      CreateStudentConfig(obj).then((res) => {
+        console.log(res);
+      });
     },
   });
   const data = [
@@ -135,17 +116,17 @@ function StudentDialog() {
       name: "groupName",
       label: lanForm.groupName,
       select: true,
-      option: ["I-52-i", "I-50", "IM-80-i", "IMT-90"],
+      option: groups,
     },
     {
       name: "course",
       label: lanForm.course,
       select: true,
       option: [
-        `1 - ${lanForm.cours}`,
-        `2 - ${lanForm.cours}`,
-        `3 - ${lanForm.cours}`,
-        `4 - ${lanForm.cours}`,
+        lanForm.course0,
+        lanForm.course1,
+        lanForm.course2,
+        lanForm.course3,
       ],
     },
     {
@@ -166,13 +147,14 @@ function StudentDialog() {
       name: "paymentType",
       label: lanForm.paymentType,
       select: true,
-      option: [lanForm.paymentType1, lanForm.paymentType2],
+      option: [lanForm.paymentType0, lanForm.paymentType1],
     },
     {
       name: "nationality",
       label: lanForm.nationality,
       select: true,
       option: [
+        lanForm.nation0,
         lanForm.nation1,
         lanForm.nation2,
         lanForm.nation3,
@@ -180,21 +162,20 @@ function StudentDialog() {
         lanForm.nation5,
         lanForm.nation6,
         lanForm.nation7,
-        lanForm.nation8,
       ],
     },
     {
       name: "familyStatus",
       label: lanForm.familyStatus,
       select: true,
-      option: [lanForm.familyStatusFalse, lanForm.familyStatusTrue],
+      option: [lanForm.familyStatus0, lanForm.familyStatus1],
     },
     {
       name: "invalidStudent",
       label: lanForm.invalidStudent,
       select: true,
       option: [
-        lanForm.invalidFalse,
+        lanForm.invalid0,
         lanForm.invalid1,
         lanForm.invalid2,
         lanForm.invalid3,
@@ -215,7 +196,7 @@ function StudentDialog() {
       label: lanForm.gender,
       width: true,
       select: true,
-      option: [lanForm["gender" + 0], lanForm["gender" + 1]],
+      option: [lanForm.gender0, lanForm.gender1],
     },
     {
       name: "passportData",
@@ -242,7 +223,6 @@ function StudentDialog() {
     {
       name: "description",
       label: lanForm.description,
-      type: "textarea",
     },
     {
       name: "parentsName",
@@ -262,7 +242,7 @@ function StudentDialog() {
       label: lanForm.needy,
       width: true,
       select: true,
-      option: [lanForm.needyFalse, lanForm.needyTrue],
+      option: [lanForm.needy0, lanForm.needy1],
     },
     {
       name: "orphanStudent",
@@ -270,10 +250,10 @@ function StudentDialog() {
       select: true,
       width: true,
       option: [
-        lanForm.orphanFalse,
-        lanForm.orphanMom,
-        lanForm.orphanDad,
-        lanForm.orphanParent,
+        lanForm.orphan0,
+        lanForm.orphan1,
+        lanForm.orphan2,
+        lanForm.orphan3,
       ],
     },
     {
@@ -281,10 +261,10 @@ function StudentDialog() {
       label: lanForm.parentsRetiree,
       select: true,
       option: [
-        lanForm.retireDad,
-        lanForm.retireMom,
-        lanForm.retireParent,
-        lanForm.retireFalse,
+        lanForm.retire0,
+        lanForm.retire1,
+        lanForm.retire2,
+        lanForm.retire3,
       ],
     },
     {
@@ -292,10 +272,10 @@ function StudentDialog() {
       label: lanForm.invalidParents,
       select: true,
       option: [
-        lanForm.invalidFalse,
-        lanForm.invalidMom,
-        lanForm.invalidDad,
-        lanForm.invalidParent,
+        lanForm.invalidParent0,
+        lanForm.invalidParent1,
+        lanForm.invalidParent2,
+        lanForm.invalidParent3,
       ],
     },
   ];

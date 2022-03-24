@@ -26,10 +26,10 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     if (error.response) {
       if (error.response.status === 401) {
-        // RefreshTokenConfig(getLocalStorage("refresh_token")).then((res) => {
-        //   setLocalStorage("token", res.data.token);
-        //   setLocalStorage("refresh_token", res.data.refreshToken);
-        // });
+        RefreshTokenConfig(getLocalStorage("refresh_token")).then((res) => {
+          setLocalStorage("token", res.data.token);
+          setLocalStorage("refresh_token", res.data.refreshToken);
+        });
         console.log(error);
       } else {
         error.response.data && toast.error(error.response.data.message);

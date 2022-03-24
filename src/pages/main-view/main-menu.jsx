@@ -15,6 +15,7 @@ import {
   deleteLocalStorage,
   getLocalStorage,
 } from "../../functions/useLocalStorage";
+import Tutor from "../tutor/tutor";
 
 function MainMenu(props) {
   const history = useHistory();
@@ -25,19 +26,36 @@ function MainMenu(props) {
   }
   // globalState
   const [globalState, setGlobalState] = useContext(GlobalContext);
-
+  const role = "ROLE_ADMIN";
   return (
     <MyDiv height="100vh" position="relative">
       <Sidebar />
       <Header />
       <Body openMenu={globalState.sidebarOpen}>
         <Switch>
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/profile-settings" component={ProfileSettings} />
-          <Route exact path="/students" component={Students} />
-          <Route path="*">
-            <Redirect to={"/dashboard"} />
-          </Route>
+          {role === "ROLE_TUTOR" ? (
+            <>
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route
+                exact
+                path="/profile-settings"
+                component={ProfileSettings}
+              />
+              <Route exact path="/students" component={Students} />
+              <Route path="*">
+                <Redirect to={"/dashboard"} />
+              </Route>
+            </>
+          ) : role === "ROLE_ADMIN" ? (
+            <>
+              <Route exact path="/tutors" component={Tutor} />
+              <Route path="*">
+                <Redirect to={"/tutors"} />
+              </Route>
+            </>
+          ) : (
+            ""
+          )}
         </Switch>
       </Body>
     </MyDiv>
