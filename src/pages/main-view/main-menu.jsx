@@ -27,7 +27,7 @@ function MainMenu(props) {
   }
   // globalState
   const [globalState, setGlobalState] = useContext(GlobalContext);
-  const role = "ROLE_ADMIN";
+  const role = "ROLE_TUTOR";
   return (
     <MyDiv height="100vh" position="relative">
       <Sidebar />
