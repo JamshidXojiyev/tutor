@@ -1,4 +1,5 @@
-import React, { useEffect,useState  } from "react"; 
+import React, { useEffect, useState, useContext } from "react";
+import { LanguagesContext } from "../../locale/languagesContext";
 import MyInput from "../../components/my-input/my-input";
 import MyTable from "../../components/my-table/my-table";
 import { MyDiv } from "../../global-styles/my-div.s";
@@ -18,6 +19,8 @@ import {
 } from "../../server/config/CrudUrls";
 
 function Students() {
+  const [languages, setLanguages] = useContext(LanguagesContext);
+  const lanStudent = languages.value.students;
   const getStudents = () => {
     GetStudentConfig().then((res) => {
       console.log(res);
@@ -70,23 +73,23 @@ function Students() {
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>
         <MyDiv widthCenter>
-          <PageTitle>Students list</PageTitle>
-          <TotalUsers>274 Users</TotalUsers>
+          <PageTitle>{lanStudent.list_of_student}</PageTitle>
+          <TotalUsers>{`274 ${lanStudent.users}`}</TotalUsers>
           <MyInput
             search
-            placeholder="Search by Name"
+            placeholder={lanStudent.search_by_name}
             height="48px"
             rightIcon={<SearchIcon />}
             setValue={(e) => console.log(e)}
           />
         </MyDiv>
         <MyDiv widthCenter gap="12px">
-          <GroupName>group name:</GroupName>
+          <GroupName>{lanStudent.group_name}:</GroupName>
           <MySelect option={["All", "101-group", "102-group"]} />
-          <MyButton white svg={<ImportIcon />} text="Import" />
+          <MyButton white svg={<ImportIcon />} text={lanStudent.import} />
           <MyButton
             svg={<AddIcon />}
-            text="Add New Student"
+            text={lanStudent.add_student}
             onClick={() => setDialogOpen(true)}
           />
         </MyDiv>
@@ -95,12 +98,13 @@ function Students() {
         <MyTable data={studentsData()} total="123" loading={false} />
       </MyDiv>
       <MyDialog
-        title="Student info"
+        title={lanStudent.student_info}
         body={<StudentDialog />}
         open={dialogOpen}
         close={(e) => setDialogOpen(e)}
       />
     </>
-  )};
+  );
+}
 
 export default Students;

@@ -62,6 +62,15 @@ const en = {
     tutor_info: "Tutor info",
     edit_tutor: "Edit Tutor",
   },
+  students: {
+    list_of_student: "Students list",
+    users: "Users",
+    search_by_name: "Search by Name",
+    group_name: "Group Name",
+    add_student: "Add New Student",
+    student_info: "Student info",
+    import: "Import",
+  },
 };
 
 export default en;

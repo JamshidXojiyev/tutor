@@ -141,6 +141,15 @@ const uz = {
     tutor_info: "Tutor ma'lumotlari",
     edit_tutor: "Ma'lumotlarni tahrirlash",
   },
+  students: {
+    list_of_student: "Studentlar listi",
+    users: "Foydalanuvchilar",
+    search_by_name: "Nom orqali qidirish",
+    group_name: "Gruh nomi",
+    add_student: "Yangi student qo'shish",
+    student_info: "Student ma'lumotari",
+    import: "Yuklab olish",
+  },
 };
 
 export default uz;
