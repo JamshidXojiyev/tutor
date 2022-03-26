@@ -62,7 +62,7 @@ function Sidebar(props) {
   useEffect(() => {
     findSize();
   }, []);
-  const role = "ROLE_TUTOR";
+  const role = "ROLE_ADMIN";
   return (
     <>
       <SidebarStyle

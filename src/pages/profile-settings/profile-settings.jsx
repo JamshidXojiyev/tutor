@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { Info, Line, P, Row, Td, UserImgStyle } from "./profile-settings.s";
 import MyButton from "../../components/my-button/my-button";
 import { ReactComponent as EditSvg } from "../../assets/icon/edit.svg";
 import { MyDiv } from "../../global-styles/my-div.s";
 import UserIcon from "../../assets/image/user.png";
+import MyDialog from "../../components/my-dialog/my-dialog";
+import ProfileDiaolog from "./profile-dialog";
 
 function ProfileSettings(props) {
   // language data
@@ -60,12 +62,18 @@ function ProfileSettings(props) {
     localStorage.setItem("lang", "uz");
   }, []);
 
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   return (
     <>
       {/* Header section */}
       <MyDiv widthCenter spaceBetween margin="0 0 18px">
         <P>{lanTutor.tutor_info}</P>
-        <MyButton svg={<EditSvg />} text={lanTutor.edit_tutor} />
+        <MyButton
+          svg={<EditSvg />}
+          text={lanTutor.edit_tutor}
+          onClick={() => setDialogOpen(true)}
+        />
       </MyDiv>
       {/* Info section */}
       <MyDiv display="inline-block">
@@ -93,6 +101,12 @@ function ProfileSettings(props) {
           </Info>
         </MyDiv>
       </MyDiv>
+      <MyDialog
+        title="Student info"
+        body={<ProfileDiaolog />}
+        open={dialogOpen}
+        close={(e) => setDialogOpen(e)}
+      />
     </>
   );
 }

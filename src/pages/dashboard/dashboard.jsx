@@ -20,8 +20,7 @@ function Dashboard(props) {
         type: "area",
       },
       dataLabels: {
-        enabled: true,
-
+        enabled: false,
       },
       stroke: {
         curve: "smooth",
@@ -52,6 +51,7 @@ function Dashboard(props) {
         <ReactApexChart
           options={data.options}
           series={data.series}
+          type="area"
           height={350}
         />
       </MyDiv>

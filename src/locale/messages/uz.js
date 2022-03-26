@@ -116,9 +116,24 @@ const uz = {
     ],
     menusAdmin: [
       {
+        name: "Dashboard",
+        icon: Dashboard,
+        url: "/dashboard",
+      },
+      {
         name: "Tutors",
         icon: Students,
         url: "/tutors",
+      },
+      {
+        name: "Profile settings",
+        icon: ProfileSettings,
+        url: "/profile-settings",
+      },
+      {
+        name: "Sign Out",
+        icon: SignOut,
+        url: "/sign-out",
       },
     ],
   },
