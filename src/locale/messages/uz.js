@@ -77,61 +77,61 @@ const uz = {
     paymentType1: "Davlat grandi asosida",
   },
   signin: {
-    signin: "Sign In",
+    signin: "Tizimga kirish",
 
-    email: "Email address",
-    email_placeholder: "Enter your email address",
-    email_required_err: "You must enter your email.",
-    email_email_err: "Your email was entered incorrectly.",
+    email: "E-pochta manzili",
+    email_placeholder: "E-mail manzilingizni kiriting",
+    email_required_err: "Siz elektron pochtangizni kiritishingiz kerak.",
+    email_email_err:
+      "Sizning elektron pochta manzilingiz noto'g'ri kiritilgan.",
 
-    password: "Password",
-    password_placeholder: "Enter your password",
-    password_required_err: "You must enter your password.",
+    password: "Parol",
+    password_placeholder: "Parolingizni kiriting",
+    password_required_err: "Siz parolingizni kiritishingiz kerak.",
 
-    min_err: "Minimum length 3 symbol.",
+    min_err: "Minimal uzunlik 3 belgisi.",
   },
   sidebar: {
-    title: "MAIN MENU",
     menus: [
       {
-        name: "Dashboard",
+        name: "Boshqaruv paneli",
         icon: Dashboard,
         url: "/dashboard",
       },
       {
-        name: "Students",
+        name: "Talabalar",
         icon: Students,
         url: "/students",
       },
       {
-        name: "Profile settings",
+        name: "Profil sozlamalari",
         icon: ProfileSettings,
         url: "/profile-settings",
       },
       {
-        name: "Sign Out",
+        name: "Tizimdan chiqish",
         icon: SignOut,
         url: "/sign-out",
       },
     ],
     menusAdmin: [
       {
-        name: "Dashboard",
+        name: "Boshqaruv paneli",
         icon: Dashboard,
         url: "/dashboard",
       },
       {
-        name: "Tutors",
+        name: "Repetitorlar",
         icon: Students,
         url: "/tutors",
       },
       {
-        name: "Profile settings",
+        name: "Profil sozlamalari",
         icon: ProfileSettings,
         url: "/profile-settings",
       },
       {
-        name: "Sign Out",
+        name: "Tizimdan chiqish",
         icon: SignOut,
         url: "/sign-out",
       },

@@ -21,7 +21,7 @@ export const HeaderStyle = styled.div`
     left: 0;
     padding: 0 4px;
   }
-  z-index: 1;
+  z-index: 12;
 `;
 export const UserName = styled.h1`
   font-family: "Poppins";
