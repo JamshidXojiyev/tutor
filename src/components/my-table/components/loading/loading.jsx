@@ -50,7 +50,7 @@ function LoadingTable(props) {
   };
   return (
     <>
-      <MyTable data={data} paginationNone />
+      <MyTable width={props.width} data={data} paginationNone />
     </>
   );
 }

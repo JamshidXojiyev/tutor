@@ -121,6 +121,7 @@ const en = {
     edit_tutor: "Edit Tutor",
   },
   students: {
+    // students header
     list_of_student: "Students list",
     users: "Users",
     search_by_name: "Search by Name",
@@ -128,6 +129,14 @@ const en = {
     add_student: "Add New Student",
     student_info: "Student info",
     import: "Import",
+    // students table
+    first_name: "first name",
+    last_name: "last name",
+    father_name: "father name",
+    age: "age",
+    birth_day: "birth day",
+    group: "group",
+    special: "invalid",
   },
 };
 

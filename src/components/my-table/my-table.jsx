@@ -24,10 +24,10 @@ function MyTable(props) {
     setPages(props.total ? Math.ceil(props.total / pageLimit) : 1);
   }, [pageLimit]);
   if (props.loading) {
-    return <LoadingTable />;
+    return <LoadingTable width={props.width} />;
   }
   return (
-    <TableContainer>
+    <TableContainer width={props.width}>
       <TableStyle>
         <TrStyle>
           {props.data.header.map((item, index) => (

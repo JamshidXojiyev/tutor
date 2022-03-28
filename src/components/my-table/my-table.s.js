@@ -4,7 +4,7 @@ import { css } from "styled-components";
 // table ui
 export const TableContainer = styled.div`
   display: inline-block;
-  width: ${({ width }) => (width ? width : "auto")};
+  width: ${({ width }) => width};
 `;
 export const TableStyle = styled.table`
   width: 100%;
