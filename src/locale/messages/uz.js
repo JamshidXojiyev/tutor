@@ -69,12 +69,20 @@ const uz = {
     course2: "3-kurs",
     course3: "4-kurs",
     speciality: "Mutahasisligi",
-    groupName: "Guruh nomi",
+    groupName: "Guruhi",
     university: "Universitet nomi",
     educationType: "Ta'lim turi",
     paymentType: "To'lov turi",
     paymentType0: "To'lov shartnoma asosida",
     paymentType1: "Davlat grandi asosida",
+    university: "Universitet",
+    firstname_required_err: "Ismini kiriting",
+    lastname_required_err: "Familayani kiriting",
+    fatherName_required_err: "Sharifini kiriting",
+    university_required_err: "Universitet nomini kiriting",
+    educationType_required_err: "Ta'lim turini kiriting",
+    speciality_required_err: "Mutahasislikni kiriting",
+    groupName_required_err: "Guruhini tanlang",
   },
   signin: {
     signin: "Tizimga kirish",
@@ -92,6 +100,10 @@ const uz = {
     min_err: "Minimal uzunlik 3 belgisi.",
   },
   sidebar: {
+    dialog_title: "Tizimdan chiqmoqchimisz?",
+    dialog_yes: "Ha",
+    dialog_no: "Yo'q",
+    sign_out_text: "Tizimdan chiqish",
     menus: [
       {
         name: "Boshqaruv paneli",
@@ -108,11 +120,6 @@ const uz = {
         icon: ProfileSettings,
         url: "/profile-settings",
       },
-      {
-        name: "Tizimdan chiqish",
-        icon: SignOut,
-        url: "/sign-out",
-      },
     ],
     menusAdmin: [
       {
@@ -121,7 +128,7 @@ const uz = {
         url: "/dashboard",
       },
       {
-        name: "Repetitorlar",
+        name: "Tutorlar",
         icon: Students,
         url: "/tutors",
       },
@@ -129,11 +136,6 @@ const uz = {
         name: "Profil sozlamalari",
         icon: ProfileSettings,
         url: "/profile-settings",
-      },
-      {
-        name: "Tizimdan chiqish",
-        icon: SignOut,
-        url: "/sign-out",
       },
     ],
   },
@@ -149,6 +151,10 @@ const uz = {
     add_student: "Yangi student qo'shish",
     student_info: "Student ma'lumotari",
     import: "Yuklab olish",
+  },
+  admin: {
+    admin_info: "Admin ma'lumotlari",
+    edit_admin: "Ma'lumotlarni tahrirlash",
   },
 };
 

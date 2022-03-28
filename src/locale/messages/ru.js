@@ -75,6 +75,14 @@ const ru = {
     paymentType: "Тип платежа",
     paymentType0: "Оплата по договору",
     paymentType1: "На основе государственного гранта",
+    university: "Университет",
+    firstname_required_err: "Bведите имя",
+    lastname_required_err: "Bведите фамилию",
+    fatherName_required_err: "Bведите имя отца",
+    university_required_err: "Bведите название университета",
+    educationType_required_err: "укажите тип образования",
+    speciality_required_err: "Bведите специальность",
+    groupName_required_err: "Bыберите группу",
   },
   signin: {
     signin: "Войти",
@@ -91,6 +99,10 @@ const ru = {
     min_err: "Минимальная длина 3 символа.",
   },
   sidebar: {
+    dialog_title: "Выйти?",
+    dialog_yes: "Да",
+    dialog_no: "Нет",
+    sign_out_text: "Выход",
     menus: [
       {
         name: "Панель приборов",
@@ -107,11 +119,6 @@ const ru = {
         icon: ProfileSettings,
         url: "/profile-settings",
       },
-      {
-        name: "Выход",
-        icon: SignOut,
-        url: "/sign-out",
-      },
     ],
     menusAdmin: [
       {
@@ -125,14 +132,9 @@ const ru = {
         url: "/tutors",
       },
       {
-        name: "Настройки профиля",
+        name: "Настройки",
         icon: ProfileSettings,
         url: "/profile-settings",
-      },
-      {
-        name: "Выход",
-        icon: SignOut,
-        url: "/sign-out",
       },
     ],
   },
@@ -148,6 +150,10 @@ const ru = {
     add_student: "Добавить нового ученика",
     student_info: "Студенческая информация",
     import: "Скачать",
+  },
+  admin: {
+    admin_info: "Информация администратора",
+    edit_admin: "Редактирование данных",
   },
 };
 

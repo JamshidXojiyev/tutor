@@ -34,9 +34,11 @@ function SignIn(props) {
     }),
     onSubmit: (val) => {
       LoginConfig(val).then((res) => {
+        console.log(res);
         setLocalStorage("token", res.data.token);
         setLocalStorage("refresh_token", res.data.refreshToken);
         setLocalStorage("role", res.data.roles[0]);
+        setLocalStorage("userId", res.data.userId);
         window.location.href = "/";
       });
     },

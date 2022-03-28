@@ -99,7 +99,7 @@ function Students() {
       </MyDiv>
       <MyDialog
         title={lanStudent.student_info}
-        body={<StudentDialog />}
+        body={<StudentDialog closeDialog={(e) => setDialogOpen(e)} />}
         open={dialogOpen}
         close={(e) => setDialogOpen(e)}
       />

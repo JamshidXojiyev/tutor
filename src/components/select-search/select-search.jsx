@@ -10,7 +10,7 @@ import {
 
 function SelectSearch(props) {
   return (
-    <SelectSearchContainer width={props.width}>
+    <SelectSearchContainer width={props.width}> 
       <LabelStyle>{props.label}</LabelStyle>
       <SearchInputStyle width={props.width} list={props.name} {...props} />
       <DatalistStyle width={props.width} id={props.name}>

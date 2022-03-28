@@ -14,12 +14,12 @@ const en = {
     phone_number: "Phone Number",
     gender: "Gender",
     gender0: "Male",
-    gender1: "Woman",
+    gender1: "Female",
     passportData: "Passport Data",
     country: "Country",
     region: "Region",
     district: "District",
-    description: "Description",
+    description: "Full address",
     firstname: "First name",
     lastname: "Lastname",
     nationality: "Nationality",
@@ -76,6 +76,14 @@ const en = {
     paymentType: "Payment Type",
     paymentType0: "Payment is by contract",
     paymentType1: "On the basis of a state grant",
+    university: "University",
+    firstname_required_err: "Please, enter the name",
+    lastname_required_err: "Please, enter the lastname",
+    fatherName_required_err: "Please, enter the name of father",
+    university_required_err: "Please, enter the name of universitet",
+    educationType_required_err: "Please, enter the type of education",
+    speciality_required_err: "Please, enter the speciality",
+    groupName_required_err: "Please, select the group",
   },
   signin: {
     signin: "Sign In",
@@ -92,7 +100,10 @@ const en = {
     min_err: "Minimum length 3 symbol.",
   },
   sidebar: {
-    title: "MAIN MENU",
+    dialog_title: "Do you want to log out?",
+    dialog_yes: "Yes",
+    dialog_no: "No",
+    sign_out_text: "Sign out",
     menus: [
       {
         name: "Dashboard",
@@ -109,10 +120,22 @@ const en = {
         icon: ProfileSettings,
         url: "/profile-settings",
       },
+    ],
+    menusAdmin: [
       {
-        name: "Sign Out",
-        icon: SignOut,
-        url: "/sign-out",
+        name: "Dashboard",
+        icon: Dashboard,
+        url: "/dashboard",
+      },
+      {
+        name: "Tutors",
+        icon: Students,
+        url: "/tutors",
+      },
+      {
+        name: "Profile Settings",
+        icon: ProfileSettings,
+        url: "/profile-settings",
       },
     ],
   },
@@ -128,6 +151,10 @@ const en = {
     add_student: "Add New Student",
     student_info: "Student info",
     import: "Import",
+  },
+  admin: {
+    admin_info: "Admin info",
+    edit_admin: "Edit Admin",
   },
 };
 

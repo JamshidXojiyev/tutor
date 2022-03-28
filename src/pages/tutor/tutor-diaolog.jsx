@@ -8,7 +8,7 @@ import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
 
-function ProfileDiaolog() {
+function TutorDiaolog({ setDialog }) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const formik = useFormik({
@@ -40,6 +40,18 @@ function ProfileDiaolog() {
   });
 
   const data = [
+    {
+      name: "category",
+      label: "Category",
+    },
+    {
+      name: "level",
+      label: "Level",
+    },
+    {
+      name: "description1",
+      label: "Description",
+    },
     {
       name: "firstname",
       label: lanForm.firstname,
@@ -138,4 +150,4 @@ function ProfileDiaolog() {
   );
 }
 
-export default ProfileDiaolog;
+export default TutorDiaolog;

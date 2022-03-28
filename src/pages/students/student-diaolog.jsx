@@ -11,8 +11,9 @@ import {
   CreateStudentConfig,
   GetTutorGroupsConfig,
 } from "../../server/config/CrudUrls";
+import SelectSearch from "../../components/select-search/select-search";
 
-function StudentDialog() {
+function StudentDialog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const [groups, setGroups] = useState([]);
@@ -28,7 +29,6 @@ function StudentDialog() {
   const formik = useFormik({
     initialValues: {
       course: "0",
-      speciality: "0",
       paymentType: "0",
       nationality: "0",
       nationality: "0",
@@ -43,13 +43,13 @@ function StudentDialog() {
       invalidParents: "0",
     },
     validationSchema: Yup.object({
-      // username: Yup.string()
-      //   .min(3, lanSignIn.min_err)
-      //   .required(lanSignIn.email_required_err)
-      //   .email(lanSignIn.email_email_err),
-      // password: Yup.string()
-      //   .min(3, lanSignIn.min_err)
-      //   .required(lanSignIn.password_required_err),
+      firstname: Yup.string().required(lanForm.firstname_required_err),
+      lastname: Yup.string().required(lanForm.lastname_required_err),
+      fatherName: Yup.string().required(lanForm.fatherName_required_err),
+      university: Yup.string().required(lanForm.university_required_err),
+      educationType: Yup.string().required(lanForm.educationType_required_err),
+      speciality: Yup.string().required(lanForm.speciality_required_err),
+      groupName: Yup.string().required(lanForm.groupName_required_err),
     }),
     onSubmit: (value) => {
       let obj = {
@@ -59,7 +59,7 @@ function StudentDialog() {
         nationality: value.nationality,
         passportData: value.passportData,
         group: {
-          groupName: "string",
+          groupName: value.groupName,
         },
         gender: value.gender,
         addressRequest: {
@@ -90,12 +90,13 @@ function StudentDialog() {
         creativePotential: [
           {
             type: "Sport",
-            category: ["Voleybo'l", "Futbo'l"],
+            category: ["Voleybo'l"],
           },
         ],
       };
+      console.log(obj);
       CreateStudentConfig(obj).then((res) => {
-        console.log(res);
+        props.closeDialog(false);
       });
     },
   });
@@ -113,10 +114,16 @@ function StudentDialog() {
       label: lanForm.father_name,
     },
     {
-      name: "groupName",
-      label: lanForm.groupName,
-      select: true,
-      option: groups,
+      name: "university",
+      label: lanForm.university,
+    },
+    {
+      name: "educationType",
+      label: lanForm.educationType,
+    },
+    {
+      name: "speciality",
+      label: lanForm.speciality,
     },
     {
       name: "course",
@@ -130,18 +137,10 @@ function StudentDialog() {
       ],
     },
     {
-      name: "speciality",
-      label: lanForm.speciality,
-      select: true,
-      option: [
-        "Iqtisodiyot (tarmoqlar va sohalar bo'yicha)",
-        "Moliya va moliyaviy texnologiyalar",
-        "Buxgalteriya va audit",
-      ],
-    },
-    {
-      name: "educationType",
-      label: lanForm.educationType,
+      name: "groupName",
+      label: lanForm.groupName,
+      option: groups,
+      slectSearch: true,
     },
     {
       name: "paymentType",
@@ -286,31 +285,56 @@ function StudentDialog() {
   return (
     <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
       <MyDiv spaceBetween gap="8px">
-        {data.map(({ name, label, width, type, select, option }) => {
-          return select ? (
-            <MySelect
-              key={name}
-              option={option}
-              width={width ? "200px" : "100%"}
-              label={label}
-              name={name}
-              value={formik.values[name]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          ) : (
-            <MyInput
-              key={name}
-              width={width ? "200px" : "100%"}
-              type={type ? type : "text"}
-              label={label}
-              name={name}
-              value={formik.values[name]}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          );
-        })}
+        {data.map(
+          ({ name, label, width, type, select, option, slectSearch }) => {
+            return slectSearch ? (
+              <SelectSearch
+                key={name}
+                values={option}
+                width={width ? "200px" : "100%"}
+                label={label}
+                name={name}
+                value={formik.values[name]}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched[name] && formik.errors[name] ? true : false
+                }
+                errorMessage={formik.touched[name] && formik.errors[name]}
+              />
+            ) : select ? (
+              <MySelect
+                key={name}
+                option={option}
+                width={width ? "200px" : "100%"}
+                label={label}
+                name={name}
+                value={formik.values[name]}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched[name] && formik.errors[name] ? true : false
+                }
+                errorMessage={formik.touched[name] && formik.errors[name]}
+              />
+            ) : (
+              <MyInput
+                key={name}
+                width={width ? "200px" : "100%"}
+                type={type ? type : "text"}
+                label={label}
+                name={name}
+                value={formik.values[name]}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={
+                  formik.touched[name] && formik.errors[name] ? true : false
+                }
+                errorMessage={formik.touched[name] && formik.errors[name]}
+              />
+            );
+          }
+        )}
       </MyDiv>
       <MyButton
         disabled={false}

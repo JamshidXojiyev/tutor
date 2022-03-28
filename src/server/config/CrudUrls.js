@@ -7,6 +7,13 @@ export const LoginConfig = (data) => {
 export const RefreshTokenConfig = (data) => {
   return CreateFunc("api/auth/refresh-token", data);
 };
+//User section
+export const GetUserByIdConfig = (id) => {
+  return GetFunc(`api/user/${id}`);
+};
+export const EditUserConfig = (id, data) => {
+  return EditFunc(`api/user/${id}`, data);
+};
 //Admin Tutor section
 export const GetTutorStudentConfig = () => {
   return GetFunc(`admin/api/tutor/students`);

@@ -18,6 +18,13 @@ import AvatarImage from "../../../assets/image/avatar.png";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ReactComponent as BottomIcon } from "../../../assets/icon/bottom.svg";
+import { ReactComponent as SignOut } from "../../../assets/icon/menu-icons/Sign-Out.svg";
+import {
+  deleteLocalStorage,
+  getLocalStorage,
+} from "../../../functions/useLocalStorage";
+import MyDialog from "../../../components/my-dialog/my-dialog";
+import MyButton from "../../../components/my-button/my-button";
 
 function Sidebar(props) {
   const location = useLocation();
@@ -26,7 +33,8 @@ function Sidebar(props) {
   const lanSidebar = languages.value.sidebar;
   // globalState
   const [globalState, setGlobalState] = useContext(GlobalContext);
-
+  // dialog state
+  const [dialogOpen, setDialogOpen] = useState(false);
   // mobile open sidebar
   const [size, setSize] = useState("0");
   const findSize = () => {
@@ -59,10 +67,21 @@ function Sidebar(props) {
   const closeSidebar = () => {
     if (window.innerWidth < 500) setSize("-255");
   };
+  // SigOut section
+  const closeDialog = () => {
+    setDialogOpen(false);
+  };
+  const signOutFunc = () => {
+    closeDialog();
+    deleteLocalStorage("token");
+    deleteLocalStorage("refresh_token");
+    deleteLocalStorage("role");
+    window.location.href = "/";
+  };
   useEffect(() => {
     findSize();
   }, []);
-  const role = "ROLE_TUTOR";
+  const role = getLocalStorage("role");
   return (
     <>
       <SidebarStyle
@@ -114,6 +133,13 @@ function Sidebar(props) {
                   </Link>
                 ))
               : ""}
+            <LiStyle
+              openMenu={globalState.sidebarOpen}
+              onClick={() => setDialogOpen(true)}
+            >
+              <SignOut />
+              {lanSidebar.sign_out_text}
+            </LiStyle>
           </UlStyle>
           <MenuButton
             sidebarType={globalState.sidebarOpen}
@@ -128,6 +154,18 @@ function Sidebar(props) {
           </MenuButton>
         </MyDiv>
       </SidebarStyle>
+      <MyDialog
+        title={lanSidebar.dialog_title}
+        width="400px"
+        body={
+          <MyDiv gap="15px" display="flex">
+            <MyButton text={lanSidebar.dialog_yes} onClick={signOutFunc} />
+            <MyButton text={lanSidebar.dialog_no} onClick={closeDialog} />
+          </MyDiv>
+        }
+        open={dialogOpen}
+        close={closeDialog}
+      />
     </>
   );
 }

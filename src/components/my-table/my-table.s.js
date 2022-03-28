@@ -13,6 +13,7 @@ export const TableStyle = styled.table`
 export const TrStyle = styled.tr`
   && {
     :first-child {
+      width: 100%; 
       background: #f7f8fa;
       border: 1px solid #eff0f4;
       box-sizing: border-box;

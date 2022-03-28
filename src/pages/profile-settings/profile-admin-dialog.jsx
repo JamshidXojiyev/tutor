@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import MyInput from "../../components/my-input/my-input";
 import { MyDiv } from "../../global-styles/my-div.s";
 import { LanguagesContext } from "../../locale/languagesContext";
@@ -7,23 +7,21 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
+import { EditUserConfig } from "../../server/config/CrudUrls";
 
-function ProfileDiaolog() {
+function ProfileAdminDiaolog(props) {
+  //Language section
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
+  //Formik section
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      fatherName: "",
-      lastname: "",
-      birthDate: "",
-      phoneNumber: "",
-      gender: "",
-      passportData: "",
-      country: "",
-      region: "",
-      district: "",
-      description: "",
+      firstname: props.informs.firstname,
+      fatherName: props.informs.fatherName,
+      lastname: props.informs.lastname,
+      birthDate: props.informs.birthDate,
+      phoneNumber: props.informs.phoneNumber,
+      gender: props.informs.gender,
     },
     validationSchema: Yup.object({
       // username: Yup.string()
@@ -34,11 +32,16 @@ function ProfileDiaolog() {
       //   .min(3, lanSignIn.min_err)
       //   .required(lanSignIn.password_required_err),
     }),
-    onSubmit: (val) => {
-      console.log(val);
+    onSubmit: (value) => {
+      console.log(value);
+      let obj = {
+        profile: value,
+      };
+      EditUserConfig(props.informs.id, obj).then((res) => {
+        console.log(res);
+      });
     },
   });
-
   const data = [
     {
       name: "firstname",
@@ -53,20 +56,14 @@ function ProfileDiaolog() {
       label: lanForm.father_name,
     },
     {
-      name: "birthDate",
-      label: lanForm.birth_date,
-      type: "date",
-      width: true,
-    },
-    {
       name: "phoneNumber",
       label: lanForm.phone_number,
       type: "number",
-      width: true,
     },
     {
-      name: "passportData",
-      label: lanForm.passportData,
+      name: "birthDate",
+      label: lanForm.birth_date,
+      type: "date",
       width: true,
     },
     {
@@ -76,29 +73,8 @@ function ProfileDiaolog() {
       select: true,
       option: [lanForm.gender0, lanForm.gender1],
     },
-    {
-      name: "country",
-      label: lanForm.country,
-    },
-    {
-      name: "region",
-      label: lanForm.region,
-      width: true,
-      select: true,
-      option: ["Toshlent", "Farg'ona", "Andijon", "Namangan"],
-    },
-    {
-      name: "district",
-      label: lanForm.district,
-      width: true,
-      select: true,
-      option: ["Yunusobod", "Olmazor", "Shayxontohur"],
-    },
-    {
-      name: "description",
-      label: lanForm.description,
-    },
   ];
+
   return (
     <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
       <MyDiv spaceBetween gap="8px">
@@ -138,4 +114,4 @@ function ProfileDiaolog() {
   );
 }
 
-export default ProfileDiaolog;
+export default ProfileAdminDiaolog;

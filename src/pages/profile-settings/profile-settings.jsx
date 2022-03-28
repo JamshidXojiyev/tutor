@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { LanguagesContext } from "../../locale/languagesContext";
-import { Info, Line, P, Row, Td, UserImgStyle } from "./profile-settings.s";
+import { Info, P, Row, Td, UserImgStyle } from "./profile-settings.s";
 import MyButton from "../../components/my-button/my-button";
 import { ReactComponent as EditSvg } from "../../assets/icon/edit.svg";
 import { MyDiv } from "../../global-styles/my-div.s";
@@ -57,10 +57,7 @@ function ProfileSettings(props) {
       th: lanForm.description,
       td: "Ingliz tilidan dars bera oladi",
     },
-  ];
-  useEffect(() => {
-    localStorage.setItem("lang", "uz");
-  }, []);
+  ]; 
 
   const [dialogOpen, setDialogOpen] = useState(false);
 
