@@ -7,50 +7,79 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
+import { CreateTutorConfig } from "../../server/config/CrudUrls";
 
-function TutorDiaolog({ setDialog }) {
+function TutorDiaolog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
+  const lanSignIn = languages.value.signin;
+
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      fatherName: "",
-      lastname: "",
-      birthDate: "",
-      phoneNumber: "",
-      gender: "",
-      passportData: "",
-      country: "",
-      region: "",
-      district: "",
-      description: "",
+      gender: "0",
+      region: "0",
+      district: "0",
     },
     validationSchema: Yup.object({
-      // username: Yup.string()
-      //   .min(3, lanSignIn.min_err)
-      //   .required(lanSignIn.email_required_err)
-      //   .email(lanSignIn.email_email_err),
-      // password: Yup.string()
-      //   .min(3, lanSignIn.min_err)
-      //   .required(lanSignIn.password_required_err),
+      username: Yup.string()
+        .min(3, lanSignIn.min_err)
+        .required(lanSignIn.username_required_err),
+      email: Yup.string()
+        .min(3, lanSignIn.min_err)
+        .required(lanSignIn.email_required_err)
+        .email(lanSignIn.email_email_err),
+      password: Yup.string()
+        .min(3, lanSignIn.min_err)
+        .required(lanSignIn.password_required_err),
     }),
     onSubmit: (val) => {
-      console.log(val);
+      let obj = {
+        address: {
+          country: val.country,
+          region: val.region,
+          district: val.district,
+          description: val.description,
+        },
+        category: val.category,
+        level: val.level,
+        description: val.description1,
+        groups: [val.groups],
+        user: {
+          username: val.username,
+          password: val.password,
+          email: val.email,
+          roles: ["tutor"],
+          profile: {
+            firstname: val.firstname,
+            fatherName: val.fatherName,
+            lastname: val.lastname,
+            birthDate: val.birthDate,
+            phoneNumber: val.phoneNumber,
+            gender: val.gender,
+            passportData: val.passportData,
+          },
+        },
+      };
+      CreateTutorConfig(obj).then((res) => {
+        console.log(res);
+        props.setDialog(false);
+      });
+      console.log(obj);
     },
   });
 
   const data = [
     {
-      name: "category",
-      label: "Category",
+      name: "username",
+      label: lanSignIn.username,
     },
     {
-      name: "level",
-      label: "Level",
+      name: "password",
+      label: lanSignIn.password,
     },
     {
-      name: "description1",
-      label: "Description",
+      name: "email",
+      label: lanSignIn.email,
     },
     {
       name: "firstname",
@@ -63,6 +92,26 @@ function TutorDiaolog({ setDialog }) {
     {
       name: "fatherName",
       label: lanForm.father_name,
+    },
+    {
+      name: "faculty",
+      label: lanForm.faculty,
+    },
+    {
+      name: "category",
+      label: lanForm.category,
+    },
+    {
+      name: "level",
+      label: lanForm.level,
+    },
+    {
+      name: "groups",
+      label: lanForm.groupName,
+    },
+    {
+      name: "description1",
+      label: lanForm.description1,
     },
     {
       name: "birthDate",
@@ -125,6 +174,8 @@ function TutorDiaolog({ setDialog }) {
               value={formik.values[name]}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              error={formik.touched[name] && formik.errors[name] ? true : false}
+              errorMessage={formik.touched[name] && formik.errors[name]}
             />
           ) : (
             <MyInput
@@ -136,6 +187,8 @@ function TutorDiaolog({ setDialog }) {
               value={formik.values[name]}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              error={formik.touched[name] && formik.errors[name] ? true : false}
+              errorMessage={formik.touched[name] && formik.errors[name]}
             />
           );
         })}

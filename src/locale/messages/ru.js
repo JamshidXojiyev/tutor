@@ -83,6 +83,10 @@ const ru = {
     educationType_required_err: "укажите тип образования",
     speciality_required_err: "Bведите специальность",
     groupName_required_err: "Bыберите группу",
+    faculty: "Факультет",
+    level: "Ученая степень",
+    description1: "Дополнительная информация",
+    category: "Категория",
   },
   signin: {
     signin: "Войти",
@@ -97,6 +101,8 @@ const ru = {
     password_required_err: "Вы должны ввести свой пароль.",
 
     min_err: "Минимальная длина 3 символа.",
+    username: "Имя пользователя", 
+    username_required_err: "Введите имя пользователя.",
   },
   sidebar: {
     dialog_title: "Выйти?",
@@ -154,6 +160,9 @@ const ru = {
   admin: {
     admin_info: "Информация администратора",
     edit_admin: "Редактирование данных",
+    list_of_tutor: "Список репетиторов",
+    add_tutor: "Добавить нового репетитора",
+    tutor_info: "Информация о репетиторе",
   },
 };
 

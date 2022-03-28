@@ -83,21 +83,26 @@ const uz = {
     educationType_required_err: "Ta'lim turini kiriting",
     speciality_required_err: "Mutahasislikni kiriting",
     groupName_required_err: "Guruhini tanlang",
+    faculty: "Fakultet",
+    level: "Ilmiy darajasi",
+    description1: "Qo'shimcha ma'lumot",
+    category: "Toifasi",
   },
   signin: {
     signin: "Tizimga kirish",
 
     email: "E-pochta manzili",
-    email_placeholder: "E-mail manzilingizni kiriting",
-    email_required_err: "Siz elektron pochtangizni kiritishingiz kerak.",
-    email_email_err:
-      "Sizning elektron pochta manzilingiz noto'g'ri kiritilgan.",
+    email_placeholder: "E-mail manzilni kiriting",
+    email_required_err: "Elektron pochtani kiritishingiz kerak.",
+    email_email_err: "Elektron pochta manzili noto'g'ri kiritilgan.",
 
     password: "Parol",
-    password_placeholder: "Parolingizni kiriting",
-    password_required_err: "Siz parolingizni kiritishingiz kerak.",
+    password_placeholder: "Parolni kiriting",
+    password_required_err: "Parolni kiritishingiz kerak.",
 
     min_err: "Minimal uzunlik 3 belgisi.",
+    username: "Foydalanuvchi nomi",
+    username_required_err: "Foydalanuvchi nomini kiriting.",
   },
   sidebar: {
     dialog_title: "Tizimdan chiqmoqchimisz?",
@@ -155,6 +160,9 @@ const uz = {
   admin: {
     admin_info: "Admin ma'lumotlari",
     edit_admin: "Ma'lumotlarni tahrirlash",
+    list_of_tutor: "Tutorlar listi",
+    add_tutor: "Yangi tutor qo'shish",
+    tutor_info: "Tutor ma'lumotari",
   },
 };
 

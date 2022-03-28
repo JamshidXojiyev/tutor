@@ -17,6 +17,7 @@ import {
 } from "../../functions/useLocalStorage";
 import Tutor from "../tutor/tutor";
 import ProfileAettingsAdmin from "../profile-settings/profile-settings-admin";
+import TutorState from "../../context/tutorState";
 
 function MainMenu(props) {
   const history = useHistory();
@@ -55,7 +56,9 @@ function MainMenu(props) {
                 path="/profile-settings"
                 component={ProfileAettingsAdmin}
               />
-              <Route exact path="/tutors" component={Tutor} />
+              <TutorState>
+                <Route exact path="/tutors" component={Tutor} />
+              </TutorState>
               <Route path="*">
                 <Redirect to={"/dashboard"} />
               </Route>

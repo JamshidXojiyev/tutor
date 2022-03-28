@@ -84,6 +84,10 @@ const en = {
     educationType_required_err: "Please, enter the type of education",
     speciality_required_err: "Please, enter the speciality",
     groupName_required_err: "Please, select the group",
+    faculty: "Faculty",
+    level: "Academic degree",
+    description1: "Additional Information",
+    category: "Category",
   },
   signin: {
     signin: "Sign In",
@@ -98,6 +102,8 @@ const en = {
     password_required_err: "You must enter your password.",
 
     min_err: "Minimum length 3 symbol.",
+    username: "Username",
+    username_required_err: "You must enter username",
   },
   sidebar: {
     dialog_title: "Do you want to log out?",
@@ -155,6 +161,9 @@ const en = {
   admin: {
     admin_info: "Admin info",
     edit_admin: "Edit Admin",
+    list_of_tutor: "Tutors list",
+    add_tutor: "Add New Tutor",
+    tutor_info: "Tutor info",
   },
 };
 
