@@ -27,11 +27,7 @@ function MyTable(props) {
     return <LoadingTable width={props.width} />;
   }
   return (
-<<<<<<< HEAD
-    <TableContainer width="100%">
-=======
     <TableContainer width={props.width}>
->>>>>>> 1bbaa1c11d96ae3cb57db18f5060302fdac96fb1
       <TableStyle>
         <TrStyle>
           {props.data.header.map((item, index) => (
