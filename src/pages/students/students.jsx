@@ -10,64 +10,67 @@ import MySelect from "../../components/my-select/my-select";
 import MyButton from "../../components/my-button/my-button";
 import { ReactComponent as ImportIcon } from "../../assets/icon/import.svg";
 import { ReactComponent as AddIcon } from "../../assets/icon/add.svg";
-import { studentsData } from "./filter-data";
 import MyDialog from "../../components/my-dialog/my-dialog";
 import StudentDialog from "./student-diaolog";
 import {
   GetStudentConfig,
   GetTutorGroupsConfig,
 } from "../../server/config/CrudUrls";
+import { StudentsContext } from "../../context/students-context";
+import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
+import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
 
 function Students() {
+  // languages
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanStudent = languages.value.students;
+  // get students
+  const [tableData, setTableData] = useContext(StudentsContext);
   const getStudents = () => {
     GetStudentConfig().then((res) => {
-      console.log(res);
+      const data = res.data?.map((item) => {
+        const subData = {
+          student: `${item.firstname}  ${item.lastname}`,
+          father_name: item.fatherName,
+          birth_day: item.birthDate,
+          course: item.studyInfo.course,
+          group: item.group.groupName,
+          special: item.studyInfo.speciality,
+          btn: (
+            <>
+              <MyButton
+                onClick={() => setTableData({ ...tableData, thisData: item })}
+                icon
+                svg={<EditIcon />}
+              />
+              <MyButton icon svg={<DeleteIcon />} />
+            </>
+          ),
+        };
+        return subData;
+      });
+      setTableData({ ...tableData, body: data });
     });
   };
+  // get tutor groups
+  const [tutorGroup, setTutorGroup] = useState([]);
   const getGroups = () => {
-    GetTutorGroupsConfig().then((res) => {
-      console.log(res);
-    });
+    setLoading(true);
+    GetTutorGroupsConfig()
+      .then((res) => {
+        const groups = res.data.map((item) => `${item.groupName} - group`);
+        setTutorGroup(["All", ...groups]);
+      })
+      .finally((err) => setLoading(false));
   };
+  // states
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     getStudents();
     getGroups();
   }, []);
-
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const data = {
-    header: [
-      "first name",
-      "last name",
-      "father name",
-      "age",
-      "birth day",
-      "group",
-      "invalid",
-    ],
-    body: [
-      {
-        first_name: "doniyor",
-        last_name: "farmonov",
-        father_name: "jsur",
-        age: 20,
-        birth_day: "21.05.2001",
-        group: "202-group",
-        special: "geodeziya va geoinformatika",
-      },
-    ],
-    order: [
-      "first_name",
-      "last_name",
-      "father_name",
-      "age",
-      "birth_day",
-      "group",
-      "special",
-    ],
-  };
 
   return (
     <>
@@ -85,7 +88,7 @@ function Students() {
         </MyDiv>
         <MyDiv widthCenter gap="12px">
           <GroupName>{lanStudent.group_name}:</GroupName>
-          <MySelect option={["All", "101-group", "102-group"]} />
+          <MySelect option={tutorGroup} />
           <MyButton white svg={<ImportIcon />} text={lanStudent.import} />
           <MyButton
             svg={<AddIcon />}
@@ -95,7 +98,7 @@ function Students() {
         </MyDiv>
       </MyDiv>
       <MyDiv width="100%" block display="inline-block">
-        <MyTable data={studentsData()} total="123" loading={false} />
+        <MyTable data={tableData} total="123" loading={true} width="100%" />
       </MyDiv>
       <MyDialog
         title={lanStudent.student_info}

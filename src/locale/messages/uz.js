@@ -149,7 +149,7 @@ const uz = {
     edit_tutor: "Ma'lumotlarni tahrirlash",
   },
   students: {
-    list_of_student: "Studentlar listi",
+    list_of_student: "Talabalar ro'yxati",
     users: "Foydalanuvchilar",
     search_by_name: "Nom orqali qidirish",
     group_name: "Gruh nomi",
