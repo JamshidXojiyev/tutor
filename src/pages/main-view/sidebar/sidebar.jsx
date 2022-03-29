@@ -27,7 +27,7 @@ import MyDialog from "../../../components/my-dialog/my-dialog";
 import MyButton from "../../../components/my-button/my-button";
 import ExitImage from "../../../assets/image/exit.png";
 
-function Sidebar(props) {
+function Sidebar({ data }) {
   const location = useLocation();
   // language data
   const [languages, setLanguages] = useContext(LanguagesContext);
@@ -93,8 +93,10 @@ function Sidebar(props) {
           <User>
             <AvatarImageStyle src={AvatarImage} />
             <MyDiv>
-              <Name>Sierra Ferguson</Name>
-              <Email>s.ferguson@gmail.com</Email>
+              <Name>
+                {data.fullName} 
+              </Name>
+              <Email>{data.email}</Email>
             </MyDiv>
           </User>
           {globalState.mobileDevice ? (

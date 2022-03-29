@@ -105,6 +105,7 @@ const ru = {
     username_required_err: "Введите имя пользователя.",
   },
   sidebar: {
+    hello: "Привет",
     dialog_title: "Выйти?",
     dialog_yes: "Да",
     dialog_no: "Нет",
@@ -163,6 +164,7 @@ const ru = {
     list_of_tutor: "Список репетиторов",
     add_tutor: "Добавить нового репетитора",
     tutor_info: "Информация о репетиторе",
+    delete_warning: "Вы действительно хотите удалить его?",
   },
 };
 
