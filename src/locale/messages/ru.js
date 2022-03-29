@@ -100,7 +100,7 @@ const ru = {
     password_placeholder: "Введите свой пароль",
     password_required_err: "Вы должны ввести свой пароль.",
 
-    min_err: "Минимальная длина 3 символа.",
+    min_err: "Минимальная длина 5 символа.",
     username: "Имя пользователя", 
     username_required_err: "Введите имя пользователя.",
   },

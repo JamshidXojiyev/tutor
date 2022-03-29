@@ -96,6 +96,7 @@ function StudentDialog(props) {
       };
       console.log(obj);
       CreateStudentConfig(obj).then((res) => {
+        console.log(res);
         props.closeDialog(false);
         props.refresh(1);
       });
@@ -342,6 +343,7 @@ function StudentDialog(props) {
         text={lanForm.create}
         type="submit"
         margin="20px 0 0 auto"
+        width="30%"
       />
     </MyForm>
   );

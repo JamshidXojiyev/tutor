@@ -27,48 +27,51 @@ function Students() {
   // get students
   const [tableData, setTableData] = useContext(StudentsContext);
   const getStudents = () => {
-    GetStudentConfig().then((res) => {
-      res.data ? setTableEmpty(false) : setTableData(true);
-      const data = res.data?.map((item) => {
-        const subData = {
-          student: `${item.firstname}  ${item.lastname}`,
-          father_name: item.fatherName,
-          birth_day: item.birthDate,
-          course: item.studyInfo.course,
-          group: item.group.groupName,
-          special: item.studyInfo.speciality,
-          btn: (
-            <>
-              <MyButton
-                onClick={() => setTableData({ ...tableData, thisData: item })}
-                icon
-                svg={<EditIcon />}
-              />
-              <MyButton icon svg={<DeleteIcon />} />
-            </>
-          ),
-        };
-        return subData;
-      });
-      setTableData({ ...tableData, body: data });
-    });
+    setLoading(true);
+    GetStudentConfig()
+      .then((res) => {
+        if (res.data.length > 0) {
+          const data = res.data?.map((item) => {
+            const subData = {
+              student: `${item.firstname}  ${item.lastname}`,
+              father_name: item.fatherName,
+              birth_day: item.birthDate,
+              course: item.studyInfo.course,
+              group: item.group.groupName,
+              special: item.studyInfo.speciality,
+              btn: (
+                <>
+                  <MyButton
+                    onClick={() =>
+                      setTableData({ ...tableData, thisData: item })
+                    }
+                    icon
+                    svg={<EditIcon />}
+                  />
+                  <MyButton icon svg={<DeleteIcon />} />
+                </>
+              ),
+            };
+            return subData;
+          });
+          setTableData({ ...tableData, body: data });
+        } else setTableEmpty(true);
+      })
+      .finally((err) => setLoading(false));
   };
   // get tutor groups
   const [tutorGroup, setTutorGroup] = useState([]);
   const getGroups = () => {
-    setLoading(true);
-    GetTutorGroupsConfig()
-      .then((res) => {
-        const groups = res.data.map((item) => `${item.groupName} - group`);
-        setTutorGroup(["All", ...groups]);
-      })
-      .finally((err) => setLoading(false));
+    GetTutorGroupsConfig().then((res) => {
+      const groups = res.data.map((item) => `${item.groupName} - group`);
+      setTutorGroup(["All", ...groups]);
+    });
   };
   // states
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(0);
-  const [tableEmpty, setTableEmpty] = useState(false);
+  const [tableEmpty, setTableEmpty] = useState(true);
 
   useEffect(() => {
     getStudents();

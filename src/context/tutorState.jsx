@@ -5,8 +5,14 @@ function TutorState({ children }) {
   const [tutor, setTutor] = useState({
     header: ["fullname", "username", "email", "phone number", "birth date", ""],
     body: [],
-    order: ["fullname", "username", "email", "phone_number", "birth_date", "btn"],
-    thisData: null,
+    order: [
+      "fullname",
+      "username",
+      "email",
+      "phone_number",
+      "birth_date",
+      "btn",
+    ],
   });
   return (
     <TutorContext.Provider value={[tutor, setTutor]}>

@@ -29,7 +29,7 @@ function Tutor() {
   //Close dialogs
   const closeDialog = () => {
     setDialogOpen(false);
-    setTutorData({ ...tutorData, thisData: null });
+    setObj(null);
   };
   const closeDialogDelete = () => {
     setDialogDelete(false);
@@ -38,45 +38,56 @@ function Tutor() {
   const [render, setRender] = useState(0);
   // Tutor api functions
   const [tutorData, setTutorData] = useContext(TutorContext);
+  const [thisObj, setObj] = useState(null);
+  const [empty, setEmpty] = useState(true);
+  const [loading, setLoading] = useState(false);
   //Get tutor
   const getTutorFunc = () => {
-    GetTutorConfig().then((res) => {
-      console.log(res);
-      const data = res.data.map((item) => {
-        const subData = {
-          fullname: `${item.user.userProfile.firstname}  ${item.user.userProfile.lastname}`,
-          username: item.user.username,
-          email: item.user.email,
-          phone_number: item.user.userProfile.phoneNumber,
-          birth_date: item.user.userProfile.birthDate,
-          id: item.id,
-          btn: (
-            <>
-              <MyButton
-                onClick={() => {
-                  setTutorData({ ...tutorData, thisData: item });
-                  setDialogOpen(true);
-                }}
-                icon
-                tableIcon
-                svg={<EditIcon />}
-              />
-              <MyButton
-                onClick={() => {
-                  setDialogDelete(true);
-                  setTutorData({ ...tutorData, thisData: item });
-                }}
-                icon
-                tableIcon
-                svg={<DeleteIcon />}
-              />
-            </>
-          ),
-        };
-        return subData;
+    setLoading(true);
+    GetTutorConfig()
+      .then((res) => {
+        if (res.data.length > 0) {
+          console.log(res);
+          const data = res.data.map((item) => {
+            const subData = {
+              fullname: `${item.user.userProfile.firstname}  ${item.user.userProfile.lastname}`,
+              username: item.user.username,
+              email: item.user.email,
+              phone_number: item.user.userProfile.phoneNumber,
+              birth_date: item.user.userProfile.birthDate,
+              id: item.id,
+              btn: (
+                <>
+                  <MyButton
+                    onClick={() => {
+                      setObj(item);
+                      setDialogOpen(true);
+                    }}
+                    icon
+                    tableIcon
+                    svg={<EditIcon />}
+                  />
+                  <MyButton
+                    onClick={() => {
+                      setDialogDelete(true);
+                      // setTutorData({ ...tutorData, thisData: item });
+                    }}
+                    icon
+                    tableIcon
+                    svg={<DeleteIcon />}
+                  />
+                </>
+              ),
+            };
+            return subData;
+          });
+          setTutorData({ ...tutorData, body: data });
+          setEmpty(false);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
       });
-      setTutorData({ ...tutorData, body: data });
-    });
   };
   //Delete tutor
   const deleteTutorFunc = () => {
@@ -112,7 +123,13 @@ function Tutor() {
         </MyDiv>
       </MyDiv>
       <MyDiv width="100%" block display="inline-block">
-        <MyTable data={tutorData} total="123" loading={false} width="100%" />
+        <MyTable
+          data={tutorData}
+          table_empty={empty}
+          total="123"
+          loading={loading}
+          width="100%"
+        />
       </MyDiv>
       <MyDialog
         title={lanTutor.tutor_info}
@@ -120,6 +137,7 @@ function Tutor() {
           <TutorDiaolog
             setDialog={closeDialog}
             renderFunc={() => setRender(render + 1)}
+            objTutor={thisObj}
           />
         }
         open={dialogOpen}

@@ -100,7 +100,7 @@ const uz = {
     password_placeholder: "Parolni kiriting",
     password_required_err: "Parolni kiritishingiz kerak.",
 
-    min_err: "Minimal uzunlik 3 belgisi.",
+    min_err: "Minimal uzunlik 5 belgisi.",
     username: "Foydalanuvchi nomi",
     username_required_err: "Foydalanuvchi nomini kiriting.",
   },

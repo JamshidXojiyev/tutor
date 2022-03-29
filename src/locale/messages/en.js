@@ -101,7 +101,7 @@ const en = {
     password_placeholder: "Enter your password",
     password_required_err: "You must enter your password.",
 
-    min_err: "Minimum length 3 symbol.",
+    min_err: "Minimum length 5 symbol.",
     username: "Username",
     username_required_err: "You must enter username",
   },

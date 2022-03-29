@@ -10,15 +10,13 @@ import MySelect from "../../components/my-select/my-select";
 import {
   CreateTutorConfig,
   EditTutorConfig,
-} from "../../server/config/CrudUrls";
-import { TutorContext } from "../../context/tutorState";
+} from "../../server/config/CrudUrls"; 
 
-function TutorDiaolog(props) {
-  const [formData, setFormData] = useContext(TutorContext);
+function TutorDiaolog(props) { 
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const lanSignIn = languages.value.signin;
-  const obj = formData.thisData;
+  const obj = props.objTutor;
   console.log(obj);
   const formik = useFormik({
     initialValues: obj
@@ -48,16 +46,16 @@ function TutorDiaolog(props) {
         },
     validationSchema: Yup.object({
       username: Yup.string()
-        .min(3, lanSignIn.min_err)
+        .min(5, lanSignIn.min_err)
         .required(lanSignIn.username_required_err),
       email: Yup.string()
-        .min(3, lanSignIn.min_err)
+        .min(5, lanSignIn.min_err)
         .required(lanSignIn.email_required_err)
         .email(lanSignIn.email_email_err),
       // password: Yup.string().test(
-      // //   "password",
-      // //   lanSignIn.password_required_err,
-      // //   (item) => !obj && item.length === 0
+      //   "password",
+      //   lanSignIn.password_required_err,
+      //   (item) => item.toString().length === 0
       // ),
     }),
     onSubmit: (val) => {
@@ -91,6 +89,8 @@ function TutorDiaolog(props) {
       if (obj) {
         EditTutorConfig(obj.id, sendObj).then((res) => {
           console.log(res);
+          props.setDialog();
+          props.renderFunc();
         });
       } else {
         CreateTutorConfig(sendObj).then((res) => {
