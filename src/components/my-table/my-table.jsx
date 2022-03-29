@@ -53,9 +53,8 @@ function MyTable(props) {
             <TdStyle key={index}>{item}</TdStyle>
           ))}
         </TrStyle>
-
         {props.data?.body.map((item, index) => (
-          <TrStyle key={index}>
+          <TrStyle key={index} onDoubleClick={() => props.setItem(item)}>
             {props.data.order.map((subItem, subIndex) => (
               <TdStyle key={subIndex}>
                 {typeof subItem === "string" ? item[subItem] : item(subItem)}

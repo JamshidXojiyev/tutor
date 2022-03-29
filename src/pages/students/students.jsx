@@ -72,6 +72,7 @@ function Students() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [tableEmpty, setTableEmpty] = useState(true);
+  const [thisData, setThisData] = useState();
 
   useEffect(() => {
     getStudents();
@@ -111,6 +112,7 @@ function Students() {
           loading={loading}
           table_empty={tableEmpty}
           width="100%"
+          setItem={(item) => console.log(item)}
         />
       </MyDiv>
       <MyDialog
@@ -119,6 +121,7 @@ function Students() {
           <StudentDialog
             closeDialog={(e) => setDialogOpen(e)}
             refresh={(e) => setRefresh(refresh + e)}
+            thisData={thisData}
           />
         }
         open={dialogOpen}

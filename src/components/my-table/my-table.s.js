@@ -11,7 +11,6 @@ export const TableEmptyContainer = styled.div`
   align-items: center;
   padding: 18px 20px;
 `;
-
 // table ui
 export const TableContainer = styled.div`
   display: inline-block;
@@ -36,6 +35,15 @@ export const TrStyle = styled.tr`
       line-height: 15px;
       text-align: center;
       color: #505470;
+      :hover {
+        background-color: #f7f8fa;
+      }
+    }
+    :hover {
+      button {
+        background-color: #fff0;
+      }
+      background-color: #f7f8fa8f;
     }
   }
 `;
