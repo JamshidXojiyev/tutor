@@ -28,7 +28,7 @@ function Students() {
   const [tableData, setTableData] = useContext(StudentsContext);
   const getStudents = () => {
     GetStudentConfig().then((res) => {
-      res.data ? setTableEmpty(false) : setTableData(true);
+      res.data ? setTableEmpty(false) : setTableEmpty(true);
       const data = res.data?.map((item) => {
         const subData = {
           student: `${item.firstname}  ${item.lastname}`,
@@ -40,7 +40,9 @@ function Students() {
           btn: (
             <>
               <MyButton
-                onClick={() => setTableData({ ...tableData, thisData: item })}
+                onClick={() => {
+                  setThisData(item);
+                }}
                 icon
                 svg={<EditIcon />}
               />
@@ -69,6 +71,7 @@ function Students() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [tableEmpty, setTableEmpty] = useState(false);
+  const [thisData, setThisData] = useState();
 
   useEffect(() => {
     getStudents();
@@ -108,6 +111,7 @@ function Students() {
           loading={loading}
           table_empty={tableEmpty}
           width="100%"
+          setItem={(item) => console.log(item)}
         />
       </MyDiv>
       <MyDialog
@@ -116,6 +120,7 @@ function Students() {
           <StudentDialog
             closeDialog={(e) => setDialogOpen(e)}
             refresh={(e) => setRefresh(refresh + e)}
+            thisData={thisData}
           />
         }
         open={dialogOpen}

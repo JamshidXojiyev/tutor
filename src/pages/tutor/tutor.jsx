@@ -54,7 +54,7 @@ function Tutor() {
             <>
               <MyButton
                 onClick={() => {
-                  setTutorData({ ...tutorData, thisData: item });
+                  setThisData(item);
                   setDialogOpen(true);
                 }}
                 icon
@@ -84,6 +84,10 @@ function Tutor() {
       console.log(res);
     });
   };
+  // states
+  const [loading, setLoading] = useState(false);
+  const [tableEmpty, setTableEmpty] = useState(false);
+  const [thisData, setThisData] = useState();
 
   useEffect(() => {
     getTutorFunc();
@@ -120,6 +124,7 @@ function Tutor() {
           <TutorDiaolog
             setDialog={closeDialog}
             renderFunc={() => setRender(render + 1)}
+            thisData={thisData}
           />
         }
         open={dialogOpen}

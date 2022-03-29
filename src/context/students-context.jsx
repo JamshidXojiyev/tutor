@@ -24,7 +24,6 @@ function StudentsState({ children }) {
       "special",
       "btn",
     ],
-    thisData: null,
   });
   return (
     <StudentsContext.Provider value={[stud, setStud]}>
