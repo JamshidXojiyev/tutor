@@ -20,7 +20,7 @@ function MyDialog(props) {
       <DialogContainer>
         <SubDialogContainer>
           <DialogBg onClick={() => props.close(false)} />
-          <DialogBlock>
+          <DialogBlock width={props.width}>
             <Header>
               <Title>{props.title ? props.title : ""}</Title>
               <CloseButton onClick={() => props.close(false)}>

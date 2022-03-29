@@ -50,7 +50,7 @@ export const LabelStyle = styled.label`
   width: 100%;
   margin-bottom: 2px;
 
-  font-family: "Poppins";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
   font-size: 10px;
@@ -69,9 +69,9 @@ export const SearchInputStyle = styled.input`
     border: 1px solid #d6e4ec;
     border-radius: 4px;
 
-    font-family: "Poppins";
+    font-family: "Montserrat";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     color: #343c44;
 
@@ -90,7 +90,7 @@ export const DatalistStyle = styled.datalist`
 `;
 export const OptionStyle = styled.option``;
 export const ErrorStyle = styled.label`
-  font-family: "Poppins";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 10px;

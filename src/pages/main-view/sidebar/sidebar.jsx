@@ -25,6 +25,7 @@ import {
 } from "../../../functions/useLocalStorage";
 import MyDialog from "../../../components/my-dialog/my-dialog";
 import MyButton from "../../../components/my-button/my-button";
+import ExitImage from "../../../assets/image/exit.png";
 
 function Sidebar(props) {
   const location = useLocation();
@@ -156,12 +157,24 @@ function Sidebar(props) {
       </SidebarStyle>
       <MyDialog
         title={lanSidebar.dialog_title}
-        width="400px"
+        width="360px"
         body={
-          <MyDiv gap="15px" display="flex">
-            <MyButton text={lanSidebar.dialog_yes} onClick={signOutFunc} />
-            <MyButton text={lanSidebar.dialog_no} onClick={closeDialog} />
-          </MyDiv>
+          <>
+            <img src={ExitImage} width="100%" />
+            <MyDiv gap="16px" display="flex">
+              <MyButton
+                width="50%"
+                text={lanSidebar.dialog_yes}
+                red
+                onClick={signOutFunc}
+              />
+              <MyButton
+                width="50%"
+                text={lanSidebar.dialog_no}
+                onClick={closeDialog}
+              />
+            </MyDiv>
+          </>
         }
         open={dialogOpen}
         close={closeDialog}

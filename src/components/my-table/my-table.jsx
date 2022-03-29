@@ -4,6 +4,7 @@ import {
   H1,
   PageBtn,
   TableContainer,
+  TableEmptyContainer,
   TableStyle,
   TdStyle,
   TrStyle,
@@ -11,7 +12,7 @@ import {
 import { ReactComponent as RightIcon } from "./icons/right.svg";
 import MySelect from "./components/my-select/my-select";
 import LoadingTable from "./components/loading/loading";
-
+import TableEmptyImg from "./images/table-empty.png";
 function MyTable(props) {
   const [page, setPage] = useState(1);
   const [pageLimit, setPageLimit] = useState(
@@ -23,21 +24,36 @@ function MyTable(props) {
   useEffect(() => {
     setPages(props.total ? Math.ceil(props.total / pageLimit) : 1);
   }, [pageLimit]);
+  // loading page
   if (props.loading) {
     return <LoadingTable width={props.width} />;
   }
+  // table empty
+  if (props.table_empty) {
+    return (
+      <TableContainer width="100%">
+        <TableStyle>
+          <TrStyle>
+            {props.data.header.map((item, index) => (
+              <TdStyle key={index}>{item}</TdStyle>
+            ))}
+          </TrStyle>
+        </TableStyle>
+        <TableEmptyContainer>
+          <img src={TableEmptyImg} width="300px" />
+        </TableEmptyContainer>
+      </TableContainer>
+    );
+  }
   return (
-<<<<<<< HEAD
     <TableContainer width="100%">
-=======
-    <TableContainer width={props.width}>
->>>>>>> 1bbaa1c11d96ae3cb57db18f5060302fdac96fb1
       <TableStyle>
         <TrStyle>
           {props.data.header.map((item, index) => (
             <TdStyle key={index}>{item}</TdStyle>
           ))}
         </TrStyle>
+
         {props.data?.body.map((item, index) => (
           <TrStyle key={index}>
             {props.data.order.map((subItem, subIndex) => (

@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 
+// table empty image
+export const TableEmptyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 20px;
+`;
+
 // table ui
 export const TableContainer = styled.div`
   display: inline-block;
@@ -13,7 +24,7 @@ export const TableStyle = styled.table`
 export const TrStyle = styled.tr`
   && {
     :first-child {
-      width: 100%; 
+      width: 100%;
       background: #f7f8fa;
       border: 1px solid #eff0f4;
       box-sizing: border-box;

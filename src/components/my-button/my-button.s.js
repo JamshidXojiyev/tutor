@@ -7,8 +7,32 @@ const blueStyle = css`
 
   font-family: "Inter";
   font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 15px;
+  color: #ffffff;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  :hover {
+    box-shadow: 0px 4px 16px #b1b1c342;
+  }
+`;
+const redStyle = css`
+  background: #f23985;
+  border-radius: 6px;
+  padding: 12px 14px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
   line-height: 15px;
   color: #ffffff;
 
@@ -32,7 +56,7 @@ const whiteStyle = css`
 
   font-family: "Inter";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 12px;
   line-height: 15px;
   color: #575c76;
@@ -75,6 +99,7 @@ export const ButtonStyle = styled.button`
           opacity: 1;
           cursor: pointer;
         `};
-  ${({ icon, white }) => (icon ? iconStyle : white ? whiteStyle : blueStyle)};
+  ${({ icon, white, red }) =>
+    icon ? iconStyle : white ? whiteStyle : red ? redStyle : blueStyle};
   margin: ${({ margin }) => margin};
 `;

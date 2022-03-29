@@ -26,8 +26,8 @@ export const HeaderStyle = styled.div`
 export const UserName = styled.h1`
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 17px;
   line-height: 27px;
   display: flex;
   align-items: center;

@@ -3,6 +3,7 @@ import { css } from "styled-components";
 
 export const LoadingContainer = styled.div`
   && {
+    width: ${({ width }) => width};
     ${({ user }) =>
       user &&
       css`

@@ -36,17 +36,16 @@ export const AvatarImageStyle = styled.img`
 export const Name = styled.h2`
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
-  line-height: 24px;
   color: #00140e;
 `;
 export const Email = styled.h3`
   font-family: "Poppins";
   font-style: normal;
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 16px;
+  font-weight: 400;
+  font-size: 12px;
+  /* line-height: 16px; */
   letter-spacing: 0.01em;
   color: #707eae;
 `;

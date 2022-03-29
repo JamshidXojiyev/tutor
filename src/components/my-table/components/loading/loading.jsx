@@ -9,41 +9,41 @@ function LoadingTable(props) {
       {
         user: (
           <LoadingContainer user>
-            <LoadingBlock img width="32px" height="32px" />
-            <LoadingContainer userInfo>
-              <LoadingBlock width="160  px" height="12px" />
-              <LoadingBlock width="130px" height="12px" />
+            <LoadingBlock img width="38px" height="36px" />
+            <LoadingContainer width="100%" userInfo>
+              <LoadingBlock width="85%" height="12px" />
+              <LoadingBlock width="70%" height="12px" />
             </LoadingContainer>
           </LoadingContainer>
         ),
-        date: <LoadingBlock width="160px" height="16px" />,
-        comments: <LoadingBlock width="280px" height="16px" />,
+        date: <LoadingBlock width="100%" height="16px" />,
+        comments: <LoadingBlock width="100%" height="16px" />,
       },
       {
         user: (
           <LoadingContainer user>
-            <LoadingBlock img width="32px" height="32px" />
-            <LoadingContainer userInfo>
-              <LoadingBlock width="160  px" height="12px" />
-              <LoadingBlock width="130px" height="12px" />
+            <LoadingBlock img width="38px" height="36px" />
+            <LoadingContainer width="100%" userInfo>
+              <LoadingBlock width="85%" height="12px" />
+              <LoadingBlock width="70%" height="12px" />
             </LoadingContainer>
           </LoadingContainer>
         ),
-        date: <LoadingBlock width="160px" height="16px" />,
-        comments: <LoadingBlock width="280px" height="16px" />,
+        date: <LoadingBlock width="100%" height="16px" />,
+        comments: <LoadingBlock width="100%" height="16px" />,
       },
       {
         user: (
           <LoadingContainer user>
-            <LoadingBlock img width="32px" height="32px" />
-            <LoadingContainer userInfo>
-              <LoadingBlock width="160  px" height="12px" />
-              <LoadingBlock width="130px" height="12px" />
+            <LoadingBlock img width="38px" height="36px" />
+            <LoadingContainer width="100%" userInfo>
+              <LoadingBlock width="85%" height="12px" />
+              <LoadingBlock width="70%" height="12px" />
             </LoadingContainer>
           </LoadingContainer>
         ),
-        date: <LoadingBlock width="160px" height="16px" />,
-        comments: <LoadingBlock width="280px" height="16px" />,
+        date: <LoadingBlock width="100%" height="16px" />,
+        comments: <LoadingBlock width="100%" height="16px" />,
       },
     ],
     order: ["user", "date", "comments"],

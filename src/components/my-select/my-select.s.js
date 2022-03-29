@@ -52,9 +52,9 @@ export const SelectStyle = styled.select`
     cursor: pointer;
     background: url(${BottomIcon}) white no-repeat calc(100% - 4px) !important;
 
-    font-family: "Poppins";
+    font-family: "Montserrat";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     color: #343c44;
   }
@@ -65,7 +65,7 @@ export const LabelStyle = styled.label`
   width: 100%;
   margin-bottom: 2px;
 
-  font-family: "Poppins";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
   font-size: 10px;
@@ -99,23 +99,9 @@ export const InputStyle = styled.input`
     ${({ error }) => (error ? errorStyle : "")}
   }
 `;
-export const IconStyle = styled.button`
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 50%;
-  right: 18px;
-  transform: translateY(-12px);
-  border: 0;
-  background-color: #fff0;
-  cursor: pointer;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 export const ErrorStyle = styled.label`
-  font-family: "Poppins";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 10px;

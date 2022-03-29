@@ -97,6 +97,7 @@ function StudentDialog(props) {
       console.log(obj);
       CreateStudentConfig(obj).then((res) => {
         props.closeDialog(false);
+        props.refresh(1);
       });
     },
   });

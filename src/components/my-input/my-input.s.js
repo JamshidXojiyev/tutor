@@ -5,8 +5,8 @@ const searchStyle = css`
   border-radius: 50px;
   font-family: "Inter";
   font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 12px;
 `;
 const errorStyle = css`
   border: 1px solid #ff333f;
@@ -62,7 +62,7 @@ export const LabelStyle = styled.label`
   width: 100%;
   margin-bottom: 2px;
 
-  font-family: "Poppins";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 600;
   font-size: 10px;
@@ -80,9 +80,9 @@ export const InputStyle = styled.input`
     border: 1px solid #d6e4ec;
     border-radius: 4px;
 
-    font-family: "Poppins";
+    font-family: "Montserrat";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 12px;
     color: #343c44;
 
@@ -113,7 +113,7 @@ export const IconStyle = styled.button`
   align-items: center;
 `;
 export const ErrorStyle = styled.label`
-  font-family: "Poppins";
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 10px;

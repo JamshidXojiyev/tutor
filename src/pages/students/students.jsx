@@ -28,6 +28,7 @@ function Students() {
   const [tableData, setTableData] = useContext(StudentsContext);
   const getStudents = () => {
     GetStudentConfig().then((res) => {
+      res.data ? setTableEmpty(false) : setTableData(true);
       const data = res.data?.map((item) => {
         const subData = {
           student: `${item.firstname}  ${item.lastname}`,
@@ -66,22 +67,25 @@ function Students() {
   // states
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [refresh, setRefresh] = useState(0);
+  const [tableEmpty, setTableEmpty] = useState(false);
 
   useEffect(() => {
     getStudents();
     getGroups();
-  }, []);
+  }, [refresh]);
 
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>
         <MyDiv widthCenter>
           <PageTitle>{lanStudent.list_of_student}</PageTitle>
-          <TotalUsers>{`274 ${lanStudent.users}`}</TotalUsers>
+          <TotalUsers>{`${tableData.body.length} ${lanStudent.users}`}</TotalUsers>
           <MyInput
             search
             placeholder={lanStudent.search_by_name}
-            height="48px"
+            height="42px"
+            width="210px"
             rightIcon={<SearchIcon />}
             setValue={(e) => console.log(e)}
           />
@@ -98,11 +102,22 @@ function Students() {
         </MyDiv>
       </MyDiv>
       <MyDiv width="100%" block display="inline-block">
-        <MyTable data={tableData} total="123" loading={true} width="100%" />
+        <MyTable
+          data={tableData}
+          total="123"
+          loading={loading}
+          table_empty={tableEmpty}
+          width="100%"
+        />
       </MyDiv>
       <MyDialog
         title={lanStudent.student_info}
-        body={<StudentDialog closeDialog={(e) => setDialogOpen(e)} />}
+        body={
+          <StudentDialog
+            closeDialog={(e) => setDialogOpen(e)}
+            refresh={(e) => setRefresh(refresh + e)}
+          />
+        }
         open={dialogOpen}
         close={(e) => setDialogOpen(e)}
       />
