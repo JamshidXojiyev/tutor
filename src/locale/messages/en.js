@@ -106,6 +106,7 @@ const en = {
     username_required_err: "You must enter username",
   },
   sidebar: {
+    hello: "Hello",
     dialog_title: "Do you want to log out?",
     dialog_yes: "Yes",
     dialog_no: "No",
@@ -173,6 +174,7 @@ const en = {
     list_of_tutor: "Tutors list",
     add_tutor: "Add New Tutor",
     tutor_info: "Tutor info",
+    delete_warning: "Do you really want to delete it?",
   },
 };
 

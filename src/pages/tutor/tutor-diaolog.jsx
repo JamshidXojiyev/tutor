@@ -7,19 +7,45 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
-import { CreateTutorConfig } from "../../server/config/CrudUrls";
+import {
+  CreateTutorConfig,
+  EditTutorConfig,
+} from "../../server/config/CrudUrls";
+import { TutorContext } from "../../context/tutorState";
 
 function TutorDiaolog(props) {
+  const [formData, setFormData] = useContext(TutorContext);
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const lanSignIn = languages.value.signin;
-
+  const obj = formData.thisData;
+  console.log(obj);
   const formik = useFormik({
-    initialValues: {
-      gender: "0",
-      region: "0",
-      district: "0",
-    },
+    initialValues: obj
+      ? {
+          country: obj.address.country,
+          region: obj.address.region,
+          district: obj.address.district,
+          description: obj.address.description,
+          category: obj.eduInfo.category,
+          level: obj.eduInfo.level,
+          description1: obj.eduInfo.description,
+          groups: obj.groups[0],
+          username: obj.user.username,
+          email: obj.user.email,
+          firstname: obj.user.userProfile.firstname,
+          fatherName: obj.user.userProfile.fatherName,
+          lastname: obj.user.userProfile.lastname,
+          birthDate: obj.user.userProfile.birthDate,
+          phoneNumber: obj.user.userProfile.phoneNumber,
+          gender: obj.user.userProfile.gender,
+          passportData: obj.user.userProfile.passportDate,
+        }
+      : {
+          gender: "0",
+          region: "0",
+          district: "0",
+        },
     validationSchema: Yup.object({
       username: Yup.string()
         .min(3, lanSignIn.min_err)
@@ -28,12 +54,14 @@ function TutorDiaolog(props) {
         .min(3, lanSignIn.min_err)
         .required(lanSignIn.email_required_err)
         .email(lanSignIn.email_email_err),
-      password: Yup.string()
-        .min(3, lanSignIn.min_err)
-        .required(lanSignIn.password_required_err),
+      // password: Yup.string().test(
+      // //   "password",
+      // //   lanSignIn.password_required_err,
+      // //   (item) => !obj && item.length === 0
+      // ),
     }),
     onSubmit: (val) => {
-      let obj = {
+      let sendObj = {
         address: {
           country: val.country,
           region: val.region,
@@ -56,15 +84,22 @@ function TutorDiaolog(props) {
             birthDate: val.birthDate,
             phoneNumber: val.phoneNumber,
             gender: val.gender,
-            passportData: val.passportData,
+            passportDate: val.passportData,
           },
         },
       };
-      CreateTutorConfig(obj).then((res) => {
-        console.log(res);
-        props.setDialog(false);
-      });
-      console.log(obj);
+      if (obj) {
+        EditTutorConfig(obj.id, sendObj).then((res) => {
+          console.log(res);
+        });
+      } else {
+        CreateTutorConfig(sendObj).then((res) => {
+          console.log(res);
+          props.setDialog();
+          props.renderFunc();
+        });
+      }
+      console.log(sendObj);
     },
   });
 
@@ -93,10 +128,10 @@ function TutorDiaolog(props) {
       name: "fatherName",
       label: lanForm.father_name,
     },
-    {
-      name: "faculty",
-      label: lanForm.faculty,
-    },
+    // {
+    //   name: "faculty",
+    //   label: lanForm.faculty,
+    // },
     {
       name: "category",
       label: lanForm.category,
@@ -194,6 +229,7 @@ function TutorDiaolog(props) {
         })}
       </MyDiv>
       <MyButton
+        width="50%"
         disabled={false}
         text={lanForm.edit}
         type="submit"

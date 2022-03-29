@@ -8,83 +8,87 @@ import { ReactComponent as SearchIcon } from "../../assets/icon/search.svg";
 import MyDialog from "../../components/my-dialog/my-dialog";
 import MyTable from "../../components/my-table/my-table";
 import TutorDiaolog from "./tutor-diaolog";
-import { GetTutorConfig } from "../../server/config/CrudUrls";
+import {
+  DeleteTutorConfig,
+  GetTutorConfig,
+} from "../../server/config/CrudUrls";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { TutorContext } from "../../context/tutorState";
+import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
+import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
 
 function Tutor() {
   //Language section
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanStudent = languages.value.students;
   const lanTutor = languages.value.admin;
+  const lanSidebar = languages.value.sidebar;
   //Dialog state
   const [dialogOpen, setDialogOpen] = useState(false);
-  //Table state
-
-  const mainData = {
-    header: ["name", "phoneNumber", "region", "birth date"],
-    body: [
-      {
-        name: "doniyor farmonov",
-        group: "+998901234567",
-        region: "Tashkent",
-        birth_date: "1990/01/01",
-      },
-      {
-        name: "doniyor farmonov",
-        group: "+998901234567",
-        region: "Tashkent",
-        birth_date: "1990/01/01",
-      },
-      {
-        name: "doniyor farmonov",
-        group: "+998901234567",
-        region: "Tashkent",
-        birth_date: "1990/01/01",
-      },
-      {
-        name: "doniyor farmonov",
-        group: "+998901234567",
-        region: "Tashkent",
-        birth_date: "1990/01/01",
-      },
-    ],
-    order: ["name", "group", "region", "birth_date"],
+  const [dialogDelete, setDialogDelete] = useState(false);
+  //Close dialogs
+  const closeDialog = () => {
+    setDialogOpen(false);
+    setTutorData({ ...tutorData, thisData: null });
   };
+  const closeDialogDelete = () => {
+    setDialogDelete(false);
+  };
+  //Render state
+  const [render, setRender] = useState(0);
   // Tutor api functions
   const [tutorData, setTutorData] = useContext(TutorContext);
-  console.log(tutorData);
+  //Get tutor
   const getTutorFunc = () => {
     GetTutorConfig().then((res) => {
       console.log(res);
       const data = res.data.map((item) => {
         const subData = {
-          // student: `${item.firstname}  ${item.lastname}`,
-          // father_name: item.fatherName,
-          // birth_day: item.birthDate,
-          // course: item.studyInfo.course,
-          // group: item.group.groupName,
-          // special: item.studyInfo.speciality,
-          // btn: (
-          //   <>
-          //     <MyButton
-          //       onClick={() => setTutorData({ ...tutorData, thisData: item })}
-          //       icon
-          //       tableIcon
-          //       svg={<EditIcon />}
-          //     />
-          //     <MyButton icon tableIcon svg={<DeleteIcon />} />
-          //   </>
-          // ),
+          fullname: `${item.user.userProfile.firstname}  ${item.user.userProfile.lastname}`,
+          username: item.user.username,
+          email: item.user.email,
+          phone_number: item.user.userProfile.phoneNumber,
+          birth_date: item.user.userProfile.birthDate,
+          id: item.id,
+          btn: (
+            <>
+              <MyButton
+                onClick={() => {
+                  setTutorData({ ...tutorData, thisData: item });
+                  setDialogOpen(true);
+                }}
+                icon
+                tableIcon
+                svg={<EditIcon />}
+              />
+              <MyButton
+                onClick={() => {
+                  setDialogDelete(true);
+                  setTutorData({ ...tutorData, thisData: item });
+                }}
+                icon
+                tableIcon
+                svg={<DeleteIcon />}
+              />
+            </>
+          ),
         };
         return subData;
       });
       setTutorData({ ...tutorData, body: data });
     });
   };
+  //Delete tutor
+  const deleteTutorFunc = () => {
+    DeleteTutorConfig(tutorData.thisData.id).then((res) => {
+      console.log(res);
+    });
+  };
+
   useEffect(() => {
     getTutorFunc();
-  }, []);
+  }, [render]);
+
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>
@@ -108,13 +112,30 @@ function Tutor() {
         </MyDiv>
       </MyDiv>
       <MyDiv width="100%" block display="inline-block">
-        <MyTable data={tutorData} total="123" loading={false} />
+        <MyTable data={tutorData} total="123" loading={false} width="100%" />
       </MyDiv>
       <MyDialog
         title={lanTutor.tutor_info}
-        body={<TutorDiaolog setDialog={setDialogOpen} />}
+        body={
+          <TutorDiaolog
+            setDialog={closeDialog}
+            renderFunc={() => setRender(render + 1)}
+          />
+        }
         open={dialogOpen}
-        close={(e) => setDialogOpen(e)}
+        close={closeDialog}
+      />
+      <MyDialog
+        title={lanTutor.delete_warning}
+        width="400px"
+        body={
+          <MyDiv gap="15px" display="flex">
+            <MyButton text={lanSidebar.dialog_yes} onClick={deleteTutorFunc} />
+            <MyButton text={lanSidebar.dialog_no} onClick={closeDialogDelete} />
+          </MyDiv>
+        }
+        open={dialogDelete}
+        close={closeDialogDelete}
       />
     </>
   );

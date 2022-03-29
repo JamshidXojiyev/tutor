@@ -105,6 +105,7 @@ const uz = {
     username_required_err: "Foydalanuvchi nomini kiriting.",
   },
   sidebar: {
+    hello: "Salom",
     dialog_title: "Tizimdan chiqmoqchimisz?",
     dialog_yes: "Ha",
     dialog_no: "Yo'q",
@@ -163,6 +164,7 @@ const uz = {
     list_of_tutor: "Tutorlar listi",
     add_tutor: "Yangi tutor qo'shish",
     tutor_info: "Tutor ma'lumotari",
+    delete_warning: "Rostdan o'chirmoqchimisz?",
   },
 };
 

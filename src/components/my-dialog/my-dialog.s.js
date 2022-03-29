@@ -32,7 +32,7 @@ export const DialogBg = styled.div`
 export const DialogBlock = styled.div`
   width: ${({ width }) => width};
   min-width: 250px;
-  max-width: 500px;
+  max-width: 600px;
   background: #ffffff;
   border-radius: 8px;
   padding: 10px 0;
@@ -69,6 +69,7 @@ export const Body = styled.div`
   && {
     padding: 0 20px;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: calc(100vh - 120px);
 
     /* width */

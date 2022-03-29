@@ -3,9 +3,9 @@ export const TutorContext = createContext();
 
 function TutorState({ children }) {
   const [tutor, setTutor] = useState({
-    header: ["name", "phoneNumber", "region", "birth date"],
+    header: ["fullname", "username", "email", "phone number", "birth date", ""],
     body: [],
-    order: ["name", "group", "region", "birth_date"],
+    order: ["fullname", "username", "email", "phone_number", "birth_date", "btn"],
     thisData: null,
   });
   return (
