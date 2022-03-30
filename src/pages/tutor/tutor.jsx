@@ -57,7 +57,7 @@ function Tutor() {
               birth_date: item.user.userProfile.birthDate,
               id: item.id,
               btn: (
-                <>
+                <MyDiv center>
                   <MyButton
                     onClick={() => {
                       setObj(item);
@@ -76,7 +76,7 @@ function Tutor() {
                     tableIcon
                     svg={<DeleteIcon />}
                   />
-                </>
+                </MyDiv>
               ),
             };
             return subData;

@@ -75,7 +75,7 @@ function MyTable(props) {
             onChange={(e) => setPageLimit(e.target.value)}
           />
           <PageBtn
-            disabled={page === 1}
+            disabled={parseFloat(page) === 1}
             left
             onClick={() => setPage(parseFloat(page) - 1)}
           >
@@ -89,7 +89,7 @@ function MyTable(props) {
             onChange={(e) => setPage(e.target.value)}
           />
           <PageBtn
-            disabled={page === pages}
+            disabled={parseFloat(page) === parseFloat(pages)}
             onClick={() => setPage(parseFloat(page) + 1)}
           >
             <RightIcon />

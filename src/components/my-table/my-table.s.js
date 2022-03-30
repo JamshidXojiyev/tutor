@@ -61,6 +61,8 @@ export const TdStyle = styled.td`
     text-transform: capitalize;
     color: #192a3e;
 
+    white-space: nowrap;
+
     :first-child {
       border-top-left-radius: 8px;
       border-bottom-left-radius: 8px;

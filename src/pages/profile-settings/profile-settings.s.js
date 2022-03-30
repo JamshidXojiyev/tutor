@@ -10,10 +10,10 @@ export const P = styled.p`
 export const UserImgStyle = styled.img`
   width: 168px;
   object-fit: cover;
-  // @media only screen and (max-width: 890px) {
-  //   width: 180px;
-  //   margin: 0 auto;
-  // }
+  display: inline;
+  @media only screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 export const Info = styled.div`
   margin-right: 17px;
@@ -21,16 +21,16 @@ export const Info = styled.div`
   @media only screen and (max-width: 1330px) {
     border-right: 0;
   }
-  // @media only screen and (max-width: 890px) {
-  //   width: 100%;
-  // }
+  @media only screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 export const Row = styled.div`
   display: flex;
   margin-top: 12px;
 `;
 export const Td = styled.span`
-  min-width: 170px;
+  /* min-width: 170px; */
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;

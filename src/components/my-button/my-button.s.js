@@ -23,6 +23,14 @@ const blueStyle = css`
   :hover {
     box-shadow: 0px 4px 16px #b1b1c342;
   }
+  @media only screen and (max-width: 500px) {
+    ${({ svg }) =>
+      svg &&
+      css`
+        font-size: 0;
+        gap: 0;
+      `}
+  }
 `;
 const redStyle = css`
   background: #f23985;

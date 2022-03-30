@@ -7,6 +7,9 @@ const searchStyle = css`
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
+  @media only screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 const errorStyle = css`
   border: 1px solid #ff333f;
@@ -74,7 +77,7 @@ export const LabelStyle = styled.label`
 `;
 export const InputStyle = styled.input`
   && {
-    width: ${({ width }) => (width ? width : "100%")};
+    width: 100%;
     height: ${({ height }) => (height ? height : "36px")};
     padding: ${({ padding }) => (padding ? padding : "0 18px")};
     border: 1px solid #d6e4ec;
@@ -111,6 +114,10 @@ export const IconStyle = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 500px) {
+    display: none !important;
+  }
 `;
 export const ErrorStyle = styled.label`
   font-family: "Montserrat";
