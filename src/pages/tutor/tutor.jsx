@@ -94,7 +94,7 @@ function Tutor() {
     DeleteTutorConfig(tutorData.thisData.id).then((res) => {
       console.log(res);
     });
-  }; 
+  };
 
   useEffect(() => {
     getTutorFunc();

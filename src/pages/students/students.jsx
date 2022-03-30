@@ -31,6 +31,7 @@ function Students() {
     GetStudentConfig()
       .then((res) => {
         if (res.data.length > 0) {
+          setTableEmpty(false);
           const data = res.data?.map((item) => {
             const subData = {
               student: `${item.firstname}  ${item.lastname}`,
@@ -42,9 +43,10 @@ function Students() {
               btn: (
                 <>
                   <MyButton
-                    onClick={() =>
-                      setTableData({ ...tableData, thisData: item })
-                    }
+                    onClick={() => {
+                      setThisData(item);
+                      setDialogOpen(true);
+                    }}
                     icon
                     svg={<EditIcon />}
                   />
@@ -61,10 +63,12 @@ function Students() {
   };
   // get tutor groups
   const [tutorGroup, setTutorGroup] = useState([]);
+  const [groups, setGroups] = useState([]);
   const getGroups = () => {
     GetTutorGroupsConfig().then((res) => {
-      const groups = res.data.map((item) => `${item.groupName} - group`);
+      const groups = res.data.map((item) => item.groupName);
       setTutorGroup(["All", ...groups]);
+      setGroups([...groups]);
     });
   };
   // states
@@ -72,7 +76,7 @@ function Students() {
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [tableEmpty, setTableEmpty] = useState(true);
-  const [thisData, setThisData] = useState();
+  const [thisData, setThisData] = useState(null);
 
   useEffect(() => {
     getStudents();
@@ -101,7 +105,10 @@ function Students() {
           <MyButton
             svg={<AddIcon />}
             text={lanStudent.add_student}
-            onClick={() => setDialogOpen(true)}
+            onClick={() => {
+              setDialogOpen(true);
+              setThisData(null);
+            }}
           />
         </MyDiv>
       </MyDiv>
@@ -122,6 +129,7 @@ function Students() {
             closeDialog={(e) => setDialogOpen(e)}
             refresh={(e) => setRefresh(refresh + e)}
             thisData={thisData}
+            groups={groups}
           />
         }
         open={dialogOpen}

@@ -9,6 +9,7 @@ import { MyForm } from "../../global-styles/form.s";
 import { MyDiv } from "../../global-styles/my-div.s";
 import {
   CreateStudentConfig,
+  EditStudentConfig,
   GetTutorGroupsConfig,
 } from "../../server/config/CrudUrls";
 import SelectSearch from "../../components/select-search/select-search";
@@ -16,32 +17,55 @@ import SelectSearch from "../../components/select-search/select-search";
 function StudentDialog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
-  const [groups, setGroups] = useState([]);
-  const getGroups = () => {
-    GetTutorGroupsConfig().then((res) => {
-      let arr = [];
-      for (let item of res.data) {
-        arr.push(item.groupName);
-      }
-      setGroups(arr);
-    });
-  };
+  let obj = props.thisData;
+  console.log(obj);
   const formik = useFormik({
-    initialValues: {
-      course: "0",
-      paymentType: "0",
-      nationality: "0",
-      nationality: "0",
-      familyStatus: "0",
-      invalidStudent: "0",
-      gender: "0",
-      region: "0",
-      district: "0",
-      needy: "0",
-      orphanStudent: "0",
-      parentsRetiree: "0",
-      invalidParents: "0",
-    },
+    initialValues: obj
+      ? {
+          country: obj.address.country,
+          description: obj.address.description,
+          district: obj.address.district,
+          region: obj.address.region,
+          birthDate: obj.birthDate,
+          address: obj.familyInformation.address,
+          invalidParents: obj.familyInformation.invalidParents,
+          invalidStudent: obj.familyInformation.invalidStudent,
+          needy: obj.familyInformation.needy,
+          orphanStudent: obj.familyInformation.orphanStudent,
+          parentsName: obj.familyInformation.parentsName,
+          parentsRetiree: obj.familyInformation.parentsRetiree,
+          phoneNumber: obj.familyInformation.phoneNumber,
+          familyStatus: obj.familyStatus,
+          fatherName: obj.fatherName,
+          firstname: obj.firstname,
+          gender: obj.gender,
+          groupName: obj.group.groupName,
+          lastname: obj.lastname,
+          nationality: obj.nationality,
+          passportData: obj.passportData,
+          course: obj.studyInfo.course,
+          educationType: obj.studyInfo.educationType,
+          paymentType: obj.studyInfo.paymentType,
+          speciality: obj.studyInfo.speciality,
+          university: obj.studyInfo.university,
+        }
+      : {
+          course: "0",
+          paymentType: "0",
+          nationality: "0",
+          nationality: "0",
+          familyStatus: "0",
+          invalidStudent: "0",
+          gender: "0",
+          region: "0",
+          district: "0",
+          needy: "0",
+          orphanStudent: "0",
+          parentsRetiree: "0",
+          invalidParents: "0",
+          groupName: props.groups[0],
+          // groupName: "I-52-i",
+        },
     validationSchema: Yup.object({
       firstname: Yup.string().required(lanForm.firstname_required_err),
       lastname: Yup.string().required(lanForm.lastname_required_err),
@@ -49,10 +73,9 @@ function StudentDialog(props) {
       university: Yup.string().required(lanForm.university_required_err),
       educationType: Yup.string().required(lanForm.educationType_required_err),
       speciality: Yup.string().required(lanForm.speciality_required_err),
-      groupName: Yup.string().required(lanForm.groupName_required_err),
     }),
     onSubmit: (value) => {
-      let obj = {
+      let sendObj = {
         firstname: value.firstname,
         lastname: value.lastname,
         fatherName: value.fatherName,
@@ -94,12 +117,17 @@ function StudentDialog(props) {
           },
         ],
       };
-      console.log(obj);
-      CreateStudentConfig(obj).then((res) => {
-        console.log(res);
-        props.closeDialog(false);
-        props.refresh(1);
-      });
+      console.log(sendObj);
+      obj
+        ? EditStudentConfig(obj.id, sendObj).then((res) => {
+            props.closeDialog(false);
+            props.refresh(1);
+          })
+        : CreateStudentConfig(sendObj).then((res) => {
+            console.log(res);
+            props.closeDialog(false);
+            props.refresh(1);
+          });
     },
   });
   const data = [
@@ -141,8 +169,9 @@ function StudentDialog(props) {
     {
       name: "groupName",
       label: lanForm.groupName,
-      option: groups,
-      slectSearch: true,
+      option: props.groups,
+      default_value: true,
+      select: true,
     },
     {
       name: "paymentType",
@@ -280,15 +309,21 @@ function StudentDialog(props) {
       ],
     },
   ];
-  useEffect(() => {
-    getGroups();
-  }, []);
 
   return (
     <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
       <MyDiv spaceBetween gap="8px">
         {data.map(
-          ({ name, label, width, type, select, option, slectSearch }) => {
+          ({
+            name,
+            label,
+            width,
+            type,
+            select,
+            option,
+            slectSearch,
+            default_value,
+          }) => {
             return slectSearch ? (
               <SelectSearch
                 key={name}
@@ -311,6 +346,7 @@ function StudentDialog(props) {
                 width={width ? "200px" : "100%"}
                 label={label}
                 name={name}
+                default_value={default_value}
                 value={formik.values[name]}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

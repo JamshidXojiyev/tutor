@@ -9,7 +9,7 @@ function MySelect(props) {
         <LabelStyle>{props.label}</LabelStyle>
         <SelectStyle {...props}>
           {props.option?.map((item, index) => (
-            <option key={index} value={index}>
+            <option key={index} value={props.default_value ? item : index}>
               {item}
             </option>
           ))}
