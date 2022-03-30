@@ -6,7 +6,7 @@ export const DialogContainer = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 16;
+  z-index: 100;
   width: 100%;
   height: 100vh;
 `;
@@ -32,13 +32,21 @@ export const DialogBg = styled.div`
 export const DialogBlock = styled.div`
   width: ${({ width }) => width};
   min-width: 250px;
+  width: 480px;
   max-width: 600px;
   background: #ffffff;
   border-radius: 8px;
   padding: 10px 0;
   padding-right: 2px;
   padding-bottom: 16px;
-  z-index: 20;
+  z-index: 999;
+  @media only screen and (max-width: 500px) {
+    padding: 6px 0;
+    padding-right: 4px;
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
 `;
 export const Header = styled.div`
   display: flex;
@@ -67,10 +75,15 @@ export const CloseButton = styled.button`
 `;
 export const Body = styled.div`
   && {
+    width: 100%;
     padding: 0 20px;
     overflow-y: auto;
     overflow-x: hidden;
     max-height: calc(100vh - 120px);
+    @media only screen and (max-width: 500px) {
+      height: auto;
+      max-height: auto;
+    }
 
     /* width */
     ::-webkit-scrollbar {

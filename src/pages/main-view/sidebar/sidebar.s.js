@@ -12,7 +12,7 @@ export const SidebarStyle = styled.div`
   background: #ffffff;
   box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.06);
   padding: 16px 8px;
-  z-index: 9;
+  z-index: 99;
 
   @media only screen and (max-width: 500px) {
     width: 255px;

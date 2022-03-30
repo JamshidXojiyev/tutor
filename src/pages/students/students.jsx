@@ -27,44 +27,44 @@ function Students() {
   // get students
   const [tableData, setTableData] = useContext(StudentsContext);
   const getStudents = () => {
-    GetStudentConfig().then((res) => {
-      res.data ? setTableEmpty(false) : setTableEmpty(true);
-      const data = res.data?.map((item) => {
-        const subData = {
-          student: `${item.firstname}  ${item.lastname}`,
-          father_name: item.fatherName,
-          birth_day: item.birthDate,
-          course: item.studyInfo.course,
-          group: item.group.groupName,
-          special: item.studyInfo.speciality,
-          btn: (
-            <>
-              <MyButton
-                onClick={() => {
-                  setThisData(item);
-                }}
-                icon
-                svg={<EditIcon />}
-              />
-              <MyButton icon svg={<DeleteIcon />} />
-            </>
-          ),
-        };
-        return subData;
-      });
-      setTableData({ ...tableData, body: data });
-    });
+    GetStudentConfig()
+      .then((res) => {
+        setLoading(true);
+        res.data ? setTableEmpty(false) : setTableEmpty(true);
+        const data = res.data?.map((item) => {
+          const subData = {
+            student: `${item.firstname}  ${item.lastname}`,
+            father_name: item.fatherName,
+            birth_day: item.birthDate,
+            course: item.studyInfo.course,
+            group: item.group.groupName,
+            special: item.studyInfo.speciality,
+            btn: (
+              <>
+                <MyButton
+                  onClick={() => {
+                    setThisData(item);
+                  }}
+                  icon
+                  svg={<EditIcon />}
+                />
+                <MyButton icon svg={<DeleteIcon />} />
+              </>
+            ),
+          };
+          return subData;
+        });
+        setTableData({ ...tableData, body: data });
+      })
+      .finally((err) => setLoading(false));
   };
   // get tutor groups
   const [tutorGroup, setTutorGroup] = useState([]);
   const getGroups = () => {
-    setLoading(true);
-    GetTutorGroupsConfig()
-      .then((res) => {
-        const groups = res.data.map((item) => `${item.groupName} - group`);
-        setTutorGroup(["All", ...groups]);
-      })
-      .finally((err) => setLoading(false));
+    GetTutorGroupsConfig().then((res) => {
+      const groups = res.data.map((item) => `${item.groupName} - group`);
+      setTutorGroup(["All", ...groups]);
+    });
   };
   // states
   const [dialogOpen, setDialogOpen] = useState(false);

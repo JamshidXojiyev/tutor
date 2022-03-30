@@ -29,6 +29,9 @@ export const Brand = styled.img`
   width: 62px;
   height: 62px;
   margin-bottom: 60px;
+  @media only screen and (max-width: 500px) {
+    margin-bottom: 20px;
+  }
 `;
 
 export const H1 = styled.h1`

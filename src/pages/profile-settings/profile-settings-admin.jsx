@@ -9,6 +9,7 @@ import MyDialog from "../../components/my-dialog/my-dialog";
 import { GetUserByIdConfig } from "../../server/config/CrudUrls";
 import { getLocalStorage } from "../../functions/useLocalStorage";
 import ProfileAdminDiaolog from "./profile-admin-dialog";
+import MyInfo from "../../components/my-info/my-info";
 
 function ProfileAettingsAdmin(props) {
   // language data
@@ -53,6 +54,185 @@ function ProfileAettingsAdmin(props) {
     },
   ];
 
+  const testData = [
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+    {
+      name: [
+        "Name:",
+        "Nationalities:",
+        "Birth Date:",
+        "Phone Number:",
+        "Phone Number:",
+      ],
+      value: [
+        "farhod dadajonov",
+        "Uzbek",
+        "15.08.1998",
+        "(99) 436-46-15",
+        "Elyor o’g’li",
+      ],
+    },
+  ];
+  const testDataObject = {
+    name: [
+      "Name:",
+      "Nationalities:",
+      "Birth Date:",
+      "Phone Number:",
+      "Phone Number:",
+    ],
+    value: [
+      "farhod dadajonov",
+      "Uzbek",
+      "15.08.1998",
+      "(99) 436-46-15",
+      "Elyor o’g’li",
+    ],
+  };
+
   return (
     <>
       {/* Header section */}
@@ -65,7 +245,7 @@ function ProfileAettingsAdmin(props) {
         />
       </MyDiv>
       {/* Info section */}
-      <MyDiv display="inline-block">
+      <MyDiv display="inline-block" width="100%">
         <MyDiv widthCenter block gap="17px">
           <UserImgStyle src={UserIcon} />
           <Info>
@@ -79,6 +259,9 @@ function ProfileAettingsAdmin(props) {
             })}
           </Info>
         </MyDiv>
+      </MyDiv>
+      <MyDiv margin="12px 0 0 0">
+        <MyInfo data={testData} />
       </MyDiv>
       {/* Dialog section */}
       <MyDialog

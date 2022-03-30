@@ -40,43 +40,45 @@ function Tutor() {
   const [tutorData, setTutorData] = useContext(TutorContext);
   //Get tutor
   const getTutorFunc = () => {
-    GetTutorConfig().then((res) => {
-      console.log(res);
-      const data = res.data.map((item) => {
-        const subData = {
-          fullname: `${item.user.userProfile.firstname}  ${item.user.userProfile.lastname}`,
-          username: item.user.username,
-          email: item.user.email,
-          phone_number: item.user.userProfile.phoneNumber,
-          birth_date: item.user.userProfile.birthDate,
-          id: item.id,
-          btn: (
-            <>
-              <MyButton
-                onClick={() => {
-                  setThisData(item);
-                  setDialogOpen(true);
-                }}
-                icon
-                tableIcon
-                svg={<EditIcon />}
-              />
-              <MyButton
-                onClick={() => {
-                  setDialogDelete(true);
-                  setTutorData({ ...tutorData, thisData: item });
-                }}
-                icon
-                tableIcon
-                svg={<DeleteIcon />}
-              />
-            </>
-          ),
-        };
-        return subData;
-      });
-      setTutorData({ ...tutorData, body: data });
-    });
+    setLoading(true);
+    GetTutorConfig()
+      .then((res) => {
+        const data = res.data.map((item) => {
+          const subData = {
+            fullname: `${item.user.userProfile.firstname}  ${item.user.userProfile.lastname}`,
+            username: item.user.username,
+            email: item.user.email,
+            phone_number: item.user.userProfile.phoneNumber,
+            birth_date: item.user.userProfile.birthDate,
+            id: item.id,
+            btn: (
+              <>
+                <MyButton
+                  onClick={() => {
+                    setThisData(item);
+                    setDialogOpen(true);
+                  }}
+                  icon
+                  tableIcon
+                  svg={<EditIcon />}
+                />
+                <MyButton
+                  onClick={() => {
+                    setDialogDelete(true);
+                    setTutorData({ ...tutorData, thisData: item });
+                  }}
+                  icon
+                  tableIcon
+                  svg={<DeleteIcon />}
+                />
+              </>
+            ),
+          };
+          return subData;
+        });
+        setTutorData({ ...tutorData, body: data });
+      })
+      .finally((err) => setLoading(false));
   };
   //Delete tutor
   const deleteTutorFunc = () => {
@@ -116,7 +118,7 @@ function Tutor() {
         </MyDiv>
       </MyDiv>
       <MyDiv width="100%" block display="inline-block">
-        <MyTable data={tutorData} total="123" loading={false} width="100%" />
+        <MyTable data={tutorData} total="123" loading={loading} width="100%" />
       </MyDiv>
       <MyDialog
         title={lanTutor.tutor_info}

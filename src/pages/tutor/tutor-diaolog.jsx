@@ -196,14 +196,14 @@ function TutorDiaolog(props) {
     },
   ];
   return (
-    <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
+    <MyForm onSubmit={formik.handleSubmit}>
       <MyDiv spaceBetween gap="8px">
         {data.map(({ name, label, width, type, select, option }) => {
           return select ? (
             <MySelect
               key={name}
               option={option}
-              width="200px"
+              width="48%"
               label={label}
               name={name}
               value={formik.values[name]}
@@ -215,7 +215,7 @@ function TutorDiaolog(props) {
           ) : (
             <MyInput
               key={name}
-              width={width ? "200px" : "100%"}
+              width={width ? "48%" : "100%"}
               type={type ? type : "text"}
               label={label}
               name={name}
