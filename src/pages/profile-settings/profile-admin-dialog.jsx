@@ -8,6 +8,7 @@ import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
 import { EditUserConfig } from "../../server/config/CrudUrls";
+import { toastEdit } from "../../functions/messages";
 
 function ProfileAdminDiaolog(props) {
   //Language section
@@ -35,10 +36,14 @@ function ProfileAdminDiaolog(props) {
     onSubmit: (value) => {
       console.log(value);
       let obj = {
-        profile: value,
+        userProfile: value,
+        email: props.informs.email,
+        username: props.informs.username,
+        id: props.informs.id,
       };
-      EditUserConfig(props.informs.id, obj).then((res) => {
+      EditUserConfig(obj.id, obj).then((res) => {
         console.log(res);
+        toastEdit("User ma'lumotlari");
       });
     },
   });

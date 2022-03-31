@@ -22,8 +22,10 @@ function ProfileAettingsAdmin(props) {
   const [data, setData] = useState({});
   const getUserFunc = () => {
     GetUserByIdConfig(getLocalStorage("userId")).then((res) => {
-      console.log(res);
-      setData({ ...res.data.userProfile, id: res.data.id });
+      let { email, id, userProfile, username } = res.data;
+      console.log(username);
+      setData({ ...userProfile, id, email, username });
+      console.log({ ...userProfile, id, email, username });
     });
   };
   console.log(data);
@@ -31,207 +33,24 @@ function ProfileAettingsAdmin(props) {
     getUserFunc();
   }, []);
   // Profile funtions
-  const firstData = [
-    {
-      th: lanForm.full_name,
-      td: data.firstname + " " + data.lastname,
-    },
-    {
-      th: lanForm.father_name,
-      td: data.fatherName,
-    },
-    {
-      th: lanForm.birth_date,
-      td: data.birthDate,
-    },
-    {
-      th: lanForm.phone_number,
-      td: data.phoneNumber,
-    },
-    {
-      th: lanForm.gender,
-      td: data.gender,
-    },
-  ];
-
   const testData = [
     {
       name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
+        lanForm.full_name,
+        lanForm.father_name,
+        lanForm.birth_date,
+        lanForm.phone_number,
+        lanForm.gender,
       ],
       value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
+        data.firstname + " " + data.lastname,
+        data.fatherName,
+        data.birthDate,
+        data.phoneNumber,
+        data.gender,
       ],
     },
   ];
-  const testDataObject = {
-    name: [
-      "Name:",
-      "Nationalities:",
-      "Birth Date:",
-      "Phone Number:",
-      "Phone Number:",
-    ],
-    value: [
-      "farhod dadajonov",
-      "Uzbek",
-      "15.08.1998",
-      "(99) 436-46-15",
-      "Elyor o’g’li",
-    ],
-  };
 
   return (
     <>
@@ -248,20 +67,10 @@ function ProfileAettingsAdmin(props) {
       <MyDiv display="inline-block" width="100%">
         <MyDiv widthCenter block gap="17px">
           <UserImgStyle src={UserIcon} />
-          <Info>
-            {firstData.map((item) => {
-              return (
-                <Row key={item.th}>
-                  <Td bold>{item.th}:</Td>
-                  <Td>{item.td}</Td>
-                </Row>
-              );
-            })}
-          </Info>
+          <MyDiv margin="12px 0 0 0">
+            <MyInfo data={testData} />
+          </MyDiv>
         </MyDiv>
-      </MyDiv>
-      <MyDiv margin="12px 0 0 0">
-        <MyInfo data={testData} />
       </MyDiv>
       {/* Dialog section */}
       <MyDialog

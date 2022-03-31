@@ -122,7 +122,7 @@ function Tutor() {
           />
         </MyDiv>
       </MyDiv>
-      <MyDiv width="100%" block display="inline-block">
+      <MyDiv id="touchId" width="100%" block display="inline-block">
         <MyTable
           data={tutorData}
           table_empty={empty}

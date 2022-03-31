@@ -13,6 +13,7 @@ import {
   GetTutorGroupsConfig,
 } from "../../server/config/CrudUrls";
 import SelectSearch from "../../components/select-search/select-search";
+import { toastAdd, toastEdit } from "../../functions/messages";
 
 function StudentDialog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
@@ -119,12 +120,14 @@ function StudentDialog(props) {
       };
       console.log(sendObj);
       obj
-        ? EditStudentConfig(obj.id, sendObj).then((res) => {
+        ? EditStudentConfig(obj.studentId, sendObj).then((res) => {
+            toastEdit("Student");
             props.closeDialog(false);
             props.refresh(1);
           })
         : CreateStudentConfig(sendObj).then((res) => {
             console.log(res);
+            toastAdd("Student"); 
             props.closeDialog(false);
             props.refresh(1);
           });
@@ -376,7 +379,7 @@ function StudentDialog(props) {
       </MyDiv>
       <MyButton
         disabled={false}
-        text={lanForm.create}
+        text={obj ? lanForm.edit : lanForm.create}
         type="submit"
         margin="20px 0 0 auto"
         width="30%"

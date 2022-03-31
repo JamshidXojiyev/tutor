@@ -34,6 +34,9 @@ export const CreateTutorConfig = (data) => {
   return CreateFunc("admin/api/tutor", data);
 };
 //Tutor Student section
+export const GetStudentsSearchConfig = (query = "") => {
+  return GetFunc(`tutor/api/student/search/?search=${query}`);
+};
 export const GetTutorGroupsConfig = () => {
   return GetFunc(`tutor/api/student/groups`);
 };

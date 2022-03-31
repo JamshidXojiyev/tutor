@@ -45,6 +45,10 @@ function Sidebar({ data }) {
   };
   let startX = "";
   let moveX = "";
+  // const el = document.getElementById("touchId");
+  // el.addEventListener("touchstart", () => {
+  //   console.log("touch");
+  // });
   window.addEventListener("touchstart", (ev) => {
     startX = ev.changedTouches[0].pageX;
   });
@@ -93,9 +97,7 @@ function Sidebar({ data }) {
           <User>
             <AvatarImageStyle src={AvatarImage} />
             <MyDiv>
-              <Name>
-                {data.fullName} 
-              </Name>
+              <Name>{data.fullName}</Name>
               <Email>{data.email}</Email>
             </MyDiv>
           </User>

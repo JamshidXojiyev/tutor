@@ -10,9 +10,10 @@ import MySelect from "../../components/my-select/my-select";
 import {
   CreateTutorConfig,
   EditTutorConfig,
-} from "../../server/config/CrudUrls"; 
+} from "../../server/config/CrudUrls";
+import { toastAdd, toastEdit } from "../../functions/messages";
 
-function TutorDiaolog(props) { 
+function TutorDiaolog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const lanSignIn = languages.value.signin;
@@ -88,6 +89,7 @@ function TutorDiaolog(props) {
       };
       if (obj) {
         EditTutorConfig(obj.id, sendObj).then((res) => {
+          toastEdit("Tutor");
           console.log(res);
           props.setDialog();
           props.renderFunc();
@@ -95,6 +97,7 @@ function TutorDiaolog(props) {
       } else {
         CreateTutorConfig(sendObj).then((res) => {
           console.log(res);
+          toastAdd("Tutor");
           props.setDialog();
           props.renderFunc();
         });
@@ -231,7 +234,7 @@ function TutorDiaolog(props) {
       <MyButton
         width="50%"
         disabled={false}
-        text={lanForm.edit}
+        text={obj ? lanForm.edit : lanForm.create}
         type="submit"
         margin="20px 0 0 auto"
       />
