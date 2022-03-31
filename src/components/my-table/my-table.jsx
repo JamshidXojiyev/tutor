@@ -34,9 +34,18 @@ function MyTable(props) {
       <TableContainer width="100%">
         <TableStyle>
           <TrStyle>
-            {props.data.header.map((item, index) => (
-              <TdStyle key={index}>{item}</TdStyle>
-            ))}
+            {props.data.header
+              .slice(
+                0,
+                window.innerWidth < 500
+                  ? 3
+                  : window.innerWidth < 1000
+                  ? 5
+                  : props.data.header.length
+              )
+              .map((item, index) => (
+                <TdStyle key={index}>{item}</TdStyle>
+              ))}
           </TrStyle>
         </TableStyle>
         <TableEmptyContainer>

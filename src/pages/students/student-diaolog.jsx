@@ -311,7 +311,7 @@ function StudentDialog(props) {
   ];
 
   return (
-    <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
+    <MyForm onSubmit={formik.handleSubmit}>
       <MyDiv spaceBetween gap="8px">
         {data.map(
           ({

@@ -7,21 +7,30 @@ export const InfoContainer = styled.div`
     padding: 18px;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     grid-gap: 24px 12px;
   }
 `;
-
+export const UserImage = styled.div`
+  min-height: 168px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  border-radius: 12px;
+`;
 export const InfoBlock = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   gap: 12px;
 `;
 export const Container = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 `;
 export const Name = styled.h3`
+  /* height: 28px; */
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;
@@ -31,6 +40,7 @@ export const Name = styled.h3`
   color: #242525;
 `;
 export const Value = styled.h3`
+  height: 28px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 500;

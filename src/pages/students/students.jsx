@@ -15,6 +15,7 @@ import StudentDialog from "./student-diaolog";
 import {
   GetStudentConfig,
   GetTutorGroupsConfig,
+  GetStudentsSearchConfig,
 } from "../../server/config/CrudUrls";
 import { StudentsContext } from "../../context/students-context";
 import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
@@ -35,6 +36,7 @@ function Students() {
           const data = res.data?.map((item) => {
             const subData = {
               student: `${item.firstname}  ${item.lastname}`,
+              id: item.studentId,
               father_name: item.fatherName,
               birth_day: item.birthDate,
               course: item.studyInfo.course,
@@ -71,6 +73,12 @@ function Students() {
       setGroups([...groups]);
     });
   };
+  // student search
+  useEffect(() => {
+    GetStudentsSearchConfig("Vjdgj").then((res) => {
+      console.log(res);
+    });
+  }, []);
   // states
   const [dialogOpen, setDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -112,7 +120,7 @@ function Students() {
           />
         </MyDiv>
       </MyDiv>
-      <MyDiv width="100%" block display="inline-block">
+      <MyDiv id="notTouch" width="100%" block display="inline-block">
         <MyTable
           data={tableData}
           total="123"

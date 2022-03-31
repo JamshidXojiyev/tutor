@@ -15,8 +15,17 @@ export const SidebarStyle = styled.div`
   z-index: 99;
 
   @media only screen and (max-width: 500px) {
-    width: 255px;
-    padding: "16px 8px";
+    && {
+      ${({ sidebarSize }) =>
+        sidebarSize &&
+        css`
+          position: "fixed";
+          left: ${({ sidebarSize }) => `${sidebarSize}px`};
+          top: 0;
+        `}
+      width: 255px;
+      padding: "16px 8px";
+    }
   }
 `;
 // user

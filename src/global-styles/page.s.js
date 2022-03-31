@@ -22,3 +22,18 @@ export const TotalUsers = styled.h2`
   line-height: 18px;
   color: #5b5f7b;
 `;
+export const ValueType = styled.h3`
+  /* height: 28px; */
+  padding: 1px 24px;
+  background: ${({ type }) =>
+    type ? "rgba(36, 193, 143, 0.2)" : "rgba(255, 0, 0, 0.2)"};
+  border-radius: 16px;
+
+  text-align: center;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 10px;
+  /* line-height: 19px; */
+  color: ${({ type }) => (type ? "#24C18F" : "#FF0000")};
+`;

@@ -10,6 +10,7 @@ import { GetUserByIdConfig } from "../../server/config/CrudUrls";
 import { getLocalStorage } from "../../functions/useLocalStorage";
 import ProfileAdminDiaolog from "./profile-admin-dialog";
 import MyInfo from "../../components/my-info/my-info";
+import { ValueType } from "../../global-styles/page.s";
 
 function ProfileAettingsAdmin(props) {
   // language data
@@ -58,9 +59,9 @@ function ProfileAettingsAdmin(props) {
     {
       name: [
         "Name:",
+        "Father Name:",
         "Nationalities:",
         "Birth Date:",
-        "Phone Number:",
         "Phone Number:",
       ],
       value: [
@@ -73,147 +74,33 @@ function ProfileAettingsAdmin(props) {
     },
     {
       name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
+        "pasport:",
+        "gender:",
+        "family status:",
+        "invalid student:",
+        "address:",
       ],
       value: [
-        "farhod dadajonov",
+        "AB7567153",
+        "male",
+        <ValueType type="true">not needy</ValueType>,
+        <ValueType>invalid</ValueType>,
         "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
       ],
     },
     {
       name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
+        "group name:",
+        "cours:",
+        "speciality:",
         "Phone Number:",
-        "Phone Number:",
+        "Father Name:",
       ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
+      value: ["farhod", "farhod", "farhod", "farhod", "farhod"],
     },
     {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
-    },
-    {
-      name: [
-        "Name:",
-        "Nationalities:",
-        "Birth Date:",
-        "Phone Number:",
-        "Phone Number:",
-      ],
-      value: [
-        "farhod dadajonov",
-        "Uzbek",
-        "15.08.1998",
-        "(99) 436-46-15",
-        "Elyor o’g’li",
-      ],
+      name: ["Name", "Name", "Name", "Name", "Name", "Name"],
+      value: ["farhod", "farhod", "farhod", "farhod", "farhod", "farhod"],
     },
   ];
   const testDataObject = {
@@ -260,11 +147,13 @@ function ProfileAettingsAdmin(props) {
           </Info>
         </MyDiv>
       </MyDiv>
+
       <MyDiv margin="12px 0 0 0">
-        <MyInfo data={testData} />
+        <MyInfo data={testDataObject} />
       </MyDiv>
       {/* Dialog section */}
       <MyDialog
+        height="440px"
         title={lanAdmin.admin_info}
         body={<ProfileAdminDiaolog informs={data} />}
         open={dialogOpen}

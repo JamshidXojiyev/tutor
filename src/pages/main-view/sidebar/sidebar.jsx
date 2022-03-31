@@ -37,37 +37,36 @@ function Sidebar({ data }) {
   // dialog state
   const [dialogOpen, setDialogOpen] = useState(false);
   // mobile open sidebar
-  const [size, setSize] = useState("0");
-  const findSize = () => {
-    if (window.innerWidth > 500) {
+  const [size, setSize] = useState("-255");
+  let touch_scroll_x = "";
+  let touch_scroll_y = "";
+  let touchStartX = "";
+  let touchStartY = "";
+  let touchEndX = "";
+  let touchEndY = "";
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  });
+  document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+    touchEndY = e.changedTouches[0].clientY;
+    touch_scroll_y =
+      touchEndY > touchStartY
+        ? touchEndY - touchStartY
+        : touchStartY - touchEndY;
+    touch_scroll_x =
+      touchEndX > touchStartX
+        ? touchEndX - touchStartX
+        : touchStartX - touchEndX;
+    if (touch_scroll_y < 50 && touchStartX < 100 && touch_scroll_x > 100) {
       setSize("0");
-    } else setSize(-255);
-  };
-  let startX = "";
-  let moveX = "";
-  window.addEventListener("touchstart", (ev) => {
-    startX = ev.changedTouches[0].pageX;
-  });
-  window.addEventListener("touchend", (ev) => {
-    moveX = ev.changedTouches[0].pageX;
-    let size = +(moveX - startX).toString().split(".")[0];
-    if (size > 100 && window.innerWidth < 500) {
-      openSidebar();
-    } else if (size < -100 && window.innerWidth < 500) {
-      closeSidebar();
+    }
+    if (touch_scroll_y < 50 && touchStartX > touchEndX && touch_scroll_x > 20) {
+      setSize("-255");
     }
   });
-  window.addEventListener("resize", () => {
-    if (500 < window.innerWidth < 505) {
-      setSize(0);
-    }
-  });
-  const openSidebar = () => {
-    setSize("0");
-  };
-  const closeSidebar = () => {
-    if (window.innerWidth < 500) setSize("-255");
-  };
+
   // SigOut section
   const closeDialog = () => {
     setDialogOpen(false);
@@ -80,22 +79,17 @@ function Sidebar({ data }) {
     window.location.href = "/";
   };
   useEffect(() => {
-    findSize();
+    // findSize();
   }, []);
   const role = getLocalStorage("role");
   return (
     <>
-      <SidebarStyle
-        style={{ position: "fixed", left: `${size}px`, top: 0 }}
-        openMenu={globalState.sidebarOpen}
-      >
+      <SidebarStyle sidebarSize={size} openMenu={globalState.sidebarOpen}>
         <MyDiv position="relative" height="100%">
           <User>
             <AvatarImageStyle src={AvatarImage} />
             <MyDiv>
-              <Name>
-                {data.fullName} 
-              </Name>
+              <Name>{data.fullName}</Name>
               <Email>{data.email}</Email>
             </MyDiv>
           </User>
@@ -111,7 +105,11 @@ function Sidebar({ data }) {
           <UlStyle>
             {role === "ROLE_TUTOR"
               ? lanSidebar.menus.map((item, index) => (
-                  <Link to={item.url} key={index} onClick={closeSidebar}>
+                  <Link
+                    to={item.url}
+                    key={index}
+                    onClick={() => setSize("-255")}
+                  >
                     <LiStyle
                       openMenu={globalState.sidebarOpen}
                       activ={!location.pathname.search(item.url)}
@@ -124,7 +122,11 @@ function Sidebar({ data }) {
                 ))
               : role === "ROLE_ADMIN"
               ? lanSidebar.menusAdmin.map((item, index) => (
-                  <Link to={item.url} key={index} onClick={closeSidebar}>
+                  <Link
+                    to={item.url}
+                    key={index}
+                    onClick={() => setSize("-255")}
+                  >
                     <LiStyle
                       openMenu={globalState.sidebarOpen}
                       activ={!location.pathname.search(item.url)}

@@ -30,25 +30,27 @@ export const DialogBg = styled.div`
   background-color: #0003;
 `;
 export const DialogBlock = styled.div`
-  width: ${({ width }) => width};
+  width: ${({ width }) => (width ? width : "480px")};
   min-width: 250px;
-  width: 480px;
+
   max-width: 600px;
+  height: ${({ height }) => (height ? height : "calc(100vh - 60px)")};
   background: #ffffff;
   border-radius: 8px;
-  padding: 10px 0;
-  padding-right: 2px;
-  padding-bottom: 16px;
   z-index: 999;
   @media only screen and (max-width: 500px) {
-    padding: 6px 0;
-    padding-right: 4px;
     width: 100%;
     height: 100vh;
     border-radius: 0;
   }
+  position: relative;
 `;
 export const Header = styled.div`
+  position: absolute;
+  top: 4px;
+  left: 0;
+  right: 0;
+
   display: flex;
   justify-content: space-between;
 
@@ -75,11 +77,17 @@ export const CloseButton = styled.button`
 `;
 export const Body = styled.div`
   && {
-    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 5px;
+
+    width: calc(100% - 2px);
     padding: 0 20px;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: calc(100vh - 120px);
+    padding-bottom: 20px;
     @media only screen and (max-width: 500px) {
       height: auto;
       max-height: auto;
@@ -90,19 +98,16 @@ export const Body = styled.div`
       width: 6px;
       cursor: pointer;
     }
-
     /* Track */
     ::-webkit-scrollbar-track {
       background-color: #0001;
       border-radius: 5px;
     }
-
     /* Handle */
     ::-webkit-scrollbar-thumb {
       background-color: #0002;
       border-radius: 5px;
     }
-
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
       background-color: #0005;

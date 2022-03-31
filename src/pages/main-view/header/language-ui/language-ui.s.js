@@ -19,7 +19,7 @@ export const ActivLanguage = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: 12px;
-  padding: 6px 12px;
+  padding: 6px 0;
   cursor: pointer;
   opacity: ${({ disables }) => (disables ? ".5" : "1")};
   ${({ none }) =>
@@ -37,4 +37,13 @@ export const ActivLanguage = styled.div`
   font-size: 12px;
   line-height: 15px;
   color: #000000;
+`;
+export const CloseBlock = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
 `;

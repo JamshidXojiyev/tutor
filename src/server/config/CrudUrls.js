@@ -52,3 +52,8 @@ export const DeleteStudentConfig = (id) => {
 export const CreateStudentConfig = (data) => {
   return CreateFunc("tutor/api/student", data);
 };
+
+// search
+export const GetStudentsSearchConfig = (query = "") => {
+  return GetFunc(`tutor/api/student/search/?search=${query}`);
+};
