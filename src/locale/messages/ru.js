@@ -1,9 +1,9 @@
 import { ReactComponent as Dashboard } from "../../assets/icon/menu-icons/Dashboard.svg";
 import { ReactComponent as Students } from "../../assets/icon/menu-icons/Students.svg";
 import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/Profile-settings.svg";
-import { ReactComponent as SignOut } from "../../assets/icon/menu-icons/Sign-Out.svg";
 const ru = {
   form: {
+    cancel: "Отмена",
     edit: "Редактировать",
     create: "Добавлять",
     delete: "Закрывать",
@@ -101,7 +101,7 @@ const ru = {
     password_required_err: "Вы должны ввести свой пароль.",
 
     min_err: "Минимальная длина 5 символа.",
-    username: "Имя пользователя", 
+    username: "Имя пользователя",
     username_required_err: "Введите имя пользователя.",
   },
   sidebar: {

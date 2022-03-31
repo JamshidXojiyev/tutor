@@ -10,6 +10,7 @@ import { GetUserByIdConfig } from "../../server/config/CrudUrls";
 import { getLocalStorage } from "../../functions/useLocalStorage";
 import ProfileAdminDiaolog from "./profile-admin-dialog";
 import MyInfo from "../../components/my-info/my-info";
+import { ValueType } from "../../global-styles/page.s";
 
 function ProfileAettingsAdmin(props) {
   // language data
@@ -65,15 +66,11 @@ function ProfileAettingsAdmin(props) {
       </MyDiv>
       {/* Info section */}
       <MyDiv display="inline-block" width="100%">
-        <MyDiv widthCenter block gap="17px">
-          <UserImgStyle src={UserIcon} />
-          <MyDiv margin="12px 0 0 0">
-            <MyInfo data={testData} />
-          </MyDiv>
-        </MyDiv>
+        <MyInfo data={testData} />
       </MyDiv>
       {/* Dialog section */}
       <MyDialog
+        height="440px"
         title={lanAdmin.admin_info}
         body={<ProfileAdminDiaolog informs={data} />}
         open={dialogOpen}

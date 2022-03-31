@@ -8,7 +8,7 @@ import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
 
-function ProfileDiaolog() {
+function ProfileDiaolog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const formik = useFormik({
@@ -25,17 +25,10 @@ function ProfileDiaolog() {
       district: "",
       description: "",
     },
-    validationSchema: Yup.object({
-      // username: Yup.string()
-      //   .min(3, lanSignIn.min_err)
-      //   .required(lanSignIn.email_required_err)
-      //   .email(lanSignIn.email_email_err),
-      // password: Yup.string()
-      //   .min(3, lanSignIn.min_err)
-      //   .required(lanSignIn.password_required_err),
-    }),
+    validationSchema: Yup.object({}),
     onSubmit: (val) => {
       console.log(val);
+      props.closeRender(1);
     },
   });
 
@@ -100,14 +93,14 @@ function ProfileDiaolog() {
     },
   ];
   return (
-    <MyForm onSubmit={formik.handleSubmit} style={{ width: "420px" }}>
+    <MyForm onSubmit={formik.handleSubmit}>
       <MyDiv spaceBetween gap="8px">
         {data.map(({ name, label, width, type, select, option }) => {
           return select ? (
             <MySelect
               key={name}
               option={option}
-              width="200px"
+              width="48%"
               label={label}
               name={name}
               value={formik.values[name]}
@@ -117,7 +110,7 @@ function ProfileDiaolog() {
           ) : (
             <MyInput
               key={name}
-              width={width ? "200px" : "100%"}
+              width={width ? "48%" : "100%"}
               type={type ? type : "text"}
               label={label}
               name={name}
@@ -128,12 +121,20 @@ function ProfileDiaolog() {
           );
         })}
       </MyDiv>
-      <MyButton
-        disabled={false}
-        text={lanForm.edit}
-        type="submit"
-        margin="20px 0 0 auto"
-      />
+      <MyDiv gap="16px" display="flex" margin="20px 0 0 0">
+        <MyButton
+          width="50%"
+          text={lanForm.cancel}
+          red
+          onClick={() => props.close(false)}
+        />
+        <MyButton
+          // disabled={true}
+          width="50%"
+          text={lanForm.edit}
+          type="submit"
+        />
+      </MyDiv>
     </MyForm>
   );
 }

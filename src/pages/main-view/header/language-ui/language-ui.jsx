@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
-import { ActivLanguage, LangContainer, LanguageBlock } from "./language-ui.s";
+import {
+  ActivLanguage,
+  CloseBlock,
+  LangContainer,
+  LanguageBlock,
+} from "./language-ui.s";
 import ImgEN from "../../../../assets/image/en.png";
 import ImgUZ from "../../../../assets/image/uz.png";
 import ImgRU from "../../../../assets/image/ru.png";
@@ -44,21 +49,24 @@ function LanguageUi(props) {
         </ActivLanguage>
       )}
       {langType && (
-        <LanguageBlock>
-          {langData.map((item, index) => (
-            <ActivLanguage
-              disables={item.lang === languages.lang}
-              key={index}
-              onClick={() => {
-                setLanguages({ ...languages, lang: item.lang });
-                setLangType(false);
-              }}
-            >
-              <p>{item.name}</p>
-              <img src={item.img} width="28px" height="28px" />
-            </ActivLanguage>
-          ))}
-        </LanguageBlock>
+        <>
+          <CloseBlock onClick={() => setLangType(false)} />
+          <LanguageBlock>
+            {langData.map((item, index) => (
+              <ActivLanguage
+                disables={item.lang === languages.lang}
+                key={index}
+                onClick={() => {
+                  setLanguages({ ...languages, lang: item.lang });
+                  setLangType(false);
+                }}
+              >
+                <p>{item.name}</p>
+                <img src={item.img} width="28px" height="28px" />
+              </ActivLanguage>
+            ))}
+          </LanguageBlock>
+        </>
       )}
     </LangContainer>
   );

@@ -1,8 +1,5 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
-import { toast } from "react-toastify";
-import MyButton from "../../components/my-button/my-button";
-import { toastAdd } from "../../functions/messages";
+import ReactApexChart from "react-apexcharts";  
 import { MyDiv } from "../../global-styles/my-div.s";
 
 function Dashboard(props) {
@@ -46,11 +43,7 @@ function Dashboard(props) {
         },
       },
     },
-  };
-  const click = () => {
-    toastAdd("student");
-    toast.success("hello world");
-  };
+  }; 
 
   return (
     <>
@@ -61,8 +54,7 @@ function Dashboard(props) {
           type="area"
           height={350}
         />
-      </MyDiv>
-      <MyButton onClick={click} text="button" />
+      </MyDiv> 
     </>
   );
 }

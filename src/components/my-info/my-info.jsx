@@ -1,10 +1,21 @@
 import React from "react";
-import { Container, InfoBlock, InfoContainer, Name, Value } from "./my-info.s";
+import {
+  Container,
+  InfoBlock,
+  InfoContainer,
+  Name,
+  UserImage,
+  Value,
+} from "./my-info.s";
+import { ReactComponent as UserIcon } from "../../assets/icon/userIcon.svg";
 
 function MyInfo(props) {
   if (Array.isArray(props.data)) {
     return (
       <InfoContainer borderRight={Array.isArray(props.data)}>
+        <UserImage>
+          <UserIcon />
+        </UserImage>
         {props.data.map((item, index) => (
           <InfoBlock key={index}>
             <Container>
@@ -24,6 +35,9 @@ function MyInfo(props) {
   } else {
     return (
       <InfoContainer borderRight={Array.isArray(props.data)}>
+        <UserImage>
+          <UserIcon />
+        </UserImage>
         <InfoBlock>
           <Container>
             {props.data.name.map((item, index) => (

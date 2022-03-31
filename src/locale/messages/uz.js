@@ -1,9 +1,9 @@
 import { ReactComponent as Dashboard } from "../../assets/icon/menu-icons/Dashboard.svg";
 import { ReactComponent as Students } from "../../assets/icon/menu-icons/Students.svg";
 import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/Profile-settings.svg";
-import { ReactComponent as SignOut } from "../../assets/icon/menu-icons/Sign-Out.svg";
 const uz = {
   form: {
+    cancel: "Bekor qilish",
     edit: "Tahrirlash",
     create: "Qo'shish",
     delete: "O'chirish",

@@ -55,3 +55,4 @@ export const DeleteStudentConfig = (id) => {
 export const CreateStudentConfig = (data) => {
   return CreateFunc("tutor/api/student", data);
 };
+ 

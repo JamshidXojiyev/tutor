@@ -57,9 +57,9 @@ function ProfileSettings(props) {
       th: lanForm.description,
       td: "Ingliz tilidan dars bera oladi",
     },
-  ]; 
-
+  ];
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [render, setRender] = useState(1);
 
   return (
     <>
@@ -100,7 +100,15 @@ function ProfileSettings(props) {
       </MyDiv>
       <MyDialog
         title="Student info"
-        body={<ProfileDiaolog />}
+        body={
+          <ProfileDiaolog
+            close={(e) => setDialogOpen(e)}
+            closeRender={(e) => {
+              setDialogOpen(false);
+              setRender(render + e);
+            }}
+          />
+        }
         open={dialogOpen}
         close={(e) => setDialogOpen(e)}
       />
