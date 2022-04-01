@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(
         console.log(error);
       } else {
         error.response.data && toast.error(error.response.data.message);
-        toast.error("Noma'lum xatolik yuz berdi");
+        // toast.error("Noma'lum xatolik yuz berdi");
       }
     }
     throw error;

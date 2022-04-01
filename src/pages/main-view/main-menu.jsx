@@ -19,7 +19,10 @@ import Tutor from "../tutor/tutor";
 import ProfileAettingsAdmin from "../profile-settings/profile-settings-admin";
 import TutorState from "../../context/tutorState";
 import StudentsState from "../../context/students-context";
-import { GetUserByIdConfig } from "../../server/config/CrudUrls";
+import {
+  GetTutorPersonalInfo,
+  GetUserByIdConfig,
+} from "../../server/config/CrudUrls";
 
 function MainMenu(props) {
   const history = useHistory();
@@ -34,12 +37,17 @@ function MainMenu(props) {
   //Get user informations
   const [data, setData] = useState({});
   const getUserFunc = () => {
-    GetUserByIdConfig(getLocalStorage("userId")).then((res) => {
-      setData({
-        email: res.data.email,
-        fullName: `${res.data.userProfile.firstname} ${res.data.userProfile.lastname}`,
+    role === "ROLE_TUTOR" &&
+      GetTutorPersonalInfo().then((res) => {
+        console.log(res);
       });
-    });
+    role === "ROLE_ADMIN" &&
+      GetUserByIdConfig(getLocalStorage("userId")).then((res) => {
+        setData({
+          email: res.data.email,
+          fullName: `${res.data.userProfile.firstname} ${res.data.userProfile.lastname}`,
+        });
+      });
   };
   useEffect(() => {
     getUserFunc();
