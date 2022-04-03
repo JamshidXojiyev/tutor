@@ -7,7 +7,7 @@ export const SidebarStyle = styled.div`
   left: 0;
   bottom: 0;
 
-  width: ${({ openMenu }) => (openMenu ? "255px" : "64px")};
+  width: ${({ openMenu }) => (openMenu ? "272px" : "64px")};
   height: 100vh;
   background: #ffffff;
   box-shadow: 4px 4px 40px rgba(0, 0, 0, 0.06);
@@ -23,7 +23,7 @@ export const SidebarStyle = styled.div`
           left: ${({ sidebarSize }) => `${sidebarSize}px`};
           top: 0;
         `}
-      width: 255px;
+      width: 272px;
       padding: "16px 8px";
     }
   }
@@ -79,7 +79,7 @@ export const UlStyle = styled.ul`
 export const LiStyle = styled.li`
   && {
     height: 38px;
-    width: 223px;
+    width: 245px;
     overflow-x: hidden;
     cursor: pointer;
 
@@ -166,4 +166,14 @@ export const MenuButton = styled.button`
       display: none;
     }
   }
+`;
+export const CloseSidebar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 95;
 `;

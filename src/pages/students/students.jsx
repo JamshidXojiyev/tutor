@@ -20,6 +20,7 @@ import {
 import { StudentsContext } from "../../context/students-context";
 import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
+import DeleteUi from "../../components/delete-ui/delete-ui";
 
 function Students() {
   // languages
@@ -52,7 +53,11 @@ function Students() {
                     icon
                     svg={<EditIcon />}
                   />
-                  <MyButton icon svg={<DeleteIcon />} />
+                  <MyButton
+                    icon
+                    svg={<DeleteIcon />}
+                    onClick={() => setDeleteDialogOpen(true)}
+                  />
                 </>
               ),
             };
@@ -74,13 +79,15 @@ function Students() {
     });
   };
   // student search
-  useEffect(() => {
-    GetStudentsSearchConfig("Vjdgj").then((res) => {
-      console.log(res);
-    });
-  }, []);
+  // useEffect(() => {
+  //   GetStudentsSearchConfig("Vjdgj").then((res) => {
+  //     console.log(res);
+  //   });
+  // }, []);
+  
   // states
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(0);
   const [tableEmpty, setTableEmpty] = useState(true);
@@ -90,7 +97,6 @@ function Students() {
     getStudents();
     getGroups();
   }, [refresh]);
-
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>
@@ -142,6 +148,14 @@ function Students() {
         }
         open={dialogOpen}
         close={(e) => setDialogOpen(e)}
+      />
+      <MyDialog
+        height="550px"
+        heightAuto
+        title={languages.value.deleteInfo}
+        body={<DeleteUi close={(e) => setDeleteDialogOpen(e)} />}
+        open={deleteDialogOpen}
+        close={(e) => setDeleteDialogOpen(e)}
       />
     </>
   );

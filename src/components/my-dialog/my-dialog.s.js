@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { css } from "styled-components";
 
 export const DialogContainer = styled.div`
   position: fixed;
@@ -30,11 +31,9 @@ export const DialogBg = styled.div`
   background-color: #0003;
 `;
 export const DialogBlock = styled.div`
-  width: ${({ width }) => (width ? width : "480px")};
   min-width: 250px;
 
   max-width: 600px;
-  height: ${({ height }) => (height ? height : "calc(100vh - 60px)")};
   background: #ffffff;
   border-radius: 8px;
   z-index: 999;
@@ -43,13 +42,35 @@ export const DialogBlock = styled.div`
     height: 100vh;
     border-radius: 0;
   }
-  position: relative;
+  ${({ heightAuto }) =>
+    heightAuto
+      ? css`
+          width: ${({ width }) => (width ? width : "360px")};
+          height: auto;
+          @media only screen and (max-width: 500px) {
+            width: ${({ width }) => (width ? width : "360px")};
+            height: auto;
+            border-radius: 8px;
+          }
+        `
+      : css`
+          width: ${({ width }) => (width ? width : "480px")};
+          height: ${({ height }) => (height ? height : "calc(100vh - 60px)")};
+          position: relative;
+        `}
 `;
 export const Header = styled.div`
-  position: absolute;
-  top: 4px;
-  left: 0;
-  right: 0;
+  ${({ heightAuto }) =>
+    heightAuto
+      ? css`
+          margin-top: 12px;
+        `
+      : css`
+          position: absolute;
+          top: 4px;
+          left: 0;
+          right: 0;
+        `}
 
   display: flex;
   justify-content: space-between;
@@ -77,11 +98,16 @@ export const CloseButton = styled.button`
 `;
 export const Body = styled.div`
   && {
-    position: absolute;
-    top: 60px;
-    left: 0;
-    right: 0;
-    bottom: 5px;
+    ${({ heightAuto }) =>
+      heightAuto
+        ? ""
+        : css`
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 5px;
+          `}
 
     width: calc(100% - 2px);
     padding: 0 20px;

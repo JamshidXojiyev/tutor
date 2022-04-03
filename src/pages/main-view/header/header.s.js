@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderStyle = styled.div`
   position: fixed;
   top: 0px;
-  left: ${({ openMenu }) => (openMenu ? "255px" : "64px")};
+  left: ${({ openMenu }) => (openMenu ? "272px" : "64px")};
   right: 0;
 
   height: 65px;
@@ -19,7 +19,7 @@ export const HeaderStyle = styled.div`
 
   @media only screen and (max-width: 500px) {
     left: 0;
-    padding: 0 4px;
+    padding: 0 16px;
   }
   z-index: 12;
 `;

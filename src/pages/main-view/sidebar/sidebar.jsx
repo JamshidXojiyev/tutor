@@ -4,6 +4,7 @@ import { LanguagesContext } from "../../../locale/languagesContext";
 import {
   AvatarImageStyle,
   Circle,
+  CloseSidebar,
   Email,
   LiStyle,
   MenuButton,
@@ -37,7 +38,7 @@ function Sidebar({ data }) {
   // dialog state
   const [dialogOpen, setDialogOpen] = useState(false);
   // mobile open sidebar
-  const [size, setSize] = useState("-255");
+  const [size, setSize] = useState("-272");
   let touch_scroll_x = "";
   let touch_scroll_y = "";
   let touchStartX = "";
@@ -63,7 +64,7 @@ function Sidebar({ data }) {
       setSize("0");
     }
     if (touch_scroll_y < 50 && touchStartX > touchEndX && touch_scroll_x > 20) {
-      setSize("-255");
+      setSize("-272");
     }
   });
 
@@ -108,7 +109,7 @@ function Sidebar({ data }) {
                   <Link
                     to={item.url}
                     key={index}
-                    onClick={() => setSize("-255")}
+                    onClick={() => setSize("-272")}
                   >
                     <LiStyle
                       openMenu={globalState.sidebarOpen}
@@ -125,7 +126,7 @@ function Sidebar({ data }) {
                   <Link
                     to={item.url}
                     key={index}
-                    onClick={() => setSize("-255")}
+                    onClick={() => setSize("-272")}
                   >
                     <LiStyle
                       openMenu={globalState.sidebarOpen}
@@ -159,7 +160,9 @@ function Sidebar({ data }) {
           </MenuButton>
         </MyDiv>
       </SidebarStyle>
+      {size === "0" && <CloseSidebar onClick={() => setSize("-272")} />}
       <MyDialog
+        heightAuto
         title={lanSidebar.dialog_title}
         width="360px"
         body={
