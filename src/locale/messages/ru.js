@@ -2,11 +2,13 @@ import { ReactComponent as Dashboard } from "../../assets/icon/menu-icons/Dashbo
 import { ReactComponent as Students } from "../../assets/icon/menu-icons/Students.svg";
 import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/Profile-settings.svg";
 const ru = {
+  deleteInfo: "Вы действительно удаляете пользователя?",
   form: {
     cancel: "Отмена",
     edit: "Редактировать",
     create: "Добавлять",
-    delete: "Закрывать",
+    // delete: "Закрывать",
+    delete: "Удалить",
     full_name: "Полное имя",
     father_name: "Имя Отца",
     birth_date: "Дата рождения",

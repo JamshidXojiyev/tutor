@@ -3,6 +3,7 @@ import { ReactComponent as Students } from "../../assets/icon/menu-icons/Student
 import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/Profile-settings.svg";
 
 const en = {
+  deleteInfo: "Do you really delete the user?",
   form: {
     cancel: "Cancel",
     edit: "Edit",

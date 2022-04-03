@@ -42,6 +42,7 @@ function ProfileAdminDiaolog(props) {
         id: props.informs.id,
       };
       EditUserConfig(obj.id, obj).then((res) => {
+        props.closeRender(1);
         console.log(res);
         toastEdit("User ma'lumotlari");
       });
@@ -109,13 +110,15 @@ function ProfileAdminDiaolog(props) {
           );
         })}
       </MyDiv>
-      <MyButton
-        width="50%"
-        disabled={false}
-        text={lanForm.edit}
-        type="submit"
-        margin="20px 0 0 auto"
-      />
+      <MyDiv gap="16px" display="flex" margin="20px 0 0 0">
+        <MyButton
+          width="50%"
+          text={lanForm.cancel}
+          red
+          onClick={() => props.close(false)}
+        />
+        <MyButton width="50%" text={lanForm.edit} type="submit" />
+      </MyDiv>
     </MyForm>
   );
 }

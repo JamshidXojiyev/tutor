@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import MyButton from "../../components/my-button/my-button";
 
 export const P = styled.p`
   color: #242525;
@@ -38,4 +39,29 @@ export const Td = styled.span`
   line-height: 19px;
   color: ${({ bold }) => (bold ? "#242525" : "#8388A2")};
   margin-right: 10px;
+`;
+export const EditProfile = styled(MyButton)`
+  ${({ top }) =>
+    top
+      ? css`
+          font-size: 13px;
+          gap: 10px;
+          @media only screen and (max-width: 500px) {
+            display: none;
+          }
+        `
+      : css`
+          @media only screen and (min-width: 500px) {
+            display: none;
+          }
+          @media only screen and (max-width: 500px) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            transform: translateX(40%) translateY(-40%);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+          }
+        `}
 `;

@@ -38,6 +38,7 @@ export const MyDiv = styled.div`
   height: ${({ height }) => height};
   margin: ${({ margin }) => margin};
   padding: ${({ padding }) => padding};
+  position: ${({ relative }) => relative};
   position: ${({ position }) => position};
   gap: ${({ gap }) => gap};
   display: ${({ display }) => display};

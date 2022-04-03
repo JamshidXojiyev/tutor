@@ -1,55 +1,46 @@
 import React from "react";
 import {
-  Container,
-  InfoBlock,
   InfoContainer,
-  Name,
+  TableStyle,
+  TdStyle,
+  TrStyle,
   UserImage,
-  Value,
 } from "./my-info.s";
 import { ReactComponent as UserIcon } from "../../assets/icon/userIcon.svg";
 
 function MyInfo(props) {
   if (Array.isArray(props.data)) {
     return (
-      <InfoContainer borderRight={Array.isArray(props.data)}>
+      <InfoContainer>
         <UserImage>
           <UserIcon />
         </UserImage>
-        {props.data.map((item, index) => (
-          <InfoBlock key={index}>
-            <Container>
-              {item.name.map((subItem, subIndex) => (
-                <Name key={subIndex}>{subItem}</Name>
-              ))}
-            </Container>
-            <Container>
-              {item.value.map((subItem, subIndex) => (
-                <Value key={subIndex}>{subItem}</Value>
-              ))}
-            </Container>
-          </InfoBlock>
+        {props.data?.map((info) => (
+          <TableStyle>
+            {info?.name?.map((item, index) => (
+              <TrStyle>
+                <TdStyle name>{item}</TdStyle>
+                <TdStyle>{info.value[index]}</TdStyle>
+              </TrStyle>
+            ))}
+          </TableStyle>
         ))}
       </InfoContainer>
     );
   } else {
     return (
-      <InfoContainer borderRight={Array.isArray(props.data)}>
+      <InfoContainer>
         <UserImage>
           <UserIcon />
         </UserImage>
-        <InfoBlock>
-          <Container>
-            {props.data.name.map((item, index) => (
-              <Name key={index}>{item}</Name>
-            ))}
-          </Container>
-          <Container>
-            {props.data.value.map((item, index) => (
-              <Value key={index}>{item}</Value>
-            ))}
-          </Container>
-        </InfoBlock>
+        <TableStyle>
+          {props.data.name.map((item, index) => (
+            <TrStyle key={index}>
+              <TdStyle name>{item}</TdStyle>
+              <TdStyle>{props.data.value[index]}</TdStyle>
+            </TrStyle>
+          ))}
+        </TableStyle>
       </InfoContainer>
     );
   }

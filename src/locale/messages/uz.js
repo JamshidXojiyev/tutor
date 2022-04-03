@@ -2,6 +2,7 @@ import { ReactComponent as Dashboard } from "../../assets/icon/menu-icons/Dashbo
 import { ReactComponent as Students } from "../../assets/icon/menu-icons/Students.svg";
 import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/Profile-settings.svg";
 const uz = {
+  deleteInfo: "Siz haqiqatan ham foydalanuvchini o'chirib tashlaysizmi?",
   form: {
     cancel: "Bekor qilish",
     edit: "Tahrirlash",

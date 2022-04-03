@@ -20,14 +20,16 @@ function MyDialog(props) {
       <DialogContainer>
         <SubDialogContainer>
           <DialogBg onClick={() => props.close(false)} />
-          <DialogBlock width={props.width} height={props.height}>
-            <Header>
+          <DialogBlock width={props.width} heightAuto={props.heightAuto}>
+            <Header heightAuto={props.heightAuto}>
               <Title>{props.title ? props.title : ""}</Title>
               <CloseButton onClick={() => props.close(false)}>
                 <CloseIcon />
               </CloseButton>
             </Header>
-            <Body>{props.body && props.body}</Body>
+            <Body heightAuto={props.heightAuto}>
+              {props.body && props.body}
+            </Body>
           </DialogBlock>
         </SubDialogContainer>
       </DialogContainer>

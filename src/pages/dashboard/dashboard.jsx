@@ -1,5 +1,6 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";  
+import ReactApexChart from "react-apexcharts";
+import MySelect from "../../components/my-select/my-select";
 import { MyDiv } from "../../global-styles/my-div.s";
 
 function Dashboard(props) {
@@ -43,7 +44,7 @@ function Dashboard(props) {
         },
       },
     },
-  }; 
+  };
 
   return (
     <>
@@ -54,7 +55,7 @@ function Dashboard(props) {
           type="area"
           height={350}
         />
-      </MyDiv> 
+      </MyDiv>
     </>
   );
 }
