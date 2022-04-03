@@ -39,7 +39,10 @@ function MainMenu(props) {
   const getUserFunc = () => {
     role === "ROLE_TUTOR" &&
       GetTutorPersonalInfo().then((res) => {
-        console.log(res);
+        setData({
+          email: res.data.email,
+          fullName: `${res.data.userProfile.firstname} ${res.data.userProfile.lastname}`,
+        });
       });
     role === "ROLE_ADMIN" &&
       GetUserByIdConfig(getLocalStorage("userId")).then((res) => {

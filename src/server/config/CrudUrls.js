@@ -41,7 +41,7 @@ export const GetStudentsSearchConfig = (query = "") => {
   return GetFunc(`tutor/api/student/search/?search=${query}`);
 };
 export const GetStudentsByGroupConfig = (query = "") => {
-  return GetFunc(`api/student/group/students?groupName=${query}`);
+  return GetFunc(`tutor/api/student/?groupname=${query}`);
 };
 export const GetTutorGroupsConfig = () => {
   return GetFunc(`tutor/api/student/groups`);

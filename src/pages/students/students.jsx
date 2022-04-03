@@ -79,12 +79,15 @@ function Students() {
     });
   };
   const changeGroup = (e) => {
+    setLoading(true);
     console.log(e.target.value);
     e.target.value === "All"
       ? getStudents()
-      : GetStudentsByGroupConfig(e.target.value).then((res) => {
-          console.log(res);
-        });
+      : GetStudentsByGroupConfig(e.target.value)
+          .then((res) => {
+            makeData(res.data);
+          })
+          .finally(() => setLoading(false));
   };
   // student search
   const [value, setValue] = useState("");

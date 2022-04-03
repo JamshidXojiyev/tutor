@@ -1,9 +1,11 @@
 import { HttpRequestHub } from "../HttpRequestHub";
 
-export const GetFunc = (url) => {
+export const GetFunc = (url, data = "") => {
+  console.log(data);
   const config = {
     method: "GET",
     url: `${url}`,
+    data,
   };
   return HttpRequestHub(config);
 };
