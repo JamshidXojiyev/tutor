@@ -16,6 +16,7 @@ import {
   GetStudentConfig,
   GetTutorGroupsConfig,
   GetStudentsSearchConfig,
+  GetStudentsByGroupConfig,
 } from "../../server/config/CrudUrls";
 import { StudentsContext } from "../../context/students-context";
 import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
@@ -32,41 +33,41 @@ function Students() {
     setLoading(true);
     GetStudentConfig()
       .then((res) => {
-        if (res.data.length > 0) {
-          setTableEmpty(false);
-          const data = res.data?.map((item) => {
-            const subData = {
-              student: `${item.firstname}  ${item.lastname}`,
-              id: item.studentId,
-              father_name: item.fatherName,
-              birth_day: item.birthDate,
-              course: item.studyInfo.course,
-              group: item.group.groupName,
-              special: item.studyInfo.speciality,
-              btn: (
-                <>
-                  <MyButton
-                    onClick={() => {
-                      setThisData(item);
-                      setDialogOpen(true);
-                    }}
-                    icon
-                    svg={<EditIcon />}
-                  />
-                  <MyButton
-                    icon
-                    svg={<DeleteIcon />}
-                    onClick={() => setDeleteDialogOpen(true)}
-                  />
-                </>
-              ),
-            };
-            return subData;
-          });
-          setTableData({ ...tableData, body: data });
-        } else setTableEmpty(true);
+        makeData(res.data);
       })
       .finally((err) => setLoading(false));
+  };
+  //Make data
+  const makeData = (arr) => {
+    if (arr.length > 0) {
+      setTableEmpty(false);
+      const data = arr.map((item) => {
+        const subData = {
+          student: `${item.firstname}  ${item.lastname}`,
+          id: item.studentId,
+          father_name: item.fatherName,
+          birth_day: item.birthDate,
+          course: item.studyInfo.course,
+          group: item.group.groupName,
+          special: item.studyInfo.speciality,
+          btn: (
+            <>
+              <MyButton
+                onClick={() => {
+                  setThisData(item);
+                  setDialogOpen(true);
+                }}
+                icon
+                svg={<EditIcon />}
+              />
+              <MyButton icon svg={<DeleteIcon />} />
+            </>
+          ),
+        };
+        return subData;
+      });
+      setTableData({ ...tableData, body: data });
+    } else setTableEmpty(true);
   };
   // get tutor groups
   const [tutorGroup, setTutorGroup] = useState([]);
@@ -78,13 +79,31 @@ function Students() {
       setGroups([...groups]);
     });
   };
+  const changeGroup = (e) => {
+    console.log(e.target.value);
+    e.target.value === "All"
+      ? getStudents()
+      : GetStudentsByGroupConfig(e.target.value).then((res) => {
+          console.log(res);
+        });
+  };
   // student search
-  // useEffect(() => {
-  //   GetStudentsSearchConfig("Vjdgj").then((res) => {
-  //     console.log(res);
-  //   });
-  // }, []);
-  
+  const [value, setValue] = useState("");
+  const changeValue = (e) => {
+    setValue(e.target.value);
+  };
+  const getStudentSearch = () => {
+    setLoading(true);
+    GetStudentsSearchConfig(value)
+      .then((res) => {
+        makeData(res.data);
+      })
+      .finally(() => setLoading(false));
+  };
+  const searchFunc = () => {
+    console.log(value);
+    value.length === 0 ? getStudents() : getStudentSearch();
+  };
   // states
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -109,12 +128,13 @@ function Students() {
             height="42px"
             width="210px"
             rightIcon={<SearchIcon />}
-            setValue={(e) => console.log(e)}
+            onChange={changeValue}
+            setValue={searchFunc}
           />
         </MyDiv>
         <MyDiv widthCenter gap="12px">
           <GroupName>{lanStudent.group_name}:</GroupName>
-          <MySelect option={tutorGroup} />
+          <MySelect option={tutorGroup} onChange={changeGroup} default_value />
           <MyButton white svg={<ImportIcon />} text={lanStudent.import} />
           <MyButton
             svg={<AddIcon />}

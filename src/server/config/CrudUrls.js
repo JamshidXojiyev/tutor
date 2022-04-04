@@ -34,8 +34,14 @@ export const CreateTutorConfig = (data) => {
   return CreateFunc("admin/api/tutor", data);
 };
 //Tutor Student section
+export const GetTutorPersonalInfo = () => {
+  return GetFunc("api/tutor/personalInfo");
+};
 export const GetStudentsSearchConfig = (query = "") => {
   return GetFunc(`tutor/api/student/search/?search=${query}`);
+};
+export const GetStudentsByGroupConfig = (query = "") => {
+  return GetFunc(`api/student/group/students?groupName=${query}`);
 };
 export const GetTutorGroupsConfig = () => {
   return GetFunc(`tutor/api/student/groups`);
@@ -55,4 +61,3 @@ export const DeleteStudentConfig = (id) => {
 export const CreateStudentConfig = (data) => {
   return CreateFunc("tutor/api/student", data);
 };
- 
