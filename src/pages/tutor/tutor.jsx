@@ -16,6 +16,8 @@ import { LanguagesContext } from "../../locale/languagesContext";
 import { TutorContext } from "../../context/tutorState";
 import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
+import { ReactComponent as MoreIcon } from "../../assets/icon/more.svg";
+import TutorInfo from "./tutor-info";
 
 function Tutor() {
   //Language section
@@ -50,6 +52,19 @@ function Tutor() {
           console.log(res);
           const data = res.data.map((item) => {
             const subData = {
+              view: (
+                <>
+                  <MyButton
+                    onClick={() => {
+                      setStudentInfoOpen(true);
+                      setStudentInfo(item);
+                    }}
+                    icon
+                    tableIcon
+                    svg={<MoreIcon />}
+                  />
+                </>
+              ),
               fullname: `${item.user.userProfile.firstname}  ${item.user.userProfile.lastname}`,
               username: item.user.username,
               email: item.user.email,
@@ -83,23 +98,37 @@ function Tutor() {
           });
           setTutorData({ ...tutorData, body: data });
           setEmpty(false);
-        }  
+        }
       })
       .finally(() => {
         setLoading(false);
       });
   };
+  useEffect(() => {
+    getTutorFunc();
+  }, [render]);
   //Delete tutor
   const deleteTutorFunc = () => {
     DeleteTutorConfig(tutorData.thisData.id).then((res) => {
       console.log(res);
     });
   };
+  // student info
+  const [studentInfoOpen, setStudentInfoOpen] = useState(false);
+  const [studentInfo, setStudentInfo] = useState(null);
 
-  useEffect(() => {
-    getTutorFunc();
-  }, [render]);
-
+  if (studentInfoOpen) {
+    return (
+      <TutorInfo
+        studentInfo={studentInfo}
+        close={(e) => setStudentInfoOpen(e)}
+        closeRender={(e) => {
+          setRender(render + 1);
+          setStudentInfoOpen(e);
+        }}
+      />
+    );
+  }
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>

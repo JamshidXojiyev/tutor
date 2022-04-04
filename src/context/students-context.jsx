@@ -6,6 +6,7 @@ function StudentsState({ children }) {
   // context state
   const [stud, setStud] = useState({
     header: [
+      "",
       "student",
       "father name",
       "birth day",
@@ -16,6 +17,7 @@ function StudentsState({ children }) {
     ],
     body: [],
     order: [
+      "view",
       "student",
       "father_name",
       "birth_day",

@@ -4,6 +4,7 @@ import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/
 const ru = {
   deleteInfo: "Вы действительно удаляете пользователя?",
   form: {
+    email: "почты",
     cancel: "Отмена",
     edit: "Редактировать",
     create: "Добавлять",
@@ -39,6 +40,7 @@ const ru = {
     familyStatus0: "Женатый",
     familyStatus1: "Не женат не замужем",
     parentsName: "Имена родителей",
+    addressMe: "Студенческий адрес",
     address: "Адрес родителя",
     parents_number: "Телефон родителей",
     orphanStudent: "Потеря кормильца",
