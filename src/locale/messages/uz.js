@@ -2,7 +2,7 @@ import { ReactComponent as Dashboard } from "../../assets/icon/menu-icons/Dashbo
 import { ReactComponent as Students } from "../../assets/icon/menu-icons/Students.svg";
 import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/Profile-settings.svg";
 const uz = {
-  deleteInfo: "Siz haqiqatan ham foydalanuvchini o'chirib tashlaysizmi?",
+  deleteInfo: "Haqiqatan ham foydalanuvchini o'chirmoqchimsz?",
   form: {
     cancel: "Bekor qilish",
     edit: "Tahrirlash",
@@ -88,6 +88,12 @@ const uz = {
     level: "Ilmiy darajasi",
     description1: "Qo'shimcha ma'lumot",
     category: "Toifasi",
+    creativePotential: "Talabalarning ijodiy salohiyati haqida ma'lumot",
+    music: "Musiqaviy yo'nalishida qiziqishlari",
+    art: "San'at va adabiyot sohasidagi qiziqishlari",
+    sport: "Sportdagi qiziqishlari",
+    science: "Ilmiy faoliyat bo`yicha qiziqishlari",
+    other: "Boshqa sohalardagi qobiliyati",
   },
   signin: {
     signin: "Tizimga kirish",
@@ -166,6 +172,7 @@ const uz = {
     add_tutor: "Yangi tutor qo'shish",
     tutor_info: "Tutor ma'lumotari",
     delete_warning: "Rostdan o'chirmoqchimisz?",
+    delete_soon: "Bu qism tez orada qo'shiladi",
   },
 };
 

@@ -16,6 +16,8 @@ import { LanguagesContext } from "../../locale/languagesContext";
 import { TutorContext } from "../../context/tutorState";
 import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
+import DeleteUi from "../../components/delete-ui/delete-ui";
+import { toast } from "react-toastify";
 
 function Tutor() {
   //Language section
@@ -83,7 +85,7 @@ function Tutor() {
           });
           setTutorData({ ...tutorData, body: data });
           setEmpty(false);
-        }  
+        }
       })
       .finally(() => {
         setLoading(false);
@@ -91,9 +93,10 @@ function Tutor() {
   };
   //Delete tutor
   const deleteTutorFunc = () => {
-    DeleteTutorConfig(tutorData.thisData.id).then((res) => {
-      console.log(res);
-    });
+    toast.warning(lanTutor.delete_soon, { autoClose: 2000 });
+    // DeleteTutorConfig(tutorData.thisData.id).then((res) => {
+    //   console.log(res);
+    // });
   };
 
   useEffect(() => {
@@ -144,16 +147,12 @@ function Tutor() {
         close={closeDialog}
       />
       <MyDialog
+        heightAuto
         title={lanTutor.delete_warning}
         width="400px"
-        body={
-          <MyDiv gap="15px" display="flex">
-            <MyButton text={lanSidebar.dialog_yes} onClick={deleteTutorFunc} />
-            <MyButton text={lanSidebar.dialog_no} onClick={closeDialogDelete} />
-          </MyDiv>
-        }
+        body={<DeleteUi delete={deleteTutorFunc} close={setDialogDelete} />}
         open={dialogDelete}
-        close={closeDialogDelete}
+        close={setDialogDelete}
       />
     </>
   );

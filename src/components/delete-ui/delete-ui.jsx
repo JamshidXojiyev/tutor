@@ -15,7 +15,7 @@ function DeleteUi(props) {
           width="50%"
           text={lanForm.delete}
           red
-          onClick={() => props.delete}
+          onClick={props.delete}
         />
         <MyButton
           width="50%"

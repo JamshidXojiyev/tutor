@@ -7,28 +7,64 @@ import * as Yup from "yup";
 import { MyForm } from "../../global-styles/form.s";
 import MyButton from "../../components/my-button/my-button";
 import MySelect from "../../components/my-select/my-select";
+import { EditTutorConfig } from "../../server/config/CrudUrls";
+import { toastEdit } from "../../functions/messages";
 
 function ProfileDiaolog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
+  const obj = props.data;
   const formik = useFormik({
     initialValues: {
-      firstname: "",
-      fatherName: "",
-      lastname: "",
-      birthDate: "",
-      phoneNumber: "",
-      gender: "",
-      passportData: "",
-      country: "",
-      region: "",
-      district: "",
-      description: "",
+      firstname: obj.firstname,
+      fatherName: obj.fatherName,
+      lastname: obj.lastname,
+      birthDate: obj.birthDate,
+      phoneNumber: obj.phoneNumber,
+      gender: obj.gender,
+      passportData: obj.passportData,
+      country: obj.country,
+      region: obj.region,
+      district: obj.district,
+      description: obj.description,
+      category: obj.category,
+      level: obj.level,
+      description1: obj.description1,
     },
     validationSchema: Yup.object({}),
     onSubmit: (val) => {
       console.log(val);
-      props.closeRender(1);
+      let sendObj = {
+        address: {
+          country: val.country,
+          region: val.region,
+          district: val.district,
+          description: val.description,
+        },
+        category: val.category,
+        level: val.level,
+        description: val.description1,
+        groups: obj.groups,
+        user: {
+          email: obj.email,
+          roles: ["tutor"],
+          profile: {
+            firstname: val.firstname,
+            fatherName: val.fatherName,
+            lastname: val.lastname,
+            birthDate: val.birthDate,
+            phoneNumber: val.phoneNumber,
+            gender: val.gender,
+            passportDate: val.passportData,
+          },
+        },
+      };
+      console.log(sendObj);
+      EditTutorConfig(obj.id, sendObj).then((res) => {
+        toastEdit("Tutor");
+        console.log(res);
+        props.closeRender(1);
+      });
     },
   });
 
@@ -44,6 +80,18 @@ function ProfileDiaolog(props) {
     {
       name: "fatherName",
       label: lanForm.father_name,
+    },
+    {
+      name: "category",
+      label: lanForm.category,
+    },
+    {
+      name: "level",
+      label: lanForm.level,
+    },
+    {
+      name: "description1",
+      label: lanForm.description1,
     },
     {
       name: "birthDate",

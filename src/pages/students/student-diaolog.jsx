@@ -9,16 +9,26 @@ import { MyForm } from "../../global-styles/form.s";
 import { MyDiv } from "../../global-styles/my-div.s";
 import {
   CreateStudentConfig,
-  EditStudentConfig, 
+  EditStudentConfig,
 } from "../../server/config/CrudUrls";
 import SelectSearch from "../../components/select-search/select-search";
 import { toastAdd, toastEdit } from "../../functions/messages";
+import { ReactComponent as AddIcon } from "../../assets/icon/add.svg";
+import { ReactComponent as DeleteIcon } from "../../assets/icon/minus.svg";
+import { LabelStyle } from "../../components/my-input/my-input.s";
 
 function StudentDialog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
+  //States
+  const [musicData, setMusicData] = useState([{ name: "music0", id: 0 }]);
+  const [artData, setArtData] = useState([{ name: "art1", id: 1 }]);
+  const [sportData, setSportData] = useState([{ name: "sport2", id: 2 }]);
+  const [scienceData, setScienceData] = useState([{ name: "science3", id: 3 }]);
+  const [otherData, setOtherData] = useState([{ name: "other4", id: 4 }]);
+  const [count, setCount] = useState(6);
+
   let obj = props.thisData;
-  console.log(obj);
   const formik = useFormik({
     initialValues: obj
       ? {
@@ -64,7 +74,6 @@ function StudentDialog(props) {
           parentsRetiree: "0",
           invalidParents: "0",
           groupName: props.groups[0],
-          // groupName: "I-52-i",
         },
     validationSchema: Yup.object({
       firstname: Yup.string().required(lanForm.firstname_required_err),
@@ -75,6 +84,32 @@ function StudentDialog(props) {
       speciality: Yup.string().required(lanForm.speciality_required_err),
     }),
     onSubmit: (value) => {
+      console.log(value);
+      let musicArr = [];
+      let artArr = [];
+      let sportArr = [];
+      let scienceArr = [];
+      let otherArr = [];
+      musicData.forEach((item) => {
+        if (value[item.name]) musicArr.push(value[item.name]);
+      });
+      artData.forEach((item) => {
+        if (value[item.name]) artArr.push(value[item.name]);
+      });
+      sportData.forEach((item) => {
+        if (value[item.name]) sportArr.push(value[item.name]);
+      });
+      scienceData.forEach((item) => {
+        if (value[item.name]) scienceArr.push(value[item.name]);
+      });
+      otherData.forEach((item) => {
+        if (value[item.name]) otherArr.push(value[item.name]);
+      });
+      console.log(musicArr);
+      console.log(artArr);
+      console.log(sportArr);
+      console.log(scienceArr);
+      console.log(otherArr);
       let sendObj = {
         firstname: value.firstname,
         lastname: value.lastname,
@@ -96,7 +131,7 @@ function StudentDialog(props) {
           parentsName: value.parentsName,
           address: value.address,
           phoneNumber: value.phoneNumber,
-          needy: true,
+          needy: value.needy,
           orphanStudent: value.orphanStudent,
           parentsRetiree: value.parentsRetiree,
           invalidParents: value.invalidParents,
@@ -109,11 +144,27 @@ function StudentDialog(props) {
           educationType: value.educationType,
           paymentType: value.paymentType,
         },
-        familyStatus: true,
+        familyStatus: value.familyStatus,
         creativePotential: [
           {
-            type: "Sport",
-            category: ["Voleybo'l"],
+            type: "music",
+            category: musicArr,
+          },
+          {
+            type: "art",
+            category: artArr,
+          },
+          {
+            type: "sport",
+            category: sportArr,
+          },
+          {
+            type: "science",
+            category: scienceArr,
+          },
+          {
+            type: "other",
+            category: otherArr,
           },
         ],
       };
@@ -126,7 +177,7 @@ function StudentDialog(props) {
           })
         : CreateStudentConfig(sendObj).then((res) => {
             console.log(res);
-            toastAdd("Student"); 
+            toastAdd("Student");
             props.closeDialog(false);
             props.refresh(1);
           });
@@ -310,8 +361,87 @@ function StudentDialog(props) {
         lanForm.invalidParent3,
       ],
     },
+    {
+      name: "music",
+      label: lanForm.music,
+      multiply: true,
+      data: musicData,
+    },
+    {
+      name: "art",
+      label: lanForm.art,
+      multiply: true,
+      data: artData,
+    },
+    {
+      name: "sport",
+      label: lanForm.sport,
+      multiply: true,
+      data: sportData,
+    },
+    {
+      name: "science",
+      label: lanForm.science,
+      multiply: true,
+      data: scienceData,
+    },
+    {
+      name: "other",
+      label: lanForm.other,
+      multiply: true,
+      data: otherData,
+    },
   ];
+  //Add data section
 
+  const addFunc = (index, Id, Name) => {
+    if (Name === "music") {
+      let arr = musicData;
+      if (index + 1 === arr.length) {
+        arr.push({ name: `music${count}`, id: count });
+        setCount(count + 1);
+      } else {
+        arr = arr.filter((el) => el.id != Id);
+      }
+      setMusicData([...arr]);
+    } else if (Name === "art") {
+      let arr = artData;
+      if (index + 1 === arr.length) {
+        arr.push({ name: `art${count}`, id: count });
+        setCount(count + 1);
+      } else {
+        arr = arr.filter((el) => el.id != Id);
+      }
+      setArtData([...arr]);
+    } else if (Name === "sport") {
+      let arr = sportData;
+      if (index + 1 === arr.length) {
+        arr.push({ name: `art${count}`, id: count });
+        setCount(count + 1);
+      } else {
+        arr = arr.filter((el) => el.id != Id);
+      }
+      setSportData([...arr]);
+    } else if (Name === "science") {
+      let arr = scienceData;
+      if (index + 1 === arr.length) {
+        arr.push({ name: `art${count}`, id: count });
+        setCount(count + 1);
+      } else {
+        arr = arr.filter((el) => el.id != Id);
+      }
+      setScienceData([...arr]);
+    } else if (Name === "other") {
+      let arr = otherData;
+      if (index + 1 === arr.length) {
+        arr.push({ name: `art${count}`, id: count });
+        setCount(count + 1);
+      } else {
+        arr = arr.filter((el) => el.id != Id);
+      }
+      setOtherData([...arr]);
+    }
+  };
   return (
     <MyForm onSubmit={formik.handleSubmit}>
       <MyDiv spaceBetween gap="8px">
@@ -325,6 +455,8 @@ function StudentDialog(props) {
             option,
             slectSearch,
             default_value,
+            multiply,
+            data,
           }) => {
             return slectSearch ? (
               <SelectSearch
@@ -341,6 +473,47 @@ function StudentDialog(props) {
                 }
                 errorMessage={formik.touched[name] && formik.errors[name]}
               />
+            ) : multiply ? (
+              <>
+                {!obj ? (
+                  <MyDiv width="100%">
+                    <LabelStyle>{label}</LabelStyle>
+                    {data.map((res, index) => {
+                      return (
+                        <MyDiv
+                          width="100%"
+                          spaceBetween
+                          gap="8px"
+                          margin="0 0 5px"
+                        >
+                          <MyInput
+                            key={res.name}
+                            width="calc(100% - 60px)"
+                            name={res.name}
+                            value={formik.values[res.name]}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            type={"text"}
+                          />
+                          <MyButton
+                            onClick={() => addFunc(index, res.id, name)}
+                            type="button"
+                            svg={
+                              index + 1 === data.length ? (
+                                <AddIcon />
+                              ) : (
+                                <DeleteIcon />
+                              )
+                            }
+                          />
+                        </MyDiv>
+                      );
+                    })}
+                  </MyDiv>
+                ) : (
+                  ""
+                )}
+              </>
             ) : select ? (
               <MySelect
                 key={name}

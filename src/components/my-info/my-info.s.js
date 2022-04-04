@@ -41,9 +41,9 @@ export const TdStyle = styled.td`
           font-style: normal;
           font-weight: 500;
           font-size: 16px;
-          line-height: 19px;
+          line-height: 24px;
           text-transform: capitalize;
-          color: #8388a2;
+          color: #8388a2; 
         `
       : css`
           font-family: "Inter";

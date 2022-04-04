@@ -33,7 +33,7 @@ function ProfileAettingsAdmin(props) {
   };
   useEffect(() => {
     getUserFunc();
-  }, []);
+  }, [render]);
   // Profile funtions
   const testData = {
     name: [
@@ -48,7 +48,7 @@ function ProfileAettingsAdmin(props) {
       data.fatherName,
       data.birthDate,
       data.phoneNumber,
-      data.gender,
+      lanForm[`gender${data.gender}`],
     ],
   };
 

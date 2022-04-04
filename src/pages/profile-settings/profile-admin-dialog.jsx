@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import MyInput from "../../components/my-input/my-input";
 import { MyDiv } from "../../global-styles/my-div.s";
 import { LanguagesContext } from "../../locale/languagesContext";
@@ -36,12 +36,12 @@ function ProfileAdminDiaolog(props) {
     onSubmit: (value) => {
       console.log(value);
       let obj = {
-        userProfile: value,
+        profile: value,
         email: props.informs.email,
         username: props.informs.username,
-        id: props.informs.id,
+        roles: ["admin"],
       };
-      EditUserConfig(obj.id, obj).then((res) => {
+      EditUserConfig(props.informs.id, obj).then((res) => {
         props.closeRender(1);
         console.log(res);
         toastEdit("User ma'lumotlari");

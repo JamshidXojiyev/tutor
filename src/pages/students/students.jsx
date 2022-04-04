@@ -22,6 +22,7 @@ import { StudentsContext } from "../../context/students-context";
 import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
 import DeleteUi from "../../components/delete-ui/delete-ui";
+import { toast } from "react-toastify";
 
 function Students() {
   // languages
@@ -60,7 +61,11 @@ function Students() {
                 icon
                 svg={<EditIcon />}
               />
-              <MyButton icon svg={<DeleteIcon />} />
+              <MyButton
+                onClick={() => setDeleteDialogOpen(true)}
+                icon
+                svg={<DeleteIcon />}
+              />
             </>
           ),
         };
@@ -94,10 +99,12 @@ function Students() {
   const [value, setValue] = useState("");
   const changeValue = (e) => {
     setValue(e.target.value);
+    if (e.target.value.length > 3) getStudentSearch(e.target.value);
+    // e.target.value.length > 3 ? getStudentSearch(e.target.value) : "";
   };
-  const getStudentSearch = () => {
+  const getStudentSearch = (val) => {
     setLoading(true);
-    GetStudentsSearchConfig(value)
+    GetStudentsSearchConfig(val)
       .then((res) => {
         makeData(res.data);
       })
@@ -105,7 +112,14 @@ function Students() {
   };
   const searchFunc = () => {
     console.log(value);
-    value.length === 0 ? getStudents() : getStudentSearch();
+    value.length === 0 ? getStudents() : getStudentSearch(value);
+  };
+  //Delete student
+  const deleteStudentFunc = () => {
+    toast.warning(languages.value.admin.delete_soon, { autoClose: 2000 });
+    // DeleteTutorConfig(tutorData.thisData.id).then((res) => {
+    //   console.log(res);
+    // });
   };
   // states
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -132,7 +146,7 @@ function Students() {
             width="210px"
             rightIcon={<SearchIcon />}
             onChange={changeValue}
-            setValue={searchFunc}
+            setValue={searchFunc} 
           />
         </MyDiv>
         <MyDiv widthCenter gap="12px">
@@ -173,12 +187,14 @@ function Students() {
         close={(e) => setDialogOpen(e)}
       />
       <MyDialog
-        height="550px"
         heightAuto
         title={languages.value.deleteInfo}
-        body={<DeleteUi close={(e) => setDeleteDialogOpen(e)} />}
+        width="400px"
+        body={
+          <DeleteUi delete={deleteStudentFunc} close={setDeleteDialogOpen} />
+        }
         open={deleteDialogOpen}
-        close={(e) => setDeleteDialogOpen(e)}
+        close={setDeleteDialogOpen}
       />
     </>
   );

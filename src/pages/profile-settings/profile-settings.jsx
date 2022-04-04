@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { EditProfile, P } from "./profile-settings.s";
 import { ReactComponent as EditSvg } from "../../assets/icon/edit.svg";
@@ -6,15 +6,36 @@ import { MyDiv } from "../../global-styles/my-div.s";
 import MyDialog from "../../components/my-dialog/my-dialog";
 import ProfileDiaolog from "./profile-dialog";
 import Info from "./info";
+import { GetTutorPersonalInfo } from "../../server/config/CrudUrls";
 
 function ProfileSettings(props) {
   // language data
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanTutor = languages.value.profileSettings;
   const lanAdmin = languages.value.admin;
-
+  // state
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [render, setRender] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState({});
   const lanForm = languages.value.form;
   // Profile funtions
+  const getTutorInforms = () => {
+    GetTutorPersonalInfo().then((res) => {
+      console.log(res.data);
+      setData({
+        ...res.data.address,
+        ...res.data.userProfile,
+        category: res.data.eduInfo.category,
+        level: res.data.eduInfo.level,
+        description1: res.data.eduInfo.description,
+        email: res.data.email,
+        groups: res.data.studentGroups,
+        id: res.data.id,
+      });
+    });
+  };
+
   const testData = [
     {
       name: [
@@ -25,16 +46,11 @@ function ProfileSettings(props) {
         lanForm.gender,
       ],
       value: [
-        "",
-        "",
-        "",
-        "",
-        "",
-        // data.firstname + " " + data.lastname,
-        // data.fatherName,
-        // data.birthDate,
-        // data.phoneNumber,
-        // data.gender,
+        data.firstname + " " + data.lastname,
+        data.fatherName,
+        data.birthDate,
+        data.phoneNumber,
+        lanForm[`gender${data.gender}`],
       ],
     },
     {
@@ -46,24 +62,23 @@ function ProfileSettings(props) {
         lanForm.description,
       ],
       value: [
-        "",
-        "",
-        "",
-        "",
-        "",
-        // data.firstname + " " + data.lastname,
-        // data.fatherName,
-        // data.birthDate,
-        // data.phoneNumber,
-        // data.gender,
+        data.passportDate,
+        data.country,
+        data.region,
+        data.district,
+        data.description,
       ],
+    },
+    {
+      name: [lanForm.category, lanForm.level, lanForm.description1],
+      value: [data.category, data.level, data.description1],
     },
   ];
 
-  // state
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [render, setRender] = useState(1);
-  const [loading, setLoading] = useState(false);
+  console.log(data);
+  useEffect(() => {
+    getTutorInforms();
+  }, []);
 
   return (
     <>
@@ -99,6 +114,7 @@ function ProfileSettings(props) {
               setDialogOpen(false);
               setRender(render + e);
             }}
+            data={data}
           />
         }
         open={dialogOpen}

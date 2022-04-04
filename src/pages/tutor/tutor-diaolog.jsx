@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import MyInput from "../../components/my-input/my-input";
 import { MyDiv } from "../../global-styles/my-div.s";
 import { LanguagesContext } from "../../locale/languagesContext";
@@ -12,11 +12,28 @@ import {
   EditTutorConfig,
 } from "../../server/config/CrudUrls";
 import { toastAdd, toastEdit } from "../../functions/messages";
+import { ReactComponent as AddIcon } from "../../assets/icon/add.svg";
+import { ReactComponent as DeleteIcon } from "../../assets/icon/minus.svg";
+import { LabelStyle } from "../../components/my-input/my-input.s";
 
 function TutorDiaolog(props) {
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanForm = languages.value.form;
   const lanSignIn = languages.value.signin;
+  //States
+  const [addData, setAddData] = useState([{ name: "groupName0", id: 0 }]);
+  const [count, setCount] = useState(1);
+  //Add group section
+  const addDataFunc = (index, Id) => {
+    let arr = addData;
+    if (index + 1 === arr.length) {
+      arr.push({ name: `groupName${count}`, id: count });
+      setCount(count + 1);
+    } else {
+      arr = arr.filter((el) => el.id != Id);
+    }
+    setAddData([...arr]);
+  };
   const obj = props.objTutor;
   console.log(obj);
   const formik = useFormik({
@@ -29,7 +46,7 @@ function TutorDiaolog(props) {
           category: obj.eduInfo.category,
           level: obj.eduInfo.level,
           description1: obj.eduInfo.description,
-          groups: obj.groups[0],
+          groups: obj.groups,
           username: obj.user.username,
           email: obj.user.email,
           firstname: obj.user.userProfile.firstname,
@@ -60,6 +77,11 @@ function TutorDiaolog(props) {
       // ),
     }),
     onSubmit: (val) => {
+      let groupArr = [];
+      addData.forEach((item) => {
+        if (val[item.name]) groupArr.push(val[item.name]);
+      });
+      console.log(groupArr);
       let sendObj = {
         address: {
           country: val.country,
@@ -70,7 +92,7 @@ function TutorDiaolog(props) {
         category: val.category,
         level: val.level,
         description: val.description1,
-        groups: [val.groups],
+        groups: groupArr,
         user: {
           username: val.username,
           password: val.password,
@@ -146,6 +168,7 @@ function TutorDiaolog(props) {
     {
       name: "groups",
       label: lanForm.groupName,
+      multiply: true,
     },
     {
       name: "description1",
@@ -198,10 +221,11 @@ function TutorDiaolog(props) {
       label: lanForm.description,
     },
   ];
+
   return (
     <MyForm onSubmit={formik.handleSubmit}>
       <MyDiv spaceBetween gap="8px">
-        {data.map(({ name, label, width, type, select, option }) => {
+        {data.map(({ name, label, width, type, select, option, multiply }) => {
           return select ? (
             <MySelect
               key={name}
@@ -215,6 +239,42 @@ function TutorDiaolog(props) {
               error={formik.touched[name] && formik.errors[name] ? true : false}
               errorMessage={formik.touched[name] && formik.errors[name]}
             />
+          ) : multiply ? (
+            <>
+              {!obj ? (
+                <>
+                  <LabelStyle>{label}</LabelStyle>
+                  {addData.map((res, index) => {
+                    return (
+                      <MyDiv width="100%" spaceBetween gap="8px">
+                        <MyInput
+                          key={res.name}
+                          width="calc(100% - 60px)"
+                          name={res.name}
+                          value={formik.values[res.name]}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          type={"text"}
+                        />
+                        <MyButton
+                          onClick={() => addDataFunc(index, res.id)}
+                          type="button"
+                          svg={
+                            index + 1 === addData.length ? (
+                              <AddIcon />
+                            ) : (
+                              <DeleteIcon />
+                            )
+                          }
+                        />
+                      </MyDiv>
+                    );
+                  })}
+                </>
+              ) : (
+                ""
+              )}
+            </>
           ) : (
             <MyInput
               key={name}

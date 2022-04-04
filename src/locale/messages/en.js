@@ -89,6 +89,12 @@ const en = {
     level: "Academic degree",
     description1: "Additional Information",
     category: "Category",
+    creativePotential: "Information about the creative potential of students",
+    music: "Interests in music",
+    art: "Interests in art and literature",
+    sport: "Интересы к спорту",
+    science: "Interests in scientific activities",
+    other: "Ability in other areas",
   },
   signin: {
     signin: "Sign In",
@@ -176,6 +182,7 @@ const en = {
     add_tutor: "Add New Tutor",
     tutor_info: "Tutor info",
     delete_warning: "Do you really want to delete it?",
+    delete_soon: "This section will be added soon!",
   },
 };
 
