@@ -4,6 +4,7 @@ import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/
 const uz = {
   deleteInfo: "Haqiqatan ham foydalanuvchini o'chirmoqchimsz?",
   form: {
+    email: "E-pochta",
     cancel: "Bekor qilish",
     edit: "Tahrirlash",
     create: "Qo'shish",
@@ -38,6 +39,7 @@ const uz = {
     familyStatus0: "Turmush qurgan",
     familyStatus1: "Turmush qurmagan",
     parentsName: "Ota-onasining ismi",
+    addressMe: "Talabaning manzili",
     address: "Ota-onasining manzili",
     parents_number: "Ota-onasining telefon raqami",
     orphanStudent: "Boquvchisini yo'qotganligi",

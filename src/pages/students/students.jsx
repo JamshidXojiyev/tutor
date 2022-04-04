@@ -23,6 +23,8 @@ import { ReactComponent as EditIcon } from "../../assets/icon/table/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icon/table/delete.svg";
 import DeleteUi from "../../components/delete-ui/delete-ui";
 import { toast } from "react-toastify";
+import StudentInfo from "./student-info";
+import { ReactComponent as MoreIcon } from "../../assets/icon/more.svg";
 
 function Students() {
   // languages
@@ -44,6 +46,17 @@ function Students() {
       setTableEmpty(false);
       const data = arr.map((item) => {
         const subData = {
+          view: (
+            <MyButton
+              onClick={() => {
+                setStudentInfoOpen(true);
+                setStudentInfo(item);
+              }}
+              icon
+              tableIcon
+              svg={<MoreIcon />}
+            />
+          ),
           student: `${item.firstname}  ${item.lastname}`,
           id: item.studentId,
           father_name: item.fatherName,
@@ -125,14 +138,28 @@ function Students() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [refresh, setRefresh] = useState(0);
   const [tableEmpty, setTableEmpty] = useState(true);
+  const [refresh, setRefresh] = useState(0);
   const [thisData, setThisData] = useState(null);
 
   useEffect(() => {
     getStudents();
     getGroups();
   }, [refresh]);
+
+  // student info
+  const [studentInfoOpen, setStudentInfoOpen] = useState(false);
+  const [studentInfo, setStudentInfo] = useState(null);
+
+  if (studentInfoOpen) {
+    return (
+      <StudentInfo
+        groups={groups}
+        studentInfo={studentInfo}
+        close={(e) => setStudentInfoOpen(e)}
+      />
+    );
+  }
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>

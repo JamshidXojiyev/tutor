@@ -37,3 +37,55 @@ export const ValueType = styled.h3`
   /* line-height: 19px; */
   color: ${({ type }) => (type ? "#24C18F" : "#FF0000")};
 `;
+export const Backspace = styled.h1`
+  && {
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 21px;
+    color: #242525;
+
+    svg {
+      path {
+        stroke: #242525;
+      }
+      transform: rotate(90deg);
+    }
+  }
+`;
+export const Potential = styled.div`
+  && {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #8388a2;
+    ul {
+      margin-top: 8px;
+      padding-left: 28px;
+    }
+  }
+`;
+export const PotentialTitle = styled.h1`
+  && {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-transform: capitalize;
+    color: #242525;
+  }
+`;

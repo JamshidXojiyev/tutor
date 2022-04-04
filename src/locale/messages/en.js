@@ -5,6 +5,7 @@ import { ReactComponent as ProfileSettings } from "../../assets/icon/menu-icons/
 const en = {
   deleteInfo: "Do you really delete the user?",
   form: {
+    email: "Email",
     cancel: "Cancel",
     edit: "Edit",
     create: "Add",
@@ -39,6 +40,7 @@ const en = {
     familyStatus0: "Married",
     familyStatus1: "Not married",
     parentsName: "Parents Name",
+    addressMe: "Address",
     address: "Parent's address",
     parents_number: "Parent's phone number",
     orphanStudent: "Orphan Student",
