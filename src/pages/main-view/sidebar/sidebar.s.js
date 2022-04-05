@@ -144,7 +144,7 @@ export const MenuButton = styled.button`
     height: 42px;
     border-radius: 50%;
     border: 0;
-    background-color: #5a55d2;
+    background-color: #1628c5;
     cursor: pointer;
 
     display: flex;

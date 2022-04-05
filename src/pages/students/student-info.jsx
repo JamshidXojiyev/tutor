@@ -185,7 +185,10 @@ function StudentInfo(props) {
         title={lanStudent.student_info}
         body={
           <StudentDialog
-            closeDialog={(e) => setDialogOpen(e)}
+            closeDialog={(e) => {
+              props.closeRender(e);
+              setDialogOpen(e);
+            }}
             refresh={(e) => setRefresh(refresh + e)}
             thisData={props.studentInfo}
             groups={props.groups}

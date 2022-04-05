@@ -24,6 +24,13 @@ function MyTable(props) {
   useEffect(() => {
     setPages(props.total ? Math.ceil(props.total / pageLimit) : 1);
   }, [pageLimit]);
+  useEffect(() => {
+    if (!props.paginationNone) {
+      props.set_page(page);
+      props.set_page_limit(pageLimit);
+    }
+  }, [page, pageLimit]);
+
   // loading page
   if (props.loading) {
     return <LoadingTable width={props.width} />;

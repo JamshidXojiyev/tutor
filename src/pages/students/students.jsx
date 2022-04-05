@@ -141,11 +141,16 @@ function Students() {
   const [tableEmpty, setTableEmpty] = useState(true);
   const [refresh, setRefresh] = useState(0);
   const [thisData, setThisData] = useState(null);
+  const [page, setPage] = useState(1);
+  const [pageLimit, setPageLimit] = useState(10);
 
   useEffect(() => {
     getStudents();
     getGroups();
   }, [refresh]);
+  useEffect(() => {
+    getStudents();
+  }, [page, pageLimit]);
 
   // student info
   const [studentInfoOpen, setStudentInfoOpen] = useState(false);
@@ -157,6 +162,10 @@ function Students() {
         groups={groups}
         studentInfo={studentInfo}
         close={(e) => setStudentInfoOpen(e)}
+        closeRender={(e) => {
+          setRefresh(refresh + 1);
+          setStudentInfoOpen(e);
+        }}
       />
     );
   }
@@ -173,7 +182,7 @@ function Students() {
             width="210px"
             rightIcon={<SearchIcon />}
             onChange={changeValue}
-            setValue={searchFunc} 
+            setValue={searchFunc}
           />
         </MyDiv>
         <MyDiv widthCenter gap="12px">
@@ -193,11 +202,12 @@ function Students() {
       <MyDiv id="notTouch" width="100%" block display="inline-block">
         <MyTable
           data={tableData}
-          total="123"
+          total="1"
           loading={loading}
           table_empty={tableEmpty}
           width="100%"
-          setItem={(item) => console.log(item)}
+          set_page={(e) => setPage(e)}
+          set_page_limit={(e) => setPageLimit(e)}
         />
       </MyDiv>
       <MyDialog
