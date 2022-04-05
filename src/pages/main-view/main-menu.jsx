@@ -41,14 +41,18 @@ function MainMenu(props) {
       GetTutorPersonalInfo().then((res) => {
         setData({
           email: res.data.email,
-          fullName: `${res.data.userProfile.firstname} ${res.data.userProfile.lastname}`,
+          fullName: res.data.userProfile.firstname,
+          lastname: res.data.userProfile.lastname,
+          gender: res.data.userProfile.gender,
         });
       });
     role === "ROLE_ADMIN" &&
       GetUserByIdConfig(getLocalStorage("userId")).then((res) => {
         setData({
           email: res.data.email,
-          fullName: `${res.data.userProfile.firstname} ${res.data.userProfile.lastname}`,
+          fullName: res.data.userProfile.firstname,
+          lastname: res.data.userProfile.lastname,
+          gender: res.data.userProfile.gender,
         });
       });
   };

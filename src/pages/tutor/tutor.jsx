@@ -45,6 +45,7 @@ function Tutor() {
   const [thisObj, setObj] = useState(null);
   const [empty, setEmpty] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [mainData, setData] = useState([]);
   //Get tutor
   const getTutorFunc = () => {
     setLoading(true);
@@ -99,6 +100,7 @@ function Tutor() {
             return subData;
           });
           setTutorData({ ...tutorData, body: data });
+          setData([...data]);
           setEmpty(false);
         }
       })
@@ -116,6 +118,26 @@ function Tutor() {
     //   console.log(res);
     // });
   };
+  // tutor search
+  const [value, setValue] = useState("");
+  const changeValue = (e) => {
+    setValue(e.target.value);
+    if (e.target.value.length > 2) getTutorSearch(e.target.value);
+    if (!e.target.value) setTutorData({ ...tutorData, body: mainData });
+  };
+  const getTutorSearch = (val) => {
+    let arr = mainData.filter((el) =>
+      el.fullname.toLocaleLowerCase().includes(val.toLocaleLowerCase())
+    );
+    setTutorData({ ...tutorData, body: arr });
+  };
+  const searchFunc = () => {
+    if (value.length === 0) {
+      setTutorData({ ...tutorData, body: mainData });
+    } else {
+      getTutorSearch(value);
+    }
+  };
   // student info
   const [studentInfoOpen, setStudentInfoOpen] = useState(false);
   const [studentInfo, setStudentInfo] = useState(null);
@@ -132,18 +154,20 @@ function Tutor() {
       />
     );
   }
+
   return (
     <>
       <MyDiv margin="0 0 16px 0" spaceBetween>
         <MyDiv widthCenter>
           <PageTitle>{lanTutor.list_of_tutor}</PageTitle>
-          <TotalUsers>{`274 ${lanStudent.users}`}</TotalUsers>
+          <TotalUsers>{`${lanStudent.users}: ${mainData.length}`}</TotalUsers>
           <MyInput
             search
             placeholder={lanStudent.search_by_name}
             height="48px"
             rightIcon={<SearchIcon />}
-            setValue={(e) => console.log(e)}
+            onChange={changeValue}
+            setValue={searchFunc}
           />
         </MyDiv>
         <MyDiv widthCenter gap="12px">
@@ -161,6 +185,7 @@ function Tutor() {
           total="123"
           loading={loading}
           width="100%"
+          paginationNone
         />
       </MyDiv>
       <MyDialog

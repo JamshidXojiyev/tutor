@@ -15,7 +15,8 @@ import {
   User,
 } from "./sidebar.s";
 import { MyDiv } from "../../../global-styles/my-div.s";
-import AvatarImage from "../../../assets/image/avatar.png";
+import AvatarMale from "../../../assets/image/userMale.png";
+import AvatarFemale from "../../../assets/image/userFemale.jpg";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ReactComponent as BottomIcon } from "../../../assets/icon/bottom.svg";
@@ -88,9 +89,16 @@ function Sidebar({ data }) {
       <SidebarStyle sidebarSize={size} openMenu={globalState.sidebarOpen}>
         <MyDiv position="relative" height="100%">
           <User>
-            <AvatarImageStyle src={AvatarImage} />
+            {data.gender === "1" ? (
+              <AvatarImageStyle src={AvatarFemale} />
+            ) : (
+              <AvatarImageStyle src={AvatarMale} />
+            )}
+
             <MyDiv>
-              <Name>{data.fullName}</Name>
+              <Name>
+                {data.fullName} {data.lastname}
+              </Name>
               <Email>{data.email}</Email>
             </MyDiv>
           </User>

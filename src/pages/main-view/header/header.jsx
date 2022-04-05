@@ -15,7 +15,7 @@ function Header({ data }) {
     <HeaderStyle openMenu={globalState.sidebarOpen}>
       <MyDiv>
         <UserName>
-          {lanSidebar.hello} {data.fullName}
+          {lanSidebar.hello} {data.fullName} 
         </UserName>
         <Date>{`${date[6]} - ${date[2]} ${date[1]} ${date[3]}`}</Date>
       </MyDiv>
