@@ -118,7 +118,7 @@ function StudentInfo(props) {
         lanForm[`needy${props.studentInfo.familyInformation.needy}`],
         lanForm[`orphan${props.studentInfo.familyInformation.orphanStudent}`],
         props.studentInfo.familyInformation.parentsName,
-        props.studentInfo.familyInformation.parentsRetiree,
+        lanForm[`retire${props.studentInfo.familyInformation.parentsRetiree}`],
       ],
     },
   ];

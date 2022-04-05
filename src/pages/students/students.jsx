@@ -30,6 +30,7 @@ function Students() {
   // languages
   const [languages, setLanguages] = useContext(LanguagesContext);
   const lanStudent = languages.value.students;
+  const lanForm = languages.value.form;
   // get students
   const [tableData, setTableData] = useContext(StudentsContext);
   const getStudents = () => {
@@ -61,7 +62,7 @@ function Students() {
           id: item.studentId,
           father_name: item.fatherName,
           birth_day: item.birthDate,
-          course: item.studyInfo.course,
+          course: lanForm[`course${item.studyInfo.course}`],
           group: item.group.groupName,
           special: item.studyInfo.speciality,
           btn: (

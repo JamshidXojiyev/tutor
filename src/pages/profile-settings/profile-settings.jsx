@@ -112,8 +112,8 @@ function ProfileSettings(props) {
         setDialogOpen={(e) => setDialogOpen(e)}
       />
 
-      <MyDialog
-        title={lanAdmin.admin_info}
+      <MyDialog 
+        title="Student info"
         body={
           <ProfileDiaolog
             close={(e) => setDialogOpen(e)}

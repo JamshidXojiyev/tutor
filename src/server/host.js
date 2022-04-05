@@ -41,7 +41,8 @@ axiosInstance.interceptors.response.use(
         console.log(error);
       } else {
         error.response.data.message
-          ? toast.error(error.response.data.message)
+          ? toast.error(error.response.data.message, {autoClose:2000})
+          :error.response.data?toast.error(error.response.data)
           : toast.error("Noma'lum xatolik yuz berdi");
       }
     }
