@@ -52,8 +52,8 @@ export const GetTutorGroupsConfig = () => {
 export const GetStudentByIdConfig = (id) => {
   return GetFunc(`tutor/api/student/${id}`);
 };
-export const GetStudentConfig = () => {
-  return GetFunc("tutor/api/student");
+export const GetStudentConfig = (page = 0, size=10) => {
+  return GetFunc(`tutor/api/student?page=${page}&&size=${size}`);
 };
 export const EditStudentConfig = (id, data) => {
   return EditFunc(`tutor/api/student/${id}`, data, "PATCH");

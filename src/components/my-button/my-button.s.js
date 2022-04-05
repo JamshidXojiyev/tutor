@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 
 const blueStyle = css`
-  background: #783efd;
+  /* background: #783efd; */
+  background: #1628c5;
   border-radius: 6px;
   padding: 12px 14px;
 
