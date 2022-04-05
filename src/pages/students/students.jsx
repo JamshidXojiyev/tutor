@@ -113,7 +113,7 @@ function Students() {
   const changeValue = (e) => {
     setValue(e.target.value);
     if (e.target.value.length > 3) getStudentSearch(e.target.value);
-    // e.target.value.length > 3 ? getStudentSearch(e.target.value) : "";
+    if (!e.target.value) getStudents();
   };
   const getStudentSearch = (val) => {
     setLoading(true);

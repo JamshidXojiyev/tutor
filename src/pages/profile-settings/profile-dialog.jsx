@@ -47,6 +47,7 @@ function ProfileDiaolog(props) {
         groups: obj.groups,
         user: {
           email: obj.email,
+          username: obj.username,
           roles: ["tutor"],
           profile: {
             firstname: val.firstname,

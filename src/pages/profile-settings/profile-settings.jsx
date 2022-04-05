@@ -35,6 +35,7 @@ function ProfileSettings(props) {
         description1: res.data.eduInfo.description,
         email: res.data.email,
         groups: res.data.studentGroups,
+        username: res.data.username,
         id: res.data.id,
       });
     });
@@ -68,8 +69,8 @@ function ProfileSettings(props) {
       value: [
         data.passportDate,
         data.country,
-        data.region,
-        data.district,
+        "Tashkent",
+        "Yunusobod",
         data.description,
       ],
     },
@@ -82,7 +83,7 @@ function ProfileSettings(props) {
   console.log(data);
   useEffect(() => {
     getTutorInforms();
-  }, []);
+  }, [render]);
 
   return (
     <>
@@ -112,8 +113,7 @@ function ProfileSettings(props) {
       />
 
       <MyDialog
-        heightAuto
-        title="Student info"
+        title={lanAdmin.admin_info}
         body={
           <ProfileDiaolog
             close={(e) => setDialogOpen(e)}
