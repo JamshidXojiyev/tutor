@@ -14,6 +14,9 @@ export const GetUserByIdConfig = (id) => {
 export const EditUserConfig = (id, data) => {
   return EditFunc(`api/user/${id}`, data);
 };
+export const ChangePasswordConfig = (data) => {
+  return EditFunc("api/tutor", data);
+};
 //Admin Tutor section
 export const GetTutorStudentConfig = () => {
   return GetFunc(`admin/api/tutor/students`);

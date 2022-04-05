@@ -1,7 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { deleteCookie, getCookie, setCookie } from "../functions/useCookies";
-import { getLocalStorage, setLocalStorage } from "../functions/useLocalStorage";
+import { deleteLocalStorage, getLocalStorage, setLocalStorage } from "../functions/useLocalStorage";
 import { RefreshTokenConfig } from "./config/CrudUrls";
 
 export const token = getLocalStorage("token");
@@ -26,14 +26,23 @@ axiosInstance.interceptors.response.use(
     console.log(error);
     if (error.response) {
       if (error.response.status === 401) {
-        RefreshTokenConfig(getLocalStorage("refresh_token")).then((res) => {
-          setLocalStorage("token", res.data.token);
-          setLocalStorage("refresh_token", res.data.refreshToken);
-        });
+        RefreshTokenConfig(getLocalStorage("refresh_token"))
+          .then((res) => {
+            setLocalStorage("token", res.data.token);
+            setLocalStorage("refresh_token", res.data.refreshToken);
+          })
+          .catch((err) => {
+            deleteLocalStorage("token");
+            deleteLocalStorage("refresh_token");
+            deleteLocalStorage("role");
+            deleteLocalStorage("userId");
+            window.location.href = "/sigin";
+          });
         console.log(error);
       } else {
-        error.response.data && toast.error(error.response.data.message);
-        // toast.error("Noma'lum xatolik yuz berdi");
+        error.response.data.message
+          ? toast.error(error.response.data.message)
+          : toast.error("Noma'lum xatolik yuz berdi");
       }
     }
     throw error;

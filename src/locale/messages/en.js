@@ -97,6 +97,7 @@ const en = {
     sport: "Интересы к спорту",
     science: "Interests in scientific activities",
     other: "Ability in other areas",
+    change_password: "Change password",
   },
   signin: {
     signin: "Sign In",
@@ -109,6 +110,10 @@ const en = {
     password: "Password",
     password_placeholder: "Enter your password",
     password_required_err: "You must enter your password.",
+
+    confirm_passwrod: "Enter the password again",
+    confirm_warning: "The password must match",
+    old_password: "Enter the old password",
 
     min_err: "Minimum length 5 symbol.",
     username: "Username",

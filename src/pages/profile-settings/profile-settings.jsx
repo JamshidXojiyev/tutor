@@ -2,11 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { LanguagesContext } from "../../locale/languagesContext";
 import { EditProfile, P } from "./profile-settings.s";
 import { ReactComponent as EditSvg } from "../../assets/icon/edit.svg";
+import { ReactComponent as ImportIcon } from "../../assets/icon/import.svg";
 import { MyDiv } from "../../global-styles/my-div.s";
 import MyDialog from "../../components/my-dialog/my-dialog";
 import ProfileDiaolog from "./profile-dialog";
 import Info from "./info";
 import { GetTutorPersonalInfo } from "../../server/config/CrudUrls";
+import MyButton from "../../components/my-button/my-button";
+import ChangePassword from "./change-password";
 
 function ProfileSettings(props) {
   // language data
@@ -15,6 +18,7 @@ function ProfileSettings(props) {
   const lanAdmin = languages.value.admin;
   // state
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [passwordOpen, setPasswordDialog] = useState(false);
   const [render, setRender] = useState(1);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({});
@@ -85,17 +89,20 @@ function ProfileSettings(props) {
       {/* Header section */}
       <MyDiv widthCenter spaceBetween margin="0 0 18px">
         <P>{lanTutor.tutor_info}</P>
-        {/* <MyButton
-          svg={<EditSvg />}
-          text={lanTutor.edit_tutor}
-          onClick={() => setDialogOpen(true)}
-        /> */}
-        <EditProfile
-          top
-          text={lanAdmin.edit_admin}
-          svg={<EditSvg />}
-          onClick={() => setDialogOpen(true)}
-        />
+        <MyDiv display="flex" gap="20px">
+          <MyButton
+            onClick={() => setPasswordDialog(true)}
+            white
+            svg={<ImportIcon />}
+            text={lanForm.change_password}
+          />
+          <EditProfile
+            top
+            text={lanAdmin.edit_admin}
+            svg={<EditSvg />}
+            onClick={() => setDialogOpen(true)}
+          />
+        </MyDiv>
       </MyDiv>
       {/* Info section */}
       <Info
@@ -119,6 +126,24 @@ function ProfileSettings(props) {
         }
         open={dialogOpen}
         close={(e) => setDialogOpen(e)}
+      />
+      {/* Change password dialog */}
+      <MyDialog
+        heightAuto
+        height="440px"
+        title={lanForm.change_password}
+        body={
+          <ChangePassword
+            informs={data}
+            close={(e) => setPasswordDialog(e)}
+            closeRender={(e) => {
+              setPasswordDialog(false);
+              // setRender(render + e);
+            }}
+          />
+        }
+        open={passwordOpen}
+        close={(e) => setPasswordDialog(e)}
       />
     </>
   );

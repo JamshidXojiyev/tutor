@@ -97,6 +97,7 @@ const ru = {
     sport: "Интересы к спорту",
     science: "Интересы к научной деятельности",
     other: "Способности в других областях",
+    change_password: "Изменить пароль",
   },
   signin: {
     signin: "Войти",
@@ -109,6 +110,10 @@ const ru = {
     password: "Пароль",
     password_placeholder: "Введите свой пароль",
     password_required_err: "Вы должны ввести свой пароль.",
+
+    confirm_passwrod: "Введите пароль еще раз",
+    confirm_warning: "Пароль должен совпадать",
+    old_password: "Введите старый пароль",
 
     min_err: "Минимальная длина 5 символа.",
     username: "Имя пользователя",

@@ -96,6 +96,7 @@ const uz = {
     sport: "Sportdagi qiziqishlari",
     science: "Ilmiy faoliyat bo`yicha qiziqishlari",
     other: "Boshqa sohalardagi qobiliyati",
+    change_password: "Parolni o'zgartirish",
   },
   signin: {
     signin: "Tizimga kirish",
@@ -108,6 +109,10 @@ const uz = {
     password: "Parol",
     password_placeholder: "Parolni kiriting",
     password_required_err: "Parolni kiritishingiz kerak.",
+
+    confirm_passwrod: "Parolni qayta kiriting",
+    confirm_warning: "Parol mos kelishi kerak",
+    old_password: "Eski parolni kiriting",
 
     min_err: "Minimal uzunlik 5 belgisi.",
     username: "Foydalanuvchi nomi",
