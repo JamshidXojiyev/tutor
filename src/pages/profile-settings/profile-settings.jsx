@@ -112,7 +112,7 @@ function ProfileSettings(props) {
       />
 
       <MyDialog
-        heightAuto
+        // heightAuto
         title="Student info"
         body={
           <ProfileDiaolog
