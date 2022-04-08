@@ -1,12 +1,17 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { deleteCookie, getCookie, setCookie } from "../functions/useCookies";
-import { deleteLocalStorage, getLocalStorage, setLocalStorage } from "../functions/useLocalStorage";
+import {
+  deleteLocalStorage,
+  getLocalStorage,
+  setLocalStorage,
+} from "../functions/useLocalStorage";
 import { RefreshTokenConfig } from "./config/CrudUrls";
 
 export const token = getLocalStorage("token");
 
-export let host = process.env.REACT_APP_BASE_URL;
+// export let host = process.env.REACT_APP_BASE_URL;
+export let host = "https://academy-back.herokuapp.com/";
 
 export let headers = {
   "X-Requested-With": "XMLHttpRequest",
@@ -41,8 +46,9 @@ axiosInstance.interceptors.response.use(
         console.log(error);
       } else {
         error.response.data.message
-          ? toast.error(error.response.data.message, {autoClose:2000})
-          :error.response.data?toast.error(error.response.data)
+          ? toast.error(error.response.data.message, { autoClose: 2000 })
+          : error.response.data
+          ? toast.error(error.response.data)
           : toast.error("Noma'lum xatolik yuz berdi");
       }
     }

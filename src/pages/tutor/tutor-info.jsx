@@ -101,7 +101,7 @@ function TutorInfo(props) {
       <MyDiv widthCenter spaceBetween margin="0 0 30px">
         <Backspace onClick={() => props.close(false)}>
           <BottomIcon />
-          {lanStudent.student_info}
+          {lanAdmin.list_of_tutor}
         </Backspace>
         <EditProfile
           top
